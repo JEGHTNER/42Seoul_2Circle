@@ -6,17 +6,17 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:42:31 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/07 19:03:43 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/07 20:17:20 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/get_next_line.h"
 
-t_list	*add_fd(int fd)
+t_gnllist	*add_fd(int fd)
 {
-	t_list	*new_node;
+	t_gnllist	*new_node;
 
-	new_node = malloc(sizeof(t_list));
+	new_node = malloc(sizeof(t_gnllist));
 	if (!new_node)
 		return (NULL);
 	new_node->file_descriptor = fd;

@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:42:28 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/02 19:27:35 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/07 20:17:01 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,24 +21,24 @@
 #  define BUFFER_SIZE 4096
 # endif
 
-typedef struct s_list
+typedef struct s_gnllist
 {
-	int				file_descriptor;
-	char			*backup;
-	char			*read_buff;
-	struct s_list	*next;
-	struct s_list	*prev;
-}t_list;
+	int					file_descriptor;
+	char				*backup;
+	char				*read_buff;
+	struct s_gnllist	*next;
+	struct s_gnllist	*prev;
+}t_gnllist;
 
-t_list	*add_fd(int fd);
-t_list	*find_fd(t_list **head, int fd);
-char	*get_next_line(int fd);
-size_t	ft_strlcpy(char *dst, const char *src, size_t size);
-size_t	ft_strlen(const char *string);
-char	*ft_strjoin(char const *string1, char const *string2);
-char	*ft_strchr(const char *string, int c);
-char	*remove_fd(t_list *current_fd, t_list **head);
-char	*split_line(t_list *current_fd, t_list **head);
-char	*read_line(int fd, t_list *cur_fd, t_list **head, ssize_t read_size);
+t_gnllist	*add_fd(int fd);
+t_gnllist	*find_fd(t_gnllist **head, int fd);
+char		*get_next_line(int fd);
+size_t		ft_strlcpy(char *dst, const char *src, size_t size);
+size_t		ft_strlen(const char *string);
+char		*ft_strjoin(char const *string1, char const *string2);
+char		*ft_strchr(const char *string, int c);
+char		*remove_fd(t_gnllist *current_fd, t_gnllist **head);
+char		*split_line(t_gnllist *current_fd, t_gnllist **head);
+char		*read_line(int fd, t_gnllist *c_fd, t_gnllist **h, ssize_t r_size);
 
 #endif

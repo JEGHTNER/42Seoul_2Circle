@@ -6,15 +6,15 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:40:17 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/07 19:03:45 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/07 20:18:37 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/get_next_line.h"
 
-t_list	*find_fd(t_list **head, int fd)
+t_gnllist	*find_fd(t_gnllist **head, int fd)
 {
-	t_list	*tmp;
+	t_gnllist	*tmp;
 
 	if (!(*head))
 	{
@@ -39,7 +39,7 @@ t_list	*find_fd(t_list **head, int fd)
 	return (NULL);
 }
 
-char	*remove_fd(t_list *current_fd, t_list **head)
+char	*remove_fd(t_gnllist *current_fd, t_gnllist **head)
 {
 	if (!current_fd || !*head)
 		return (NULL);
@@ -57,7 +57,7 @@ char	*remove_fd(t_list *current_fd, t_list **head)
 	return (NULL);
 }
 
-char	*split_line(t_list *current_fd, t_list **head)
+char	*split_line(t_gnllist *current_fd, t_gnllist **head)
 {
 	char	*line;
 	char	*tmp;
@@ -85,30 +85,30 @@ char	*split_line(t_list *current_fd, t_list **head)
 	}
 }
 
-char	*read_line(int fd, t_list *current_fd, t_list **head, ssize_t read_size)
+char	*read_line(int fd, t_gnllist *cur_fd, t_gnllist **head, ssize_t r_size)
 {
 	char			*line;
 	char			*tmp;
 
 	while (1)
 	{
-		read_size = read(fd, current_fd->read_buff, BUFFER_SIZE);
-		if (read_size == 0)
+		r_size = read(fd, cur_fd->read_buff, BUFFER_SIZE);
+		if (r_size == 0)
 		{
-			line = split_line(current_fd, head);
+			line = split_line(cur_fd, head);
 			return (line);
 		}
-		if (read_size == -1)
-			return (remove_fd(current_fd, head));
-		current_fd->read_buff[read_size] = '\0';
-		tmp = ft_strjoin(current_fd->backup, current_fd->read_buff);
+		if (r_size == -1)
+			return (remove_fd(cur_fd, head));
+		cur_fd->read_buff[r_size] = '\0';
+		tmp = ft_strjoin(cur_fd->backup, cur_fd->read_buff);
 		if (!tmp)
-			return (remove_fd(current_fd, head));
-		free(current_fd->backup);
-		current_fd->backup = tmp;
-		if (ft_strchr(current_fd->backup, '\n') != NULL)
+			return (remove_fd(cur_fd, head));
+		free(cur_fd->backup);
+		cur_fd->backup = tmp;
+		if (ft_strchr(cur_fd->backup, '\n') != NULL)
 		{
-			line = split_line(current_fd, head);
+			line = split_line(cur_fd, head);
 			return (line);
 		}
 	}
@@ -116,10 +116,10 @@ char	*read_line(int fd, t_list *current_fd, t_list **head, ssize_t read_size)
 
 char	*get_next_line(int fd)
 {
-	static t_list	*head;
-	t_list			*current_fd;
-	char			*line;
-	ssize_t			read_size;
+	static t_gnllist	*head;
+	t_gnllist			*current_fd;
+	char				*line;
+	ssize_t				read_size;
 
 	line = NULL;
 	read_size = 0;

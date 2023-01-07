@@ -6,11 +6,11 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/15 16:59:24 by jehelee           #+#    #+#             */
-/*   Updated: 2022/11/27 13:12:52 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/07 19:16:53 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../include/libft.h"
 
 static int	check_space_sign(const char *string, int *sign)
 {
