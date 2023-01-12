@@ -6,23 +6,25 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:05:15 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/07 19:17:02 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:51:26 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/libft.h"
 
-void	ft_lstadd_back(t_list **lst, t_list *new)
+t_list	*ft_lstadd_back(t_list **lst, t_list *new)
 {
 	t_list	*last;
 
 	if (!lst || !new)
-		return ;
+		return (NULL);
 	if (!(*lst))
 	{
 		*lst = new;
-		return ;
+		return (NULL);
 	}
 	last = ft_lstlast(*lst);
 	last -> next = new;
+
+	return (new);
 }

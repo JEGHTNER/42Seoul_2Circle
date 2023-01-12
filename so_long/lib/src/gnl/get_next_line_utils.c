@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:42:31 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/07 20:17:20 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:33:52 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_gnllist	*add_fd(int fd)
 	return (new_node);
 }
 
-size_t	ft_strlen(const char *string)
+size_t	ft_strlen_gnl(const char *string)
 {
 	size_t	i;
 
@@ -47,7 +47,7 @@ size_t	ft_strlen(const char *string)
 	return (i);
 }
 
-size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+size_t	ft_strlcpy_gnl(char *dst, const char *src, size_t size)
 {
 	size_t	i;
 
@@ -63,26 +63,26 @@ size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 		}
 		dst[i] = '\0';
 	}
-	return (ft_strlen(src));
+	return (ft_strlen_gnl(src));
 }
 
-char	*ft_strjoin(char const *string1, char const *string2)
+char	*ft_strjoin_gnl(char const *string1, char const *string2)
 {
 	size_t	string1_len;
 	size_t	string2_len;
 	char	*tmp_string;
 
-	string2_len = ft_strlen(string2);
-	string1_len = ft_strlen(string1);
+	string2_len = ft_strlen_gnl(string2);
+	string1_len = ft_strlen_gnl(string1);
 	tmp_string = malloc(sizeof(char) * (string1_len + string2_len) + 1);
 	if (!tmp_string)
 		return (0);
-	ft_strlcpy(tmp_string, string1, string1_len + 1);
-	ft_strlcpy(tmp_string + string1_len, string2, string2_len + 1);
+	ft_strlcpy_gnl(tmp_string, string1, string1_len + 1);
+	ft_strlcpy_gnl(tmp_string + string1_len, string2, string2_len + 1);
 	return (tmp_string);
 }
 
-char	*ft_strchr(const char *string, int c)
+char	*ft_strchr_gnl(const char *string, int c)
 {
 	char	*tmp;
 

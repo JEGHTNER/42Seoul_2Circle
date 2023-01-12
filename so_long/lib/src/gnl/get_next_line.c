@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/10 16:40:17 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/07 20:18:37 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/12 15:40:42 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,19 +65,19 @@ char	*split_line(t_gnllist *current_fd, t_gnllist **head)
 	line = NULL;
 	if (!(current_fd->backup && *(current_fd->backup)))
 		return (remove_fd(current_fd, head));
-	tmp = ft_strchr(current_fd->backup, '\n');
+	tmp = ft_strchr_gnl(current_fd->backup, '\n');
 	if (tmp)
 	{	
 		*tmp = '\0';
-		line = ft_strjoin(current_fd->backup, "\n");
+		line = ft_strjoin_gnl(current_fd->backup, "\n");
 		if (!line)
 			return (remove_fd(current_fd, head));
-		ft_strlcpy(current_fd->backup, tmp + 1, ft_strlen(tmp + 1) + 1);
+		ft_strlcpy_gnl(current_fd->backup, tmp + 1, ft_strlen_gnl(tmp + 1) + 1);
 		return (line);
 	}
 	else
 	{
-		line = ft_strjoin(current_fd->backup, "");
+		line = ft_strjoin_gnl(current_fd->backup, "");
 		if (!line)
 			return (remove_fd(current_fd, head));
 		remove_fd(current_fd, head);
@@ -101,12 +101,12 @@ char	*read_line(int fd, t_gnllist *cur_fd, t_gnllist **head, ssize_t r_size)
 		if (r_size == -1)
 			return (remove_fd(cur_fd, head));
 		cur_fd->read_buff[r_size] = '\0';
-		tmp = ft_strjoin(cur_fd->backup, cur_fd->read_buff);
+		tmp = ft_strjoin_gnl(cur_fd->backup, cur_fd->read_buff);
 		if (!tmp)
 			return (remove_fd(cur_fd, head));
 		free(cur_fd->backup);
 		cur_fd->backup = tmp;
-		if (ft_strchr(cur_fd->backup, '\n') != NULL)
+		if (ft_strchr_gnl(cur_fd->backup, '\n') != NULL)
 		{
 			line = split_line(cur_fd, head);
 			return (line);

@@ -6,7 +6,7 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/01/07 20:46:25 by jehelee          ###   ########.fr        #
+#    Updated: 2023/01/12 15:45:29 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,7 @@ SRCS = main.c	\
 
 LIB_DIR		= ./lib/
 
-OBJ = ${SRCS:%.c =  %.o}
+OBJ = ${SRCS:%.c=%.o}
 
 
 CC = cc
@@ -29,11 +29,13 @@ CLIB = -Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
 all : ${NAME}
 
 %.o : %.c
-	${CC} ${CFLAGS} $< -o $@
+#	${CC} ${CFLAGS} $< -o $@
+	$(CC) -o ${NAME} main.c -L ${LIB_DIR} -l_jehelee ${CLIB} -g
 
 ${NAME} : ${OBJ}
 #	${CC} ${CFLAGS} ${CLIB} ${SRCS} -o ${NAME}
 	make -C ./lib/
+#	$(CC) -o main.o main.c -L ${LIB_DIR} -l_jehelee ${CLIB} -g
 	$(CC) -o $(NAME) main.c -L ${LIB_DIR} -l_jehelee ${CLIB} -g
 	install_name_tool -change libmlx.dylib mlx/libmlx.dylib $(NAME)
 
