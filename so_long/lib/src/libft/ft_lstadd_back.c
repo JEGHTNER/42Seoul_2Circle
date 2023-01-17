@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 16:05:15 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/12 15:51:26 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/17 20:10:41 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_list	*ft_lstadd_back(t_list **lst, t_list *new)
 	}
 	last = ft_lstlast(*lst);
 	last -> next = new;
+	new->prev = last;
 
 	return (new);
 }

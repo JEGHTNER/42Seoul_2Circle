@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:31:20 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/17 16:51:29 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/17 20:23:22 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,17 @@ typedef struct s_map
 // 	struct s_list	next;
 // }				t_list;
 
-typedef struct s_vars
+typedef struct s_game
 {
 	void	*mlx;
 	void	*win;
-}				t_vars;
+	void	*img_wall;
+	void	*img_ground;
+	void	*img_player;
+	void	*img_collectible;
+	void	*img_exit;
+
+}				t_game;
 
 typedef struct s_status
 {
@@ -58,25 +64,29 @@ typedef struct s_status
 	int	y;
 }				t_status;
 
-void	status_init(t_status *status)
+void	move_w(t_map *map)
 {
-	status->x = 3;
-	status->y = 4;
+	int	x;
+	int	y;
+
+	y = map->p_place[0];
+	x = map->p_place[1];
+
+	//while ()
 }
 
-int	key_press(int keycode, t_status *status)
+int	key_press(int keycode, t_map *map)
 {
-	if (keycode == KEY_W)
-		status->y++;
-	else if (keycode == KEY_S)
-		status->y--;
-	else if (keycode == KEY_A)
-		status->x--;
-	else if (keycode == KEY_D)
-		status->x++;
-	else if (keycode == KEY_ESC)
-		exit(0);
-	printf("x: %d, y: %d\n", status->x, status->y);
+	// if (keycode == KEY_W)
+	// 	move_w(map);
+	// else if (keycode == KEY_S)
+	// 	move_s(map);
+	// else if (keycode == KEY_A)
+	// 	move_a(map);
+	// else if (keycode == KEY_D)
+	// 	move_d(map);
+	// else if (keycode == KEY_ESC)
+	// 	exit(0);
 	return (0);
 }
 #include<stdio.h>
@@ -250,36 +260,81 @@ void	map_init(t_map *map)
 	map->tail = NULL;
 }
 
+void init_image(t_game *game)
+{
+	int	img_width;
+	int	img_height;
+
+	game->img_player =mlx_xpm_file_to_image(game->mlx,"./so_long/images/front1.xpm",&img_width, &img_height);
+	game->img_collectible = mlx_xpm_file_to_image(game->mlx,"./so_long/images/collectible.xpm",&img_width, &img_height);
+	game->img_ground = mlx_xpm_file_to_image(game->mlx,"./so_long/images/ground.xpm",&img_width, &img_height);
+	game->img_wall = mlx_xpm_file_to_image(game->mlx,"./so_long/images/wall.xpm",&img_width, &img_height);
+	game->img_exit = mlx_xpm_file_to_image(game->mlx,"./so_long/images/exit.xpm",&img_width, &img_height);
+}
+
+void	set_image(t_map *map, t_game game)
+{
+	t_list	*tmp;
+	int		height;
+	int		width;
+
+	tmp = map->head;
+	width = 0;
+	height = 0;
+	while (tmp)
+	{
+		width = 0;
+		while (tmp->content[width])
+		{
+			if (tmp ->content[width] == '1')
+				mlx_put_image_to_window(game.mlx, game.win, game.img_wall, width * 64, height * 64);
+			else if (tmp->content[width] == '0')
+				mlx_put_image_to_window(game.mlx, game.win, game.img_ground, width * 64, height * 64);
+			else if (tmp->content[width] == 'P')
+			{	
+				mlx_put_image_to_window(game.mlx, game.win, game.img_ground, width * 64, height * 64);
+				mlx_put_image_to_window(game.mlx, game.win, game.img_player, width * 64, height * 64);
+			}
+			else if (tmp->content[width] == 'C')
+			{
+				mlx_put_image_to_window(game.mlx, game.win, game.img_ground, width * 64, height * 64);
+				mlx_put_image_to_window(game.mlx, game.win, game.img_collectible, width * 64, height * 64);
+			}
+			else if (tmp->content[width] == 'E')
+				mlx_put_image_to_window(game.mlx, game.win, game.img_exit, width * 64, height * 64);
+			width++;
+		}
+		tmp = tmp->next;
+		height++;
+	}
+}
+
 int	main(void)
 {
-	t_vars		vars;
+	t_game		game;
 	t_status	status;
 	t_map		*map;
-	void		*img;
-	void		*img2;
-	int			img_width;
-	int			img_height;
 
 	map = malloc(sizeof(t_map));
+	if(!map)
+		return (0);
 	map_init(map);
-	int fd = open("./so_long/map2.ber",O_RDONLY);
+	int fd = open("./so_long/map.ber",O_RDONLY);
 	parse_map(map, fd);
 	if (map->map_error != 0)
 		return (write(1,"Map Error\n", 10));
+
 	t_list *tmp = map->head;
 	while(tmp)
 	{
 		printf("%s\n",tmp->content);
 		tmp = tmp->next;
 	}
-	status_init(&status);
-	vars.mlx = mlx_init();
-	vars.win = mlx_new_window(vars.mlx, 1024, 1024, "Hello World");
-	mlx_key_hook(vars.win, key_press, &status);
-	img = mlx_xpm_file_to_image(vars.mlx,"./so_long/images/front1.xpm",&img_width,&img_height);
-	img2 = mlx_xpm_file_to_image(vars.mlx,"./so_long/images/front2.xpm",&img_width,&img_height);
-	mlx_put_image_to_window(vars.mlx, vars.win, img, 0, 0);
-	mlx_put_image_to_window(vars.mlx, vars.win, img2, 0, 64);
-	mlx_loop(vars.mlx);
+	game.mlx = mlx_init();
+	game.win = mlx_new_window(game.mlx, map->map_width * 64, map->map_height * 64, "So_long");
+	mlx_key_hook(game.win, key_press, map);
+	init_image(&game);
+	set_image(map, game);
+	mlx_loop(game.mlx);
 	return (0);
 }

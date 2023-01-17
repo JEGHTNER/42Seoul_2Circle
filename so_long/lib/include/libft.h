@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:21:58 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/12 15:50:03 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/17 20:07:53 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@
 
 typedef struct s_list
 {
-	void			*content;
+	char			*content;
 	struct s_list	*next;
+	struct s_list	*prev;
 }				t_list;
 
 int		ft_isascii(int c);
@@ -56,7 +57,7 @@ char	*ft_strtrim(char const *string1, char const *trim_set);
 char	*ft_itoa(int number);
 char	**ft_split(char const *string, char seperator);
 char	*ft_strmapi(char const *string, char (*f)(unsigned int, char));
-t_list	*ft_lstnew(void *content);
+t_list	*ft_lstnew(char *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 int		ft_lstsize(t_list *lst);
 t_list	*ft_lstlast(t_list *lst);
