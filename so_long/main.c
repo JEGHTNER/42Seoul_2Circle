@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:31:20 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/12 20:16:02 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/17 16:51:29 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	check_line(t_map *map, char *line)
 	int line_len;
 	//rectangle check, first last 1 check
 	line_len = -1;
-	while (line[++line_len])
+	while (line[++line_len] && line[line_len] != '\n')
 	{
 		if (line[line_len] == 'C')
 			map->collectible++;
@@ -99,10 +99,10 @@ void	check_line(t_map *map, char *line)
 		if (line[line_len] == 'E')
 			map->exit++;
 	}
-	if (line[0] != 1 || line[line_len - 1] != 1)
-		map->map_error = 1;
+	if (line[0] != '1' || line[line_len - 1] != '1')
+		map->map_error = LINE_ERROR;
 	if (line_len != map->map_width)
-		map->map_error = 1;
+		map->map_error = LINE_ERROR;
 }
 
 void	free_all(char **table)
@@ -137,23 +137,28 @@ char	**init_table(t_map *map)
 			free_all(table);
 			return (NULL);
 		}
-		table[i] = tmp->content;
+		ft_strlcpy(table[i], tmp->content, map->map_width);
 		tmp = tmp->next;
 	}
 	return (table);
 }
 
-int dfs(char **table, int i, int j, int *found)
+int dfs(char **table, int i, int j, int *found,t_map *map)
 {
 	if (table[i][j] == '1')
 		return (0);
-	else if (table[i][j] == '0')
+	if (table[i][j] == 'C')
+	{
+		map->collectible--;
+		table[i][j] = '0';
+	}
+	if (table[i][j] == '0')
 	{
 		table[i][j] = '1';
-		dfs(table, i + 1, j, found);
-		dfs(table, i, j + 1, found);
-		dfs(table, i - 1, j, found);
-		dfs(table, i, j - 1, found);
+		dfs(table, i + 1, j, found, map);
+		dfs(table, i, j + 1, found, map);
+		dfs(table, i - 1, j, found, map);
+		dfs(table, i, j - 1, found, map);
 	}
 	if (table[i][j] == 'E')
 	{	
@@ -174,11 +179,13 @@ void	check_valid_path(t_map *map)
 	table = init_table(map);
 	i = map->p_place[0];
 	j = map->p_place[1];
-	dfs(table, i + 1, j, &found);
-	dfs(table, i, j + 1, &found);
-	dfs(table, i - 1, j, &found);
-	dfs(table, i, j - 1, &found);
+	dfs(table, i + 1, j, &found, map);
+	dfs(table, i, j + 1, &found, map);
+	dfs(table, i - 1, j, &found, map);
+	dfs(table, i, j - 1, &found, map);
 	if (found == 0)
+		map->map_error = NO_PATH;
+	if (map->collectible != 0)
 		map->map_error = NO_PATH;
 }
 
@@ -188,7 +195,6 @@ void	check_map(t_map *map)
 	char	*line;
 
 	line = map->head->content;
-	//first line, last line 1 check
 	i = -1;
 	while (++i < map->map_width)
 	{
@@ -256,8 +262,10 @@ int	main(void)
 
 	map = malloc(sizeof(t_map));
 	map_init(map);
-	int fd = open("./so_long/map.ber",O_RDONLY);
+	int fd = open("./so_long/map2.ber",O_RDONLY);
 	parse_map(map, fd);
+	if (map->map_error != 0)
+		return (write(1,"Map Error\n", 10));
 	t_list *tmp = map->head;
 	while(tmp)
 	{
