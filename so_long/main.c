@@ -31,6 +31,7 @@ typedef struct s_map
 {
 	t_list	*head;
 	t_list	*tail;
+	t_list	*p_list;
 	int		map_height;
 	int		map_width;
 	int		map_error;
@@ -38,6 +39,13 @@ typedef struct s_map
 	int		exit;
 	int		player;
 	int		p_place[2];
+	void	*mlx;
+	void	*win;
+	void	*img_wall;
+	void	*img_ground;
+	void	*img_player;
+	void	*img_collectible;
+	void	*img_exit;
 }				t_map;
 
 // typedef struct s_list
@@ -66,27 +74,39 @@ typedef struct s_status
 
 void	move_w(t_map *map)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
 
 	y = map->p_place[0];
 	x = map->p_place[1];
 
-	//while ()
+	if (y - 1 < 0 || map->p_list->prev->content[x] == '1')
+		return ;
+	map->p_list->content[x] = '0';
+	mlx_put_image_to_window(map->mlx, map->win, map->img_ground, x * 64, y * 64);
+	map->p_place[0] = y - 1;
+	map->p_list = map->p_list->prev;
+	if (map->p_list->content[x] == '0')
+		mlx_put_image_to_window(map->mlx, map->win, map->img_player, x * 64, (y - 1) * 64);
+	else if (map->p_list->content[x] == 'C')
+	{
+		mlx_put_image_to_window(map->mlx, map->win, map->img_ground, x * 64, (y - 1) * 64);
+		mlx_put_image_to_window(map->mlx, map->win, map->img_player, x * 64, (y - 1) * 64);
+	}
 }
 
 int	key_press(int keycode, t_map *map)
 {
-	// if (keycode == KEY_W)
-	// 	move_w(map);
+	if (keycode == KEY_W)
+		move_w(map);
 	// else if (keycode == KEY_S)
 	// 	move_s(map);
 	// else if (keycode == KEY_A)
 	// 	move_a(map);
 	// else if (keycode == KEY_D)
 	// 	move_d(map);
-	// else if (keycode == KEY_ESC)
-	// 	exit(0);
+	else if (keycode == KEY_ESC)
+		exit(0);
 	return (0);
 }
 #include<stdio.h>
@@ -115,7 +135,7 @@ void	check_line(t_map *map, char *line)
 		map->map_error = LINE_ERROR;
 }
 
-void	free_all(char **table)
+void	free_table(char **table)
 {
 	int	i;
 
@@ -144,7 +164,7 @@ char	**init_table(t_map *map)
 		table[i] = malloc(map->map_width);
 		if (!table[i])
 		{
-			free_all(table);
+			free_table(table);
 			return (NULL);
 		}
 		ft_strlcpy(table[i], tmp->content, map->map_width);
@@ -226,6 +246,7 @@ void	check_map(t_map *map)
 void	parse_map(t_map *map, int fd)
 {
 	char	*line;
+	int		i;
 
 	line = get_next_line(fd);
 	if (!line)
@@ -244,6 +265,10 @@ void	parse_map(t_map *map, int fd)
 		map->map_height++;
 	}
 	check_map(map);
+	map->p_list = map->head;
+	i = -1;
+	while(++i < map->p_place[0])
+		map->p_list = map->p_list->next;
 }
 
 void	map_init(t_map *map)
@@ -258,21 +283,22 @@ void	map_init(t_map *map)
 	map->p_place[1] = 0;
 	map->head = NULL;
 	map->tail = NULL;
+	map->p_list = NULL;
 }
 
-void init_image(t_game *game)
+void init_image(t_map *map)
 {
 	int	img_width;
 	int	img_height;
 
-	game->img_player =mlx_xpm_file_to_image(game->mlx,"./so_long/images/front1.xpm",&img_width, &img_height);
-	game->img_collectible = mlx_xpm_file_to_image(game->mlx,"./so_long/images/collectible.xpm",&img_width, &img_height);
-	game->img_ground = mlx_xpm_file_to_image(game->mlx,"./so_long/images/ground.xpm",&img_width, &img_height);
-	game->img_wall = mlx_xpm_file_to_image(game->mlx,"./so_long/images/wall.xpm",&img_width, &img_height);
-	game->img_exit = mlx_xpm_file_to_image(game->mlx,"./so_long/images/exit.xpm",&img_width, &img_height);
+	map->img_player =mlx_xpm_file_to_image(map->mlx,"./so_long/images/front1.xpm",&img_width, &img_height);
+	map->img_collectible = mlx_xpm_file_to_image(map->mlx,"./so_long/images/collectible.xpm",&img_width, &img_height);
+	map->img_ground = mlx_xpm_file_to_image(map->mlx,"./so_long/images/ground.xpm",&img_width, &img_height);
+	map->img_wall = mlx_xpm_file_to_image(map->mlx,"./so_long/images/wall.xpm",&img_width, &img_height);
+	map->img_exit = mlx_xpm_file_to_image(map->mlx,"./so_long/images/exit.xpm",&img_width, &img_height);
 }
 
-void	set_image(t_map *map, t_game game)
+void	set_image(t_map *map)
 {
 	t_list	*tmp;
 	int		height;
@@ -287,21 +313,21 @@ void	set_image(t_map *map, t_game game)
 		while (tmp->content[width])
 		{
 			if (tmp ->content[width] == '1')
-				mlx_put_image_to_window(game.mlx, game.win, game.img_wall, width * 64, height * 64);
+				mlx_put_image_to_window(map->mlx, map->win, map->img_wall, width * 64, height * 64);
 			else if (tmp->content[width] == '0')
-				mlx_put_image_to_window(game.mlx, game.win, game.img_ground, width * 64, height * 64);
+				mlx_put_image_to_window(map->mlx, map->win, map->img_ground, width * 64, height * 64);
 			else if (tmp->content[width] == 'P')
 			{	
-				mlx_put_image_to_window(game.mlx, game.win, game.img_ground, width * 64, height * 64);
-				mlx_put_image_to_window(game.mlx, game.win, game.img_player, width * 64, height * 64);
+				mlx_put_image_to_window(map->mlx, map->win, map->img_ground, width * 64, height * 64);
+				mlx_put_image_to_window(map->mlx, map->win, map->img_player, width * 64, height * 64);
 			}
 			else if (tmp->content[width] == 'C')
 			{
-				mlx_put_image_to_window(game.mlx, game.win, game.img_ground, width * 64, height * 64);
-				mlx_put_image_to_window(game.mlx, game.win, game.img_collectible, width * 64, height * 64);
+				mlx_put_image_to_window(map->mlx, map->win, map->img_ground, width * 64, height * 64);
+				mlx_put_image_to_window(map->mlx, map->win, map->img_collectible, width * 64, height * 64);
 			}
 			else if (tmp->content[width] == 'E')
-				mlx_put_image_to_window(game.mlx, game.win, game.img_exit, width * 64, height * 64);
+				mlx_put_image_to_window(map->mlx, map->win, map->img_exit, width * 64, height * 64);
 			width++;
 		}
 		tmp = tmp->next;
@@ -311,8 +337,6 @@ void	set_image(t_map *map, t_game game)
 
 int	main(void)
 {
-	t_game		game;
-	t_status	status;
 	t_map		*map;
 
 	map = malloc(sizeof(t_map));
@@ -330,11 +354,11 @@ int	main(void)
 		printf("%s\n",tmp->content);
 		tmp = tmp->next;
 	}
-	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, map->map_width * 64, map->map_height * 64, "So_long");
-	mlx_key_hook(game.win, key_press, map);
-	init_image(&game);
-	set_image(map, game);
-	mlx_loop(game.mlx);
+	map->mlx = mlx_init();
+	map->win = mlx_new_window(map->mlx, map->map_width * 64, map->map_height * 64, "So_long");
+	mlx_key_hook(map->win, key_press, map);
+	init_image(map);
+	set_image(map);
+	mlx_loop(map->mlx);
 	return (0);
 }
