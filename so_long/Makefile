@@ -6,42 +6,45 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/01/20 17:54:14 by jehelee          ###   ########.fr        #
+#    Updated: 2023/01/20 23:53:34 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = a.out
+NAME = so_long
 
-SRCS = main.c key_input_utils.c	image_utils.c error_utils.c map_utils.c\
+SRCS = main.c move_utils.c image_utils.c error_utils.c map_utils.c key_hook_utils.c\
+		error_utils2.c																\
 
+INC_DIR		= ./lib/include/
 LIB_DIR		= ./lib/
+MLX_DIR		= ./mlx/
 
-OBJ = ${SRCS:%.c=%.o}
+OBJS = ${SRCS:%.c=%.o}
 
 
 CC = cc
 CFLAGS = -Wextra -Werror -Wall
-CLIB = -Lmlx -lmlx -framework OpenGL -framework Appkit -Imlx
+CLIB = -L ${MLX_DIR} -lmlx -framework OpenGL -framework Appkit -Imlx
 
 
 #rules
 
-all : ${NAME}
+all : libs ${NAME}
+
+libs:
+	make -C ./lib/
+	make -C ./mlx/
 
 %.o : %.c
-#	${CC} ${CFLAGS} $< -o $@
-	$(CC) -o ${NAME} ${SRCS} -L ${LIB_DIR} -l_jehelee ${CLIB} -g
+	$(CC) $(CFLAGS) -I $(INC_DIR) -Imlx -c -o $@ $<
 
-${NAME} : ${OBJ}
-#	${CC} ${CFLAGS} ${CLIB} ${SRCS} -o ${NAME}
-	make -C ./lib/
-#	$(CC) -o main.o main.c -L ${LIB_DIR} -l_jehelee ${CLIB} -g
-	$(CC) -o $(NAME) ${SRCS} -L ${LIB_DIR} -l_jehelee ${CLIB} -g
-	install_name_tool -change libmlx.dylib mlx/libmlx.dylib $(NAME)
+${NAME} : ${OBJS}
+	$(CC) -o $(NAME) ${OBJS} -L ${LIB_DIR} -l_jehelee ${CLIB} -g
 
 clean	:
 	make -C ./lib/ clean
-	rm -rf $(OBJ)
+	make -C ./mlx/ clean
+	rm -rf $(OBJS)
 
 fclean	: clean
 	rm -rf  ./lib/lib_jehelee.a

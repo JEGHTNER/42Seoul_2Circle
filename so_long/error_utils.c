@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:35:53 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/20 17:47:09 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/20 23:34:47 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	check_line(t_map *map, char *line)
 {
 	int line_len;
-	//rectangle check, first last 1 check
+    
 	line_len = -1;
 	while (line[++line_len] && line[line_len] != '\n')
 	{
@@ -76,6 +76,8 @@ char	**init_table(t_map *map)
 
 int dfs(char **table, int i, int j, int *found,t_map *map)
 {
+    if (!table)
+        return (0);
 	if (table[i][j] == '1')
 		return (0);
 	if (table[i][j] == 'C')

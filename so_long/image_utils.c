@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:35:56 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/20 17:41:03 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/20 23:54:50 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void init_image(t_map *map)
 	int	img_width;
 	int	img_height;
 
-	map->img_player =mlx_xpm_file_to_image(map->mlx,"./so_long/images/front1.xpm",&img_width, &img_height);
-	map->img_collectible = mlx_xpm_file_to_image(map->mlx,"./so_long/images/collectible.xpm",&img_width, &img_height);
-	map->img_ground = mlx_xpm_file_to_image(map->mlx,"./so_long/images/ground.xpm",&img_width, &img_height);
-	map->img_wall = mlx_xpm_file_to_image(map->mlx,"./so_long/images/wall.xpm",&img_width, &img_height);
-	map->img_exit = mlx_xpm_file_to_image(map->mlx,"./so_long/images/exit.xpm",&img_width, &img_height);
+	map->img_player =mlx_xpm_file_to_image(map->mlx,"./images/front1.xpm",&img_width, &img_height);
+	map->img_collectible = mlx_xpm_file_to_image(map->mlx,"./images/collectible.xpm",&img_width, &img_height);
+	map->img_ground = mlx_xpm_file_to_image(map->mlx,"./images/ground.xpm",&img_width, &img_height);
+	map->img_wall = mlx_xpm_file_to_image(map->mlx,"./images/wall.xpm",&img_width, &img_height);
+	map->img_exit = mlx_xpm_file_to_image(map->mlx,"./images/exit.xpm",&img_width, &img_height);
 }
 
 void	set_image(t_map *map)

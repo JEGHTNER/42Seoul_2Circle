@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:35:44 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/20 17:36:35 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/21 00:12:42 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 // # include "lib/include/get_next_line.h"
 // # include "lib/include/libft.h"
 
+# define KEY_EXIT       17
 # define KEY_ESC		53
 # define KEY_W			13
 # define KEY_A			0
@@ -42,6 +43,8 @@ typedef struct s_map
 	int		map_width;
 	int		map_error;
 	int		collectible;
+    int     c_count;
+    int     move;
 	int		exit;
 	int		player;
 	int		p_place[2];
@@ -60,6 +63,8 @@ void	move_s(t_map *map);
 void	move_a(t_map *map);
 void	move_d(t_map *map);
 int     key_press(int keycode, t_map *map);
+int     exit_game(t_map *map);
+int     print_err(t_map *map);
 void	check_line(t_map *map, char *line);
 void	free_table(char **table);
 char	**init_table(t_map *map);
@@ -70,4 +75,6 @@ void	parse_map(t_map *map, int fd);
 void	map_init(t_map *map);
 void    init_image(t_map *map);
 void	set_image(t_map *map);
+void    check_end(t_map *map, int x, int y);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:36:04 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/20 17:46:33 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/20 23:10:21 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	check_map(t_map *map)
 		map->map_error = NO_EXIT;
 	if (map->player < 1)
 		map->map_error = NO_PLAYER;
+    map->c_count = map->collectible;
 	check_valid_path(map);
 }
 
@@ -44,7 +45,7 @@ void	parse_map(t_map *map, int fd)
 	line = get_next_line(fd);
 	if (!line)
 		return ;
-	map->map_width = ft_strlen(line) - 1; // exclude \n
+	map->map_width = ft_strlen(line) - 1;
 	map->map_height++;
 	check_line(map, line);
 	map->tail = ft_lstadd_back(&map->head, ft_lstnew(line));
