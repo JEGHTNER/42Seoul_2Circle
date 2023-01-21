@@ -6,7 +6,7 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/01/20 23:53:34 by jehelee          ###   ########.fr        #
+#    Updated: 2023/01/21 15:07:55 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ libs:
 	$(CC) $(CFLAGS) -I $(INC_DIR) -Imlx -c -o $@ $<
 
 ${NAME} : ${OBJS}
-	$(CC) -o $(NAME) ${OBJS} -L ${LIB_DIR} -l_jehelee ${CLIB} -g
+	$(CC) -o $(NAME) ${OBJS} -L ${LIB_DIR} -l_jehelee ${CLIB}
 
 clean	:
 	make -C ./lib/ clean

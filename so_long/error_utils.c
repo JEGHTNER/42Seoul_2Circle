@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:35:53 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/20 23:34:47 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/21 15:24:39 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	**init_table(t_map *map)
 	int		i;
 	t_list	*tmp;
 
-	table = malloc(map->map_height * (sizeof(char *)));
+	table = malloc(map->map_height * (sizeof(char *) + 1));
 	if (!table)
 		return (NULL);
 	i = -1;
@@ -71,6 +71,7 @@ char	**init_table(t_map *map)
 		ft_strlcpy(table[i], tmp->content, map->map_width);
 		tmp = tmp->next;
 	}
+    table[i] = NULL;
 	return (table);
 }
 
@@ -101,7 +102,7 @@ int dfs(char **table, int i, int j, int *found,t_map *map)
 	return (0);
 }
 
-void	check_valid_path(t_map *map)
+int	check_valid_path(t_map *map)
 {
 	char	**table;
 	int		i;
@@ -116,8 +117,10 @@ void	check_valid_path(t_map *map)
 	dfs(table, i, j + 1, &found, map);
 	dfs(table, i - 1, j, &found, map);
 	dfs(table, i, j - 1, &found, map);
-	if (found == 0)
-		map->map_error = NO_PATH;
+	free_table(table);
+    if (found == 0)
+		return (NO_PATH);
 	if (map->collectible != 0)
-		map->map_error = NO_PATH;
+		return (NO_PATH);
+    return (0);
 }

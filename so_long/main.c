@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:31:20 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/20 23:56:50 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/21 15:09:27 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ int	main(int argc, char *argv[])
 	if(!map)
 		return (0);
 	map_init(map);
-	int fd = open(argv[1],O_RDONLY);
+	int fd = open(argv[1], O_RDONLY);
 	if (fd < 0)
 		return (ft_printf("Error\nFile Open Failed.\n"));
-	parse_map(map, fd);
+	parse_map(map, fd); // todo: NULL 일떄?
 	if (map->map_error != 0)
 		return (print_err(map));
 	map->mlx = mlx_init();

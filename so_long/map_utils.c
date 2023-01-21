@@ -6,35 +6,39 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:36:04 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/20 23:10:21 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/21 15:39:30 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/include/so_long.h"
 
-void	check_map(t_map *map)
+int	check_map(t_map *map)
 {
 	int		i;
-	char	*line;
+	char	*head_line;
+    char    *tail_line;
 
-	line = map->head->content;
+	head_line = map->head->content;
+    tail_line = map->tail->content;
 	i = -1;
 	while (++i < map->map_width)
 	{
-		if (line[i] != '1')
-		{	
-			map->map_error = LINE_ERROR;
-			break ;
-		}
+		if (head_line[i] != '1')
+			return (LINE_ERROR);
+	}
+    while (--i >= 0)
+	{
+		if (tail_line[i] != '1')
+			return (LINE_ERROR);
 	}
 	if (map->collectible < 1)
-		map->map_error = NO_COLLECTIBLE;
-	if (map->exit < 1)
-		map->map_error = NO_EXIT;
-	if (map->player < 1)
-		map->map_error = NO_PLAYER;
+		return (NO_COLLECTIBLE);
+	if (map->exit != 1)
+		return (EXIT_ERROR);
+	if (map->player != 1)
+		return (PLAYER_ERROR);
     map->c_count = map->collectible;
-	check_valid_path(map);
+	return (check_valid_path(map));
 }
 
 void	parse_map(t_map *map, int fd)
@@ -58,7 +62,8 @@ void	parse_map(t_map *map, int fd)
 		map->tail = ft_lstadd_back(&map->head, ft_lstnew(line));
 		map->map_height++;
 	}
-	check_map(map);
+    if (map->map_error == 0)
+	    map->map_error = check_map(map);
 	map->p_list = map->head;
 	i = -1;
 	while(++i < map->p_place[0])

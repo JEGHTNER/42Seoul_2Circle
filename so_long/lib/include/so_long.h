@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:35:44 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/21 00:12:42 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/21 15:39:44 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,8 @@
 # define KEY_D			2
 # define NO_COLLECTIBLE 1
 # define LINE_ERROR 	2
-# define NO_EXIT		3
-# define NO_PLAYER		4
+# define EXIT_ERROR		3
+# define PLAYER_ERROR		4
 # define NO_PATH		5
 
 typedef struct s_map
@@ -69,12 +69,12 @@ void	check_line(t_map *map, char *line);
 void	free_table(char **table);
 char	**init_table(t_map *map);
 int     dfs(char **table, int i, int j, int *found,t_map *map);
-void	check_valid_path(t_map *map);
-void	check_map(t_map *map);
+int 	check_valid_path(t_map *map);
+int 	check_map(t_map *map);
 void	parse_map(t_map *map, int fd);
 void	map_init(t_map *map);
 void    init_image(t_map *map);
 void	set_image(t_map *map);
-void    check_end(t_map *map, int x, int y);
+void    check_end(t_map *map);
 
 #endif
