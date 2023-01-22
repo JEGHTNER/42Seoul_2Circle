@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:25:10 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/22 21:32:35 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/22 21:44:51 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,20 @@ void rotate(t_stack *stack)
 	stack->top = stack->top->next;
 	stack->bottom->next = tmp;
 	tmp->next = NULL;
+	stack->bottom = tmp;
+}
+
+void reverse_rotate(t_stack *stack)
+{
+	t_list	*tmp;
+	
+	if (stack->size <= 1)
+		return ;
+	tmp = stack->bottom->prev;
+	tmp->next = NULL;
+	stack->bottom->prev = NULL;
+	stack->bottom->next = stack->top;
+	stack->top->prev = stack->bottom;
+	stack->top = stack->bottom;
 	stack->bottom = tmp;
 }
