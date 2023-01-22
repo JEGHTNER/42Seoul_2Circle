@@ -6,13 +6,13 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/01/22 18:56:07 by jehelee          ###   ########.fr        #
+#    Updated: 2023/01/22 20:28:15 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
-SRCS = main.c \
+SRCS = main.c commands.c\
 
 INC_DIR		= ./lib/include/
 LIB_DIR		= ./lib/

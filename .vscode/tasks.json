@@ -6,7 +6,8 @@
             "command": "/usr/bin/make",
             "args": [
                 "-C",
-                "${workspaceFolder}/so_long/",
+                //"${workspaceFolder}/so_long/",
+                "${workspaceFolder}/push_swap/",
                 "re"
             ],
             "options": {

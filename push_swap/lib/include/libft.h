@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:21:58 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/22 13:26:00 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/22 20:19:55 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_list
 }				t_list;
 
 int		ft_isascii(int c);
+int		ft_isspace(int c);
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
 int		ft_isalnum(int c);

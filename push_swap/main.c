@@ -6,20 +6,11 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/22 19:41:19 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/22 21:45:21 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./lib/include/libft.h"
-#include "./lib/include/ft_printf.h"
-
-typedef struct s_stack
-{
-    t_list  *top;
-    t_list  *bottom;
-    int     size;
-
-}               t_stack;
+#include"./lib/include/push_swap.h"
 
 int ft_isspace(int c)
 {
@@ -39,7 +30,11 @@ void	ft_stack_push(t_stack *stack, t_list *new)
 {
 	if (!new || !stack)
 		return ;
+    if (stack->size == 0)
+        stack->bottom = new;
 	new ->next = stack->top;
+    if (stack->top)
+        stack->top->prev = new;
 	stack->top = new;
     stack->size++;
 }
@@ -52,6 +47,7 @@ void    ft_stack_pop(t_stack *stack)
         return ;
     tmp = stack->top;
     stack->top = stack->top->next;
+    stack->top->prev = NULL;
     free(tmp);
     stack->size--;
 }
@@ -147,7 +143,7 @@ int check_argv(char *argv, t_stack *a)
 int main(int argc, char *argv[])
 {
     t_stack *a;
-    // t_stack *b;
+    t_stack *b;
     
     a = malloc(sizeof(t_stack));
     if (!a)
@@ -158,15 +154,27 @@ int main(int argc, char *argv[])
         if (!check_argv(argv[i],a))
             return (0);
     }
+    
+    
+    check_duplicate(a);
+    b = malloc(sizeof(t_stack));
+    if (!b)
+        return (0);
+    swap(a);
+    push(b,a);
+	//rotate(a);
+	reverse_rotate(a);
     t_list  *tmp = a->top;
+    t_list  *tmp2 = b->top;
     for(int i = 0; i < a->size; i++)
     {
         ft_printf("%d ",tmp->content);
         tmp = tmp->next;
     }
-    check_duplicate(a);
-    // b = malloc(sizeof(t_stack));
-    // if (!b)
-    //     return (0);
-    
+    ft_printf("\n");
+    for(int i = 0; i < b->size; i++)
+    {
+        ft_printf("%d ",tmp2->content);
+        tmp2 = tmp2->next;
+    }
 }

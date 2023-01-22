@@ -9,8 +9,9 @@
 		"type": "cppdbg",
 		"request": "launch",
 		// 현재 workspace를 기준으로 test.out 프로그램을 실행
-		"program": "${workspaceFolder}/so_long/a.out",
-		"args": [],
+		//"program": "${workspaceFolder}/so_long/a.out",
+		"program": "${workspaceFolder}/push_swap/push_swap",
+		"args": ["1 2 3 4"],
 		"stopAtEntry": true,
 		"cwd": "${workspaceFolder}",
 		"environment": [],
