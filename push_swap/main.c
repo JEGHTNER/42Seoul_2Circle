@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/22 21:45:21 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/23 17:07:01 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,12 @@ void    ft_stack_pop(t_stack *stack)
         return ;
     tmp = stack->top;
     stack->top = stack->top->next;
-    stack->top->prev = NULL;
+    if (stack->top)
+        stack->top->prev = NULL;
     free(tmp);
     stack->size--;
+    if (stack->size == 0)
+        stack->bottom = NULL;
 }
 
 int	check_overflow(long long result)
@@ -162,7 +165,11 @@ int main(int argc, char *argv[])
         return (0);
     swap(a);
     push(b,a);
-	//rotate(a);
+	rotate(a);
+	reverse_rotate(a);
+    swap(a);
+    push(b,a);
+	rotate(a);
 	reverse_rotate(a);
     t_list  *tmp = a->top;
     t_list  *tmp2 = b->top;
