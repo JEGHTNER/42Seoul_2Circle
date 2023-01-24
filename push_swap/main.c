@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/23 17:07:01 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/24 19:09:29 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ int check_argv(char *argv, t_stack *a)
         ft_printf("Input range : -2147483648 ~ 2147483647");
         return(0);
     }
-    ft_stack_push(a, ft_lstnew(lnum * sign));
+    //ft_stack_push(a, ft_lstnew(lnum * sign));
     while (*argv)
     {
         if (!ft_isdigit(*argv))
@@ -140,6 +140,7 @@ int check_argv(char *argv, t_stack *a)
         }
         argv++;
     }
+    ft_stack_push(a, ft_lstnew(lnum * sign));
     return (1);
 }
 
@@ -152,25 +153,15 @@ int main(int argc, char *argv[])
     if (!a)
         return (0);
     init_stack(a);
-    for(int i =1; i < argc; i++)
+    for(int i = argc - 1; i >= 1; i--)
     {
         if (!check_argv(argv[i],a))
             return (0);
     }
-    
-    
     check_duplicate(a);
     b = malloc(sizeof(t_stack));
     if (!b)
         return (0);
-    swap(a);
-    push(b,a);
-	rotate(a);
-	reverse_rotate(a);
-    swap(a);
-    push(b,a);
-	rotate(a);
-	reverse_rotate(a);
     t_list  *tmp = a->top;
     t_list  *tmp2 = b->top;
     for(int i = 0; i < a->size; i++)
