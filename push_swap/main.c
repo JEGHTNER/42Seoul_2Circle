@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/24 19:12:39 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/24 19:38:16 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int check_argv(char *argv, t_stack *a)
         overflow = check_overflow(lnum);
         i++;
     }
-    if (lnum * sign > 2147483647 || lnum * sign < - 2147483648 || overflow != 0)
+    if (lnum * sign > 2147483647 || lnum * sign < -2147483648 || overflow != 0)
     {
         ft_printf("Input range : -2147483648 ~ 2147483647");
         return(0);
