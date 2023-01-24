@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/24 19:38:16 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/24 21:26:47 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,31 +145,31 @@ int check_argv(char *argv, t_stack *a)
 
 int main(int argc, char *argv[])
 {
-    t_stack *a;
-    t_stack *b;
+    t_ab    stacks;
     
-    a = malloc(sizeof(t_stack));
-    if (!a)
+    stacks.a = malloc(sizeof(t_stack));
+    if (!stacks.a)
         return (0);
-    init_stack(a);
+    init_stack(stacks.a);
     for(int i = argc - 1; i >= 1; i--)
     {
-        if (!check_argv(argv[i],a))
+        if (!check_argv(argv[i],stacks.a))
             return (0);
     }
-    check_duplicate(a);
-    b = malloc(sizeof(t_stack));
-    if (!b)
+    check_duplicate(stacks.a);
+    stacks.b = malloc(sizeof(t_stack));
+    if (!stacks.b)
         return (0);
-    t_list  *tmp = a->top;
-    t_list  *tmp2 = b->top;
-    for(int i = 0; i < a->size; i++)
+    sort_5(&stacks);
+    t_list  *tmp = stacks.a->top;
+    t_list  *tmp2 = stacks.b->top;
+    for(int i = 0; i < stacks.a->size; i++)
     {
         ft_printf("%d ",tmp->content);
         tmp = tmp->next;
     }
     ft_printf("\n");
-    for(int i = 0; i < b->size; i++)
+    for(int i = 0; i < stacks.b->size; i++)
     {
         ft_printf("%d ",tmp2->content);
         tmp2 = tmp2->next;
