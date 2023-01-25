@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:35:44 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/25 14:19:47 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/25 16:04:06 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@
 # define NO_COLLECTIBLE 1
 # define LINE_ERROR 	2
 # define EXIT_ERROR		3
-# define PLAYER_ERROR		4
+# define PLAYER_ERROR	4
 # define NO_PATH		5
 
 typedef struct s_map

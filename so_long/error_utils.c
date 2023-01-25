@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:35:53 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/25 15:25:26 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/25 18:42:16 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,18 @@ void	check_line(t_map *map, char *line)
 	{
 		if (line[line_len] == 'C')
 			map->collectible++;
-		if (line[line_len] == 'P')
+		else if (line[line_len] == 'P')
 		{
 			map->player++;
 			map->p_place[0] = map->map_height;
 			map->p_place[1] = line_len;
 		}
-		if (line[line_len] == 'E')
+		else if (line[line_len] == 'E')
 			map->exit++;
+		else if (line[line_len] == '1' || line[line_len] == '0')
+			;
+		else
+			map->map_error = LINE_ERROR;
 	}
 	if (line[0] != '1' || line[line_len - 1] != '1')
 		map->map_error = LINE_ERROR;
