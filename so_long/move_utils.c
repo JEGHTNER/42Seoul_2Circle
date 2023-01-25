@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:35:59 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/25 13:52:12 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/25 17:34:02 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	check_end(t_map *map)
 		exit(0);
 	}
 }
-void	get_image(t_map *map, int height, int width, char c);
 
 void	move_w(t_map *map)
 {
@@ -110,7 +109,7 @@ void	move_d(t_map *map)
 	y = map->p_place[0];
 	x = map->p_place[1];
 	if (x + 1 < 0 || map->p_list->content[x + 1] == '1' || \
-	(map->c_count != 0 && map->p_list->prev->content[x + 1] == 'E'))
+	(map->c_count != 0 && map->p_list->content[x + 1] == 'E'))
 		return ;
 	ft_printf("%d moves\n", ++(map->move));
 	map->p_list->content[x] = '0';
