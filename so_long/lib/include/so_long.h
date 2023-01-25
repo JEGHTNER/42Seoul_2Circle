@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:35:44 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/25 14:16:02 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/25 14:19:47 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,7 @@ void	set_image(t_map *map);
 void	check_end(t_map *map);
 void	get_image(t_map *map, int height, int width, char c);
 void	print_image(t_list *tmp, t_map *map, int height, int width);
+int		set_errors(t_map *map);
+void	set_player_node(t_map *map);
 
 #endif
