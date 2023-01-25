@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:35:53 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/25 13:28:57 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/25 15:25:26 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ char	**init_table(t_map *map)
 	tmp = map->head;
 	while (++i < map->map_height)
 	{
-		table[i] = malloc(map->map_width);
+		table[i] = malloc(map->map_width + 1);
 		if (!table[i])
 		{
 			free_table(table);
 			return (NULL);
 		}
-		ft_strlcpy(table[i], tmp->content, map->map_width);
+		ft_strlcpy(table[i], tmp->content, map->map_width + 1);
 		tmp = tmp->next;
 	}
 	table[i] = NULL;

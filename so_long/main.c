@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/07 16:31:20 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/25 14:17:01 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/25 15:34:11 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char *argv[])
 	int			fd;
 
 	if (argc != 2)
-		return (ft_printf("Error\nInput Map Missing.\n"));
+		return (ft_printf("Error\nInput Map ERROR.\n"));
 	map = malloc(sizeof(t_map));
 	if (!map)
 		return (0);
@@ -32,7 +32,7 @@ int	main(int argc, char *argv[])
 		return (print_err(map));
 	map->mlx = mlx_init();
 	map->win = mlx_new_window(map->mlx, map->map_width * 64, \
-	map->map_height * 64, "So_long");
+	map->map_height * 64, "so_long");
 	mlx_key_hook(map->win, key_press, map);
 	mlx_hook(map->win, KEY_EXIT, 0, &exit_game, map);
 	init_image(map);
