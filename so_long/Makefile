@@ -6,7 +6,7 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/01/21 15:07:55 by jehelee          ###   ########.fr        #
+#    Updated: 2023/01/25 14:05:18 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,10 +36,10 @@ libs:
 	make -C ./mlx/
 
 %.o : %.c
-	$(CC) $(CFLAGS) -I $(INC_DIR) -Imlx -c -o $@ $<
+	$(CC) -g $(CFLAGS) -I $(INC_DIR) -Imlx -c -o $@ $<
 
 ${NAME} : ${OBJS}
-	$(CC) -o $(NAME) ${OBJS} -L ${LIB_DIR} -l_jehelee ${CLIB}
+	$(CC) -g -o $(NAME) ${OBJS} -L ${LIB_DIR} -l_jehelee ${CLIB}
 
 clean	:
 	make -C ./lib/ clean
@@ -51,3 +51,5 @@ fclean	: clean
 	rm -rf	$(NAME)
 
 re		: fclean all
+
+.PHONY: all bonus clean fclean re libs

@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:35:53 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/21 15:24:39 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/25 13:28:57 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	check_line(t_map *map, char *line)
 {
-	int line_len;
-    
+	int	line_len;
+
 	line_len = -1;
 	while (line[++line_len] && line[line_len] != '\n')
 	{
@@ -71,14 +71,14 @@ char	**init_table(t_map *map)
 		ft_strlcpy(table[i], tmp->content, map->map_width);
 		tmp = tmp->next;
 	}
-    table[i] = NULL;
+	table[i] = NULL;
 	return (table);
 }
 
-int dfs(char **table, int i, int j, int *found,t_map *map)
+int	dfs(char **table, int i, int j, t_map *map)
 {
-    if (!table)
-        return (0);
+	if (!table)
+		return (0);
 	if (table[i][j] == '1')
 		return (0);
 	if (table[i][j] == 'C')
@@ -89,14 +89,14 @@ int dfs(char **table, int i, int j, int *found,t_map *map)
 	if (table[i][j] == '0')
 	{
 		table[i][j] = '1';
-		dfs(table, i + 1, j, found, map);
-		dfs(table, i, j + 1, found, map);
-		dfs(table, i - 1, j, found, map);
-		dfs(table, i, j - 1, found, map);
+		dfs(table, i + 1, j, map);
+		dfs(table, i, j + 1, map);
+		dfs(table, i - 1, j, map);
+		dfs(table, i, j - 1, map);
 	}
 	if (table[i][j] == 'E')
 	{	
-		*found = 1;
+		map->exit_found = 1;
 		return (1);
 	}
 	return (0);
@@ -107,20 +107,18 @@ int	check_valid_path(t_map *map)
 	char	**table;
 	int		i;
 	int		j;
-	int		found;
 
-	found = 0;
 	table = init_table(map);
 	i = map->p_place[0];
 	j = map->p_place[1];
-	dfs(table, i + 1, j, &found, map);
-	dfs(table, i, j + 1, &found, map);
-	dfs(table, i - 1, j, &found, map);
-	dfs(table, i, j - 1, &found, map);
+	dfs(table, i + 1, j, map);
+	dfs(table, i, j + 1, map);
+	dfs(table, i - 1, j, map);
+	dfs(table, i, j - 1, map);
 	free_table(table);
-    if (found == 0)
+	if (map->exit_found == 0)
 		return (NO_PATH);
 	if (map->collectible != 0)
 		return (NO_PATH);
-    return (0);
+	return (0);
 }

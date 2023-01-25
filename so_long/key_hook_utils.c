@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/20 23:03:20 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/20 23:18:19 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/25 13:20:09 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,13 @@ int	key_press(int keycode, t_map *map)
 	else if (keycode == KEY_D)
 		move_d(map);
 	else if (keycode == KEY_ESC)
-        exit_game(map);
+		exit_game(map);
 	return (0);
 }
 
 int	exit_game(t_map *map)
 {
 	mlx_destroy_window(map->mlx, map->win);
-    ft_printf("You gave up!\n");
+	ft_printf("You gave up!\n");
 	exit(0);
 }
