@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/19 16:36:04 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/25 14:15:36 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/25 14:52:59 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,5 @@ void	map_init(t_map *map)
 	map->head = NULL;
 	map->tail = NULL;
 	map->p_list = NULL;
+	map->move = 0;
 }
