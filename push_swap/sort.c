@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:46:40 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/26 22:29:32 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/26 22:59:28 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,14 +58,15 @@ void    sort_3(t_stack *stack)
 		return ;
 	max = stack->top->content;
 	min = stack->top->content;
+	mid = stack->top->content;
 	tmp = stack->top;
 	while (tmp)
 	{
 		if (max < tmp->content)
 			max = tmp->content;
-		if (min > tmp->content)
+		else if (min > tmp->content)
 			min = tmp->content;
-		if (tmp->content != max && tmp->content != min)
+		else if (tmp->content != max && tmp->content != min)
 			mid = tmp->content;
 		tmp = tmp->next;
 	}
@@ -87,7 +88,7 @@ void	sort_5(t_ab *stacks)
 	{
 		if (stacks->a->top->content == max || stacks->a->top->content == min)
 			push(stacks->b, stacks->a);
-		else
+		else if (stacks->a->size > 3)
 			rotate(stacks->a);
 		i++;
 	}
