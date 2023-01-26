@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/24 21:13:51 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/26 22:28:56 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_stack
     t_list  *top;
     t_list  *bottom;
     int     size;
+    int     both_flag;
+    char    name;
 }               t_stack;
 
 typedef struct s_ab
@@ -29,7 +31,7 @@ typedef struct s_ab
     t_stack *b;
 }               t_ab;
 
-void    init_stack(t_stack *stack);
+void    init_stack(t_stack *stack, char name);
 void    ft_stack_push(t_stack *stack, t_list *n);
 void    ft_stack_pop(t_stack *stack);
 int     check_overflow(long long result);
@@ -45,6 +47,18 @@ void    sort_3(t_stack *stack);
 int	    get_max(t_stack *stack);
 int	    get_min(t_stack *stack);
 void	sort_5(t_ab *stacks);
-
+int     get_max(t_stack *stack);
+int     get_min(t_stack *stack);
+void    pa(t_ab *stacks);
+void    pb(t_ab *stacks);
+void    rra(t_ab *stacks);
+void    rrb(t_ab *stacks);
+void    rrr(t_ab *stacks);
+void    ra(t_ab *stacks);
+void    rb(t_ab *stacks);
+void    rr(t_ab *stacks);
+void    sa(t_ab *stacks);
+void    sb(t_ab *stacks);
+void    ss(t_ab *stacks);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:46:40 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/24 21:41:42 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/26 22:29:32 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,11 @@
 
 void    sort_2(t_stack *stack)
 {   
-	
     if (stack->size != 2)
         return ;
 	
     if (stack->top->content > stack->top->next->content)
-        swap(stack);
+		swap(stack);
 }
 
 void	check_case_3(t_stack	*stack, int max, int mid, int min)
@@ -71,38 +70,6 @@ void    sort_3(t_stack *stack)
 		tmp = tmp->next;
 	}
 	check_case_3(stack, max, mid, min);
-}
-
-int	get_max(t_stack *stack)
-{
-	int		max;
-	t_list	*tmp;
-
-	max = -2147483648;
-	tmp = stack->top;
-	while (tmp)
-	{
-		if (max < tmp->content)
-			max = tmp->content;
-		tmp = tmp->next;
-	}
-	return (max);
-}
-
-int	get_min(t_stack *stack)
-{
-	int		min;
-	t_list	*tmp;
-
-	min = 2147483647;
-	tmp = stack->top;
-	while (tmp)
-	{
-		if (min > tmp->content)
-			min = tmp->content;
-		tmp = tmp->next;
-	}
-	return (min);
 }
 
 void	sort_5(t_ab *stacks)

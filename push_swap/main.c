@@ -6,24 +6,19 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/24 21:26:47 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/26 22:36:52 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include"./lib/include/push_swap.h"
 
-int ft_isspace(int c)
-{
-    if ((c >= 9 && c <= 13) || c == 32)
-        return (1);
-    return (0);
-}
-
-void    init_stack(t_stack *stack)
+void    init_stack(t_stack *stack, char name)
 {
     stack->bottom = NULL;
     stack->top = NULL;
-    stack->size = 0;   
+    stack->size = 0;
+    stack->name = name;  
+    stack->both_flag = 0;
 }
 
 void	ft_stack_push(t_stack *stack, t_list *new)
@@ -150,7 +145,7 @@ int main(int argc, char *argv[])
     stacks.a = malloc(sizeof(t_stack));
     if (!stacks.a)
         return (0);
-    init_stack(stacks.a);
+    init_stack(stacks.a, 'a');
     for(int i = argc - 1; i >= 1; i--)
     {
         if (!check_argv(argv[i],stacks.a))
@@ -160,6 +155,7 @@ int main(int argc, char *argv[])
     stacks.b = malloc(sizeof(t_stack));
     if (!stacks.b)
         return (0);
+    init_stack(stacks.b, 'b');
     sort_5(&stacks);
     t_list  *tmp = stacks.a->top;
     t_list  *tmp2 = stacks.b->top;
