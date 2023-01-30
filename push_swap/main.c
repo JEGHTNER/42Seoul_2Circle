@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/30 15:57:19 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/30 22:20:18 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,12 +61,17 @@ int	check_overflow(long long result)
 int check_duplicate(t_stack *stack)
 {
     int     num;
+    int     sort_flag;
     t_list  *tmp;
     t_list  *tmp2;
 
+	sort_flag = 0;
+	num = 0;
     tmp = stack->top;
     while (tmp)
     {
+		if (tmp->content >= num)
+			sort_flag++;
         num = tmp->content;
         tmp2 = tmp->next;
         while (tmp2)
@@ -80,6 +85,8 @@ int check_duplicate(t_stack *stack)
         }
         tmp = tmp->next;
     }
+	if (sort_flag == stack->size)
+		return (0);
     return (1);
 }
 
@@ -151,7 +158,8 @@ int main(int argc, char *argv[])
         if (!check_argv(argv[i],stacks.a))
             return (0);
     }
-    check_duplicate(stacks.a);
+    if (!check_duplicate(stacks.a))
+		return (ft_printf("ERROR:sorted"));
     stacks.b = malloc(sizeof(t_stack));
     if (!stacks.b)
         return (0);
