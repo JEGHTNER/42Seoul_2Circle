@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/26 23:00:08 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/30 15:57:19 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,16 +156,20 @@ int main(int argc, char *argv[])
     if (!stacks.b)
         return (0);
     init_stack(stacks.b, 'b');
+    a_to_b(&stacks, stacks.a->size);
+    b_to_a(&stacks, stacks.b->size);
     //sort_3(stacks.a);
-    sort_5(&stacks);
+    //sort_5(&stacks);
     t_list  *tmp = stacks.a->top;
     t_list  *tmp2 = stacks.b->top;
+    ft_printf("a= ");
     for(int i = 0; i < stacks.a->size; i++)
     {
         ft_printf("%d ",tmp->content);
         tmp = tmp->next;
     }
     ft_printf("\n");
+    ft_printf("b= ");
     for(int i = 0; i < stacks.b->size; i++)
     {
         ft_printf("%d ",tmp2->content);

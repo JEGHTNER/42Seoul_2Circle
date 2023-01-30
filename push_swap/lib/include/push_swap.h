@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/26 22:28:56 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/01/30 17:17:10 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,16 +39,20 @@ int     check_duplicate(t_stack *stack);
 int     check_argv(char *argv, t_stack *a);
 void    swap(t_stack *stack);
 void    push(t_stack *stack_to, t_stack *stack_from);
+void    a_to_b(t_ab *stacks, int count);
+void	b_to_a(t_ab *stacks, int count);
 void    rotate(t_stack *stack);
 void	reverse_rotate(t_stack *stack);
 void    sort_2(t_stack *stack);
-void	check_case_3(t_stack	*stack, int max, int mid, int min);
+void	check_case_3(t_stack	*stack, int max, int min);
 void    sort_3(t_stack *stack);
-int	    get_max(t_stack *stack);
+int	    get_max(t_stack *stack, int count);
 int	    get_min(t_stack *stack);
-void	sort_5(t_ab *stacks);
-int     get_max(t_stack *stack);
+void	sort_5_ab(t_ab *stacks);
+void	sort_5_ba(t_ab *stacks);
+int     get_max(t_stack *stack, int count);
 int     get_min(t_stack *stack);
+int     get_pivot(t_stack *stack);
 void    pa(t_ab *stacks);
 void    pb(t_ab *stacks);
 void    rra(t_ab *stacks);

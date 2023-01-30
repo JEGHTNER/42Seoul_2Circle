@@ -6,7 +6,7 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/01/26 21:56:06 by jehelee          ###   ########.fr        #
+#    Updated: 2023/01/30 12:19:28 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = push_swap
 
 SRCS = main.c commands.c sort.c sort_util_find_max_min.c \
 	   sort_util_push.c sort_util_reverse_rotate.c sort_util_rotate.c \
-	   sort_util_swap.c
+	   sort_util_swap.c push_swap.c
 
 INC_DIR		= ./lib/include/
 LIB_DIR		= ./lib/
