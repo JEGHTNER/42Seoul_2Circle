@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:25:10 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/26 22:27:10 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/01 13:58:13 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void swap(t_stack *stack)
 void    push(t_stack *stack_to, t_stack *stack_from)
 {
     int push_num;
-	
+
     if (stack_from->size == 0)
         return ;
     push_num = stack_from->top->content;
@@ -68,13 +68,12 @@ void rotate(t_stack *stack)
 		ft_printf("ra\n");
 	else if (stack->name == 'b')
 		ft_printf("rb\n");
-	
 }
 
 void reverse_rotate(t_stack *stack)
 {
 	t_list	*tmp;
-	
+
 	if (stack->size <= 1)
 		return ;
 	tmp = stack->bottom->prev;
