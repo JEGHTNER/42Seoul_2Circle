@@ -6,27 +6,23 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/01 16:14:02 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/01 16:17:26 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./lib/include/push_swap.h"
 
-void	exit_with_error(char *str)
-{
-	ft_printf("%s", str);
-	exit(0);
-}
-
 int main(int argc, char *argv[])
 {
 	t_ab	stacks;
+	int		i;
 
 	stacks.a = malloc(sizeof(t_stack));
 	if (!stacks.a)
 		return (0);
 	init_stack(stacks.a, 'a');
-	for (int i = argc - 1; i >= 1; i--)
+	i = argc;
+	while (--i >= 1)
 	{
 		if (!check_argv(argv[i], stacks.a))
 			return (0);
