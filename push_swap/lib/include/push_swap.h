@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/01 16:07:58 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/01 16:37:42 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ int     get_pivot(t_stack *stack);
 int 	check_space_sign(char **argv, int *sign);
 void	check_recur(char **argv, t_stack *a);
 void	exit_with_error(char *str);
+void	make_index(t_stack *stack, int size);
 void    pa(t_ab *stacks);
 void    pb(t_ab *stacks);
 void    rra(t_ab *stacks);

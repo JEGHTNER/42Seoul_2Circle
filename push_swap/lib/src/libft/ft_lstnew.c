@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/24 14:28:21 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/22 13:18:05 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/01 16:31:01 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_list	*ft_lstnew(int content)
 	if (!new_node)
 		return (0);
 	new_node -> content = content;
+	new_node -> index = 0;
 	new_node -> next = 0;
 	new_node -> prev = 0;
 	return (new_node);

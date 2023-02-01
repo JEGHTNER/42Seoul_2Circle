@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/01 16:17:26 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/01 16:37:54 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int main(int argc, char *argv[])
 	}
 	if (!check_duplicate(stacks.a))
 		return (ft_printf("ERROR:sorted"));
+	make_index(stacks.a, stacks.a->size);
 	stacks.b = malloc(sizeof(t_stack));
 	if (!stacks.b)
 		return (0);
