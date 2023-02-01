@@ -6,22 +6,22 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:46:40 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/30 17:23:50 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/01 16:13:22 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./lib/include/push_swap.h"
 
-void    sort_2(t_stack *stack)
-{   
-    if (stack->size != 2)
-        return ;
-	
-    if (stack->top->content > stack->top->next->content)
+void	sort_2(t_stack *stack)
+{
+	if (stack->size != 2)
+		return ;
+
+	if (stack->top->content > stack->top->next->content)
 		swap(stack);
 }
 
-void	check_case_3(t_stack	*stack, int max, int min)
+void	check_case_3(t_stack *stack, int max, int min)
 {
 	if (stack->top->content == min && stack->top->next->content == max)
 	{
@@ -47,10 +47,10 @@ void	check_case_3(t_stack	*stack, int max, int min)
 	}
 }
 
-void    sort_3(t_stack *stack)
+void	sort_3(t_stack *stack)
 {
-    int 	max;
-    int 	min;
+	int		max;
+	int		min;
 	t_list	*tmp;
 
 	if (stack->size != 3)
@@ -71,10 +71,10 @@ void    sort_3(t_stack *stack)
 
 void	sort_5_ab(t_ab *stacks)
 {
-	int		max;
-	int		min;
-	int		i;
-	
+	int	max;
+	int	min;
+	int	i;
+
 	if (stacks->a->size != 5)
 		return ;
 	max = get_max(stacks->a, stacks->a->size);
@@ -98,10 +98,10 @@ void	sort_5_ab(t_ab *stacks)
 
 void	sort_5_ba(t_ab *stacks)
 {
-	int		max;
-	int		min;
-	int		i;
-	
+	int	max;
+	int	min;
+	int	i;
+
 	if (stacks->b->size != 5)
 		return ;
 	max = get_max(stacks->b, stacks->b->size);

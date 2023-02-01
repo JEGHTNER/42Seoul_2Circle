@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/30 17:17:10 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/01 16:07:58 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,9 @@ void	sort_5_ba(t_ab *stacks);
 int     get_max(t_stack *stack, int count);
 int     get_min(t_stack *stack);
 int     get_pivot(t_stack *stack);
+int 	check_space_sign(char **argv, int *sign);
+void	check_recur(char **argv, t_stack *a);
+void	exit_with_error(char *str);
 void    pa(t_ab *stacks);
 void    pb(t_ab *stacks);
 void    rra(t_ab *stacks);
