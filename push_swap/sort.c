@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:46:40 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/01 16:13:22 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/01 20:44:02 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,8 @@ void	sort_5_ab(t_ab *stacks)
 
 	if (stacks->a->size != 5)
 		return ;
-	max = get_max(stacks->a, stacks->a->size);
-	min = get_min(stacks->a);
+	max = get_max(stacks->a, 5);
+	min = get_min(stacks->a, 5);
 	i = 0;
 	while (i < 5)
 	{
@@ -94,31 +94,4 @@ void	sort_5_ab(t_ab *stacks)
 	push(stacks->a, stacks->b);
 	push(stacks->a, stacks->b);
 	rotate(stacks->a);
-}
-
-void	sort_5_ba(t_ab *stacks)
-{
-	int	max;
-	int	min;
-	int	i;
-
-	if (stacks->b->size != 5)
-		return ;
-	max = get_max(stacks->b, stacks->b->size);
-	min = get_min(stacks->b);
-	i = 0;
-	while (i < 5)
-	{
-		if (stacks->b->top->content == max || stacks->b->top->content == min)
-			push(stacks->a, stacks->b);
-		else if (stacks->b->size > 3)
-			rotate(stacks->b);
-		i++;
-	}
-	sort_3(stacks->b);
-	if (stacks->a->top->content > stacks->a->top->next->content)
-		swap(stacks->a);
-	push(stacks->b, stacks->a);
-	push(stacks->b, stacks->a);
-	rotate(stacks->b);
 }

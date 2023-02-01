@@ -6,22 +6,36 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:11:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/30 21:57:26 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/01 20:32:05 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/include/push_swap.h"
 
-int	get_pivot(t_stack *stack)
+int	get_pivot(t_stack *stack, int size)
 {
 	t_list	*tmp;
-	//int		i;
-	
+	int		sum;
+	int		find;
+	int		i;
+
+	sum = 0;
 	tmp = stack->top;
-	// i = -1;
-	// while (++i < 1)
-	// 	tmp = tmp->next;
-	return (tmp->content);
+	i = -1;
+	while (++i < size)
+	{
+		sum += tmp->index;
+		tmp = tmp->next;
+	}
+	tmp = stack->top;
+	find = sum / size;
+	while (--i > 0)
+	{
+		if (tmp->index == find)
+			return (tmp->content);
+		tmp = tmp->next;
+	}
+	return (stack->top->content);
 }
 
 void	b_to_a(t_ab *stacks, int count)
@@ -30,29 +44,28 @@ void	b_to_a(t_ab *stacks, int count)
 	int	i;
 	int	push_count;
 	int	rb_count;
-	
-	if (stacks->b->size == 1)
+
+	if (count <= 1)
 	{
 		push(stacks->a, stacks->b);
 		return ;
 	}
-	if (count <= 0)
-		return ;
-    // if (stacks->b->size == 2)
-    //     sort_2(stacks->b);
-    // else if (stacks->b->size == 3)
-    //     sort_3(stacks->b);
-    // else if (stacks->b->size == 5)
-    // 	sort_5_ba(stacks);
+    if (count == 2)
+        rev_sort_2(stacks, stacks->b);
+    else if (count == 3)
+        rev_sort_3(stacks, stacks->b);
+    else if (count == 5)
+    	rev_sort_5_ba(stacks);
     else
     {
 		rb_count = 0;
 		push_count = 0;
 		i = -1;
-        pivot = get_max(stacks->b, count);
+        pivot = get_pivot(stacks->b, count);
+		ft_printf("b_pivot = %d\n",pivot);
 		while (++i < count)
 		{
-			if (stacks->b->top->content == pivot)
+			if (stacks->b->top->content > pivot)
 			{
 				push(stacks->a, stacks->b);
 				push_count++;
@@ -67,7 +80,8 @@ void	b_to_a(t_ab *stacks, int count)
 		i = -1;
 		while (++i < rb_count)
 			reverse_rotate(stacks->b);
-		b_to_a(stacks, count - 1);
+		a_to_b(stacks, push_count);
+		b_to_a(stacks, count - push_count);
     }
 }
 
@@ -77,24 +91,25 @@ void    a_to_b(t_ab *stacks, int count)
 	int	i;
 	int	ra_count;
 	int	push_count;
-	
-	if (stacks->a->size <= 1)
+
+	if (count <= 1)
 		return ;
-    if (stacks->a->size == 2)
+    if (count == 2)
         sort_2(stacks->a);
-    else if (stacks->a->size == 3)
+    else if (count == 3)
         sort_3(stacks->a);
-    else if (stacks->a->size == 5)
+    else if (count == 5)
         sort_5_ab(stacks);
     else
     {
 		push_count = 0;
 		ra_count = 0;
 		i = -1;
-        pivot = get_pivot(stacks->a);
+		pivot = get_pivot(stacks->a, count);
+		ft_printf("a_pivot = %d\n", pivot);
 		while (++i < count)
 		{
-			if (stacks->a->top->content <= pivot)
+			if (stacks->a->top->content < pivot)
 			{
 				push(stacks->b, stacks->a);
 				push_count++;
@@ -108,7 +123,7 @@ void    a_to_b(t_ab *stacks, int count)
 		i = -1;
 		while (++i < ra_count)
 			reverse_rotate(stacks->a);
-		a_to_b(stacks, stacks->a->size);
+		a_to_b(stacks, count - push_count);
 		b_to_a(stacks, push_count);
     }
 }

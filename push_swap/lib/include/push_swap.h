@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/01 16:37:42 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/01 20:43:31 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,15 @@ void    sort_2(t_stack *stack);
 void	check_case_3(t_stack	*stack, int max, int min);
 void    sort_3(t_stack *stack);
 int	    get_max(t_stack *stack, int count);
-int	    get_min(t_stack *stack);
 void	sort_5_ab(t_ab *stacks);
 void	sort_5_ba(t_ab *stacks);
+void	rev_sort_2(t_ab *stacks, t_stack *stack);
+void	rev_check_case_3(t_ab *stacks, t_stack *stack, int max, int min);
+void	rev_sort_3(t_ab *stacks, t_stack *stack);
+void	rev_sort_5_ba(t_ab *stacks);
 int     get_max(t_stack *stack, int count);
-int     get_min(t_stack *stack);
-int     get_pivot(t_stack *stack);
+int     get_min(t_stack *stack, int count);
+int     get_pivot(t_stack *stack, int size);
 int 	check_space_sign(char **argv, int *sign);
 void	check_recur(char **argv, t_stack *a);
 void	exit_with_error(char *str);

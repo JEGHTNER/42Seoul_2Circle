@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/26 21:28:55 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/01 13:57:47 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/01 20:43:07 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,16 @@ int	get_max(t_stack *stack, int count)
 	return (max);
 }
 
-int	get_min(t_stack *stack)
+int	get_min(t_stack *stack, int count)
 {
 	int		min;
+	int		i;
 	t_list	*tmp;
 
 	min = 2147483647;
 	tmp = stack->top;
-	while (tmp)
+	i = -1;
+	while (++i < count)
 	{
 		if (min > tmp->content)
 			min = tmp->content;
