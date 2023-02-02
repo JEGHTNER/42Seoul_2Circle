@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:07:08 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/02 23:12:48 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/02 23:18:57 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,10 +107,8 @@ void	rev_sort_4_ba(t_ab *stacks)
 	int	i;
 	int	rb_count;
 
-	// if (stacks->b->size != 5)
-	// 	return ;
 	rb_count = 0;
-	max = get_max(stacks->b, 5);
+	max = get_max(stacks->b, 4);
 	i = -1;
 	while (++i < 4)
 	{
@@ -135,8 +133,6 @@ void	rev_sort_5_ba(t_ab *stacks)
 	int	i;
 	int	rb_count;
 
-	// if (stacks->b->size != 5)
-	// 	return ;
 	rb_count = 0;
 	max = get_max(stacks->b, 5);
 	min = get_min(stacks->b, 5);
