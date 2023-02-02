@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:07:08 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/01 20:44:18 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/02 23:12:48 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,11 +24,24 @@ void	rev_sort_2(t_ab *stacks, t_stack *stack)
 
 void	rev_check_case_3(t_ab *stacks, t_stack *stack, int max, int min)
 {
-	if (stack->top->content == max && stack->top->next->content == min)
+	if (stack->top->content == max)
 	{
-		rotate(stack);
-		swap(stack);
-		reverse_rotate(stack);
+		if (stack->top->next->content == min)
+		{
+			rotate(stack);
+			swap(stack);
+			reverse_rotate(stack);
+			push(stacks->a, stacks->b);
+			push(stacks->a, stacks->b);
+			push(stacks->a, stacks->b);
+		}
+		else
+		{
+			push(stacks->a, stacks->b);
+			push(stacks->a, stacks->b);
+			push(stacks->a, stacks->b);			
+		}
+			
 	}
 	else if (stack->top->content != max && stack->top->content != min)
 	{
@@ -88,6 +101,33 @@ void	rev_sort_3(t_ab *stacks, t_stack *stack)
 	rev_check_case_3(stacks, stack, max, min);
 }
 
+void	rev_sort_4_ba(t_ab *stacks)
+{
+	int	max;
+	int	i;
+	int	rb_count;
+
+	// if (stacks->b->size != 5)
+	// 	return ;
+	rb_count = 0;
+	max = get_max(stacks->b, 5);
+	i = -1;
+	while (++i < 4)
+	{
+		if (stacks->b->top->content == max)
+			push(stacks->a, stacks->b);
+		else if (stacks->b->size > 3)
+		{
+			rotate(stacks->b);
+			rb_count++;
+		}
+	}
+	while (--rb_count >= 0)
+		reverse_rotate(stacks->b);
+	rev_sort_3(stacks, stacks->b);
+}
+
+
 void	rev_sort_5_ba(t_ab *stacks)
 {
 	int	max;
@@ -114,14 +154,9 @@ void	rev_sort_5_ba(t_ab *stacks)
 	}
 	while (--rb_count >= 0)
 		reverse_rotate(stacks->b);
-	rev_sort_3(stacks, stacks->b);
 	if (stacks->a->top->content > stacks->a->top->next->content)
 		swap(stacks->a);
-	push(stacks->b, stacks->a);
-	rotate(stacks->b);
-	push(stacks->a, stacks->b);
-	push(stacks->a, stacks->b);
-	push(stacks->a, stacks->b);
-	reverse_rotate(stacks->b);
-	push(stacks->a, stacks->b);
+	rotate(stacks->a);
+	rev_sort_3(stacks, stacks->b);
+	reverse_rotate(stacks->a);
 }

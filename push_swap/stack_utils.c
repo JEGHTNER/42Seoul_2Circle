@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:11:24 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/01 16:37:23 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/02 20:49:43 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,9 +50,8 @@ void	ft_stack_pop(t_stack *stack)
 		stack->bottom = NULL;
 }
 
-void	make_index(t_stack *stack, int size)
+void	init_index(t_stack *stack, int size)
 {
-	t_list	*tmp;
 	t_list	*current;
 	int		i;
 
@@ -60,8 +59,26 @@ void	make_index(t_stack *stack, int size)
 	current = stack->top;
 	while (++i < size)
 	{
+		current->index = 0;
+		current = current->next;
+	}
+}
+
+void	make_index(t_stack *stack, int size)
+{
+	t_list	*tmp;
+	t_list	*current;
+	int		i;
+	int		j;
+
+	init_index(stack, size);
+	i = -1;
+	current = stack->top;
+	while (++i < size)
+	{
+		j = -1;
 		tmp = stack->top;
-		while (tmp)
+		while (++j < size)
 		{
 			if (current->content > tmp->content)
 				current->index++;

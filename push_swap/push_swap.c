@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:11:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/01 20:32:05 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/02 20:55:11 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	get_pivot(t_stack *stack, int size)
 
 	sum = 0;
 	tmp = stack->top;
+	make_index(stack, size);
 	i = -1;
 	while (++i < size)
 	{
@@ -29,7 +30,7 @@ int	get_pivot(t_stack *stack, int size)
 	}
 	tmp = stack->top;
 	find = sum / size;
-	while (--i > 0)
+	while (--i >= 0)
 	{
 		if (tmp->index == find)
 			return (tmp->content);
