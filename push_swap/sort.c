@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/24 19:46:40 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/02 23:06:26 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:20:32 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,10 @@ void	check_case_3(t_stack *stack, int max, int min)
 		else
 		{
 			swap(stack);
+			rotate(stack);
+			swap(stack);
 			reverse_rotate(stack);
+			swap(stack);
 		}
 	}
 }
@@ -48,12 +51,14 @@ void	sort_3(t_stack *stack)
 {
 	int		max;
 	int		min;
+	int		i;
 	t_list	*tmp;
 
 	max = stack->top->content;
 	min = stack->top->content;
 	tmp = stack->top;
-	while (tmp)
+	i = -1;
+	while (++i < 3)
 	{
 		if (max < tmp->content)
 			max = tmp->content;
@@ -104,7 +109,7 @@ void	sort_5_ab(t_ab *stacks)
 	{
 		if (stacks->a->top->content == max || stacks->a->top->content == min)
 			push(stacks->b, stacks->a);
-		else if (stacks->a->size > 3)
+		else
 		{
 			rotate(stacks->a);
 			ra_count++;
@@ -113,7 +118,7 @@ void	sort_5_ab(t_ab *stacks)
 	if (stacks->b->top->content < stacks->b->top->next->content)
 		swap(stacks->b);
 	push(stacks->a, stacks->b);
-	while(--ra_count >= 0)
+	while (--ra_count >= 0)
 		reverse_rotate(stacks->a);
 	sort_3(stacks->a);
 	push(stacks->a, stacks->b);

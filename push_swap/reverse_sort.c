@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:07:08 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/02 23:18:57 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/03 16:38:34 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,18 @@ void	rev_check_case_3(t_ab *stacks, t_stack *stack, int max, int min)
 		{
 			push(stacks->a, stacks->b);
 			push(stacks->a, stacks->b);
-			push(stacks->a, stacks->b);			
+			push(stacks->a, stacks->b);
 		}
-			
 	}
 	else if (stack->top->content != max && stack->top->content != min)
 	{
 		if (stack->top->next->content == max)
+		{
 			swap(stack);
+			push(stacks->a, stacks->b);
+			push(stacks->a, stacks->b);
+			push(stacks->a, stacks->b);
+		}
 		else
 		{
 			push(stacks->a, stacks->b);
@@ -124,7 +128,6 @@ void	rev_sort_4_ba(t_ab *stacks)
 		reverse_rotate(stacks->b);
 	rev_sort_3(stacks, stacks->b);
 }
-
 
 void	rev_sort_5_ba(t_ab *stacks)
 {
