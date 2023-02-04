@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:11:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/04 16:29:55 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/04 19:00:08 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,13 +148,8 @@ void	b_to_a(t_ab *stacks, int count)
 	}
 }
 
-void	a_to_b(t_ab *stacks, int count)
+void	check_count(t_ab *stacks, int count)
 {
-	int	pivot;
-	int	i;
-	int	ra_count;
-	int	push_count;
-
 	if (count <= 1)
 		return ;
 	if (is_sorted(stacks->a, count))
@@ -166,7 +161,35 @@ void	a_to_b(t_ab *stacks, int count)
 	else if (count == 4)
 		sort_4_ab(stacks);
 	else if (count == 5)
-		sort_5_ab(stacks);
+	{
+		if (stacks->a->size == 5)
+			sort_5_ab(stacks);
+		else
+			sort_5_ab_above(stacks);
+	}
+}
+
+void	a_to_b(t_ab *stacks, int count)
+{
+	int	pivot;
+	int	i;
+	int	ra_count;
+	int	push_count;
+
+	if (count <= 5)
+		check_count(stacks, count);
+	// if (count <= 1)
+	// 	return ;
+	// if (is_sorted(stacks->a, count))
+	// 	return ;
+	// if (count == 2)
+	// 	sort_2(stacks, stacks->a);
+	// else if (count == 3)
+	// 	sort_3(stacks, stacks->a);
+	// else if (count == 4)
+	// 	sort_4_ab(stacks);
+	// else if (count == 5)
+	// 	sort_5_ab(stacks);
 	else
 	{
 		push_count = 0;

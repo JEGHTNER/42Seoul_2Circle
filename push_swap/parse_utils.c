@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:53:11 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/04 12:40:19 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/04 18:34:47 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,10 @@ int	check_space_sign(char **argv, int *sign)
 		(*argv)++;
 	if (!(**argv))
 		return (0);
-	if (**argv == '-')
+	if (**argv == '-' || **argv == '+')
 	{
-		*sign = -1;
+		if (**argv == '-')
+			*sign = -1;
 		(*argv)++;
 		if (!(**argv) || ft_isspace(**argv))
 			exit_with_error("non digit input\n");

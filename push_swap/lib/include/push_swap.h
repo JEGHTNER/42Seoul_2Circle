@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/04 13:43:43 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/04 19:14:02 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,14 @@ void	b_to_a(t_ab *stacks, int count);
 void	rotate(t_stack *stack, t_cmd_lst *commands);
 void	reverse_rotate(t_stack *stack, t_cmd_lst *commands);
 void	sort_2(t_ab *stacks, t_stack *stack);
+void	check_case_3_above(t_ab *stacks, t_stack *stack, int max, int min);
 void	check_case_3(t_ab *stacks, t_stack *stack, int max, int min);
 void	sort_3(t_ab *stacks, t_stack *stack);
 int		get_max(t_stack *stack, int count);
 void	sort_4_ab(t_ab *stacks);
 void	sort_5_ab(t_ab *stacks);
+void	sort_5_ab_above(t_ab *stacks);
+void	sort_5_norm(t_ab *stacks, int ra_count);
 void	rev_sort_2(t_ab *stacks, t_stack *stack);
 void	rev_check_case_3(t_ab *stacks, t_stack *stack, int max, int min);
 void	rev_sort_3(t_ab *stacks, t_stack *stack);
