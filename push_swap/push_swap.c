@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:11:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/04 19:00:08 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/04 21:19:59 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,13 +65,14 @@ void	print_stack(t_ab *stacks, int size)
 }
 
 
-int	get_pivot(t_stack *stack, int size)
+void	get_pivot(t_stack *stack, int size, int *big_pivot, int *samll_pivot)
 {
 	t_list	*tmp;
 	int		sum;
-	int		find;
+	int		find[2];
 	int		i;
 
+	//pivot 3등분????
 	sum = 0;
 	tmp = stack->top;
 	make_index(stack, size);
@@ -82,7 +83,7 @@ int	get_pivot(t_stack *stack, int size)
 		tmp = tmp->next;
 	}
 	tmp = stack->top;
-	find = sum / size;
+	find[0] = sum / size;
 	while (--i >= 0)
 	{
 		if (tmp->index == find)
@@ -171,31 +172,20 @@ void	check_count(t_ab *stacks, int count)
 
 void	a_to_b(t_ab *stacks, int count)
 {
-	int	pivot;
+	int	*big_pivot;
+	int	*small_pivot;
 	int	i;
 	int	ra_count;
 	int	push_count;
 
 	if (count <= 5)
 		check_count(stacks, count);
-	// if (count <= 1)
-	// 	return ;
-	// if (is_sorted(stacks->a, count))
-	// 	return ;
-	// if (count == 2)
-	// 	sort_2(stacks, stacks->a);
-	// else if (count == 3)
-	// 	sort_3(stacks, stacks->a);
-	// else if (count == 4)
-	// 	sort_4_ab(stacks);
-	// else if (count == 5)
-	// 	sort_5_ab(stacks);
 	else
 	{
 		push_count = 0;
 		ra_count = 0;
 		i = -1;
-		pivot = get_pivot(stacks->a, count);
+		get_pivot(stacks->a, count, big_pivot, small_pivot);
 		//ft_printf("a_pivot = %d\n", pivot);
 		while (++i < count)
 		{
