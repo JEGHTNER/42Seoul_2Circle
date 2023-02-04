@@ -6,11 +6,32 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:11:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/02 20:55:11 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/04 12:29:30 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/include/push_swap.h"
+
+void	print_stack(t_ab *stacks, int size)
+{
+	t_list *tmp = stacks->a->top;
+	t_list *tmp2 = stacks->b->top;
+	ft_printf("size = %d a= ", size);
+	for (int i = 0; i < stacks->a->size; i++)
+	{
+		ft_printf("%d ", tmp->content);
+		tmp = tmp->next;
+	}
+	ft_printf("\n");
+	ft_printf("b= ");
+	for (int i = 0; i < stacks->b->size; i++)
+	{
+		ft_printf("%d ", tmp2->content);
+		tmp2 = tmp2->next;
+	}
+	ft_printf("\n");
+}
+
 
 int	get_pivot(t_stack *stack, int size)
 {
@@ -55,6 +76,8 @@ void	b_to_a(t_ab *stacks, int count)
         rev_sort_2(stacks, stacks->b);
     else if (count == 3)
         rev_sort_3(stacks, stacks->b);
+	else if (count == 4)
+		rev_sort_4_ba(stacks);
     else if (count == 5)
     	rev_sort_5_ba(stacks);
     else
@@ -99,6 +122,8 @@ void    a_to_b(t_ab *stacks, int count)
         sort_2(stacks->a);
     else if (count == 3)
         sort_3(stacks->a);
+	else if (count == 4)
+		sort_4_ab(stacks);
     else if (count == 5)
         sort_5_ab(stacks);
     else
@@ -126,5 +151,5 @@ void    a_to_b(t_ab *stacks, int count)
 			reverse_rotate(stacks->a);
 		a_to_b(stacks, count - push_count);
 		b_to_a(stacks, push_count);
-    }
+	}
 }

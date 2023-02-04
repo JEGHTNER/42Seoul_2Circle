@@ -6,26 +6,26 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:25:10 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/01 13:58:13 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/04 12:34:52 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./lib/include/push_swap.h"
 
-void swap(t_stack *stack)
+void	swap(t_stack *stack)
 {
-    t_list  *tmp;
+	t_list	*tmp;
 
-    if (stack->size <= 1)
-        return ;
-    tmp = stack->top->next;
+	if (stack->size <= 1)
+		return ;
+	tmp = stack->top->next;
 	if (tmp->next)
 		tmp->next->prev = stack->top;
-    stack->top->next = tmp->next;
-    stack->top->prev = tmp;
-    tmp->prev = NULL;
-    tmp->next = stack->top;
-    stack->top = tmp;
+	stack->top->next = tmp->next;
+	stack->top->prev = tmp;
+	tmp->prev = NULL;
+	tmp->next = stack->top;
+	stack->top = tmp;
 	if (stack->size == 2)
 		stack->bottom = stack->top->next;
 	if (stack->name == 'a')
@@ -34,28 +34,28 @@ void swap(t_stack *stack)
 		ft_printf("sb\n");
 }
 
-void    push(t_stack *stack_to, t_stack *stack_from)
+void	push(t_stack *stack_to, t_stack *stack_from)
 {
-    int push_num;
+	int	push_num;
 
-    if (stack_from->size == 0)
-        return ;
-    push_num = stack_from->top->content;
-    ft_stack_pop(stack_from);
-    ft_stack_push(stack_to, ft_lstnew(push_num));
+	if (stack_from->size == 0)
+		return ;
+	push_num = stack_from->top->content;
+	ft_stack_pop(stack_from);
+	ft_stack_push(stack_to, ft_lstnew(push_num));
 	if (stack_to->name == 'a')
 		ft_printf("pa\n");
 	else if (stack_to->name == 'b')
 		ft_printf("pb\n");
 }
 
-void rotate(t_stack *stack)
+void	rotate(t_stack *stack)
 {
 	t_list	*tmp;
-	
+
 	if (stack->size <= 1)
 		return ;
-    tmp = stack->top;
+	tmp = stack->top;
 	stack->top->next->prev = NULL;
 	stack->top = stack->top->next;
 	stack->bottom->next = tmp;
@@ -70,7 +70,7 @@ void rotate(t_stack *stack)
 		ft_printf("rb\n");
 }
 
-void reverse_rotate(t_stack *stack)
+void	reverse_rotate(t_stack *stack)
 {
 	t_list	*tmp;
 

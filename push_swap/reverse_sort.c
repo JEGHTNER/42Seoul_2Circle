@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:07:08 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/03 16:38:34 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/04 12:07:26 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,9 @@ void	rev_check_case_3(t_ab *stacks, t_stack *stack, int max, int min)
 			swap(stack);
 			push(stacks->b, stacks->a);
 			swap(stack);
+			push(stacks->a, stacks->b);
+			push(stacks->a, stacks->b);
+			push(stacks->a, stacks->b);
 		}
 	}
 	else if (stack->top->content == min)
