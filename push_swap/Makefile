@@ -6,15 +6,14 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/02/01 18:13:13 by jehelee          ###   ########.fr        #
+#    Updated: 2023/02/04 12:41:42 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 
 SRCS = main.c commands.c sort.c sort_util_find_max_min.c \
-	   sort_util_push.c sort_util_reverse_rotate.c sort_util_rotate.c \
-	   sort_util_swap.c push_swap.c parse_utils.c error_utils.c stack_utils.c \
+	   push_swap.c parse_utils.c error_utils.c stack_utils.c \
 	   reverse_sort.c
 	   
 

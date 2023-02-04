@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:53:11 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/01 16:08:50 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/04 12:40:19 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,12 +82,12 @@ void	check_recur(char **argv, t_stack *a)
 	}
 }
 
-int check_argv(char *argv, t_stack *a)
+int	check_argv(char *argv, t_stack *a)
 {
-	int i;
-	int sign;
-	int	overflow;
-	long long lnum;
+	int			i;
+	int			sign;
+	int			overflow;
+	long long	lnum;
 
 	sign = 1;
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/04 12:38:35 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/04 13:43:43 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,9 @@ typedef struct s_stack
 
 typedef struct s_ab
 {
-	t_stack	*a;
-	t_stack	*b;
+	t_stack		*a;
+	t_stack		*b;
+	t_cmd_lst	*commands;
 }				t_ab;
 
 void	init_stack(t_stack *stack, char name);
@@ -43,15 +44,15 @@ void	ft_stack_pop(t_stack *stack);
 int		check_overflow(long long result);
 int		check_duplicate(t_stack *stack);
 int		check_argv(char *argv, t_stack *a);
-void	swap(t_stack *stack);
-void	push(t_stack *stack_to, t_stack *stack_from);
+void	swap(t_stack *stack, t_cmd_lst *commands);
+void	push(t_stack *stack_to, t_stack *stack_from, t_cmd_lst *commands);
 void	a_to_b(t_ab *stacks, int count);
 void	b_to_a(t_ab *stacks, int count);
-void	rotate(t_stack *stack);
-void	reverse_rotate(t_stack *stack);
-void	sort_2(t_stack *stack);
-void	check_case_3(t_stack	*stack, int max, int min);
-void	sort_3(t_stack *stack);
+void	rotate(t_stack *stack, t_cmd_lst *commands);
+void	reverse_rotate(t_stack *stack, t_cmd_lst *commands);
+void	sort_2(t_ab *stacks, t_stack *stack);
+void	check_case_3(t_ab *stacks, t_stack *stack, int max, int min);
+void	sort_3(t_ab *stacks, t_stack *stack);
 int		get_max(t_stack *stack, int count);
 void	sort_4_ab(t_ab *stacks);
 void	sort_5_ab(t_ab *stacks);
