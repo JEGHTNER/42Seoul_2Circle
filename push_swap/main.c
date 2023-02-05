@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/05 19:22:00 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/05 20:40:31 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,12 @@ void	trim_cmd(t_ab *stacks)
 		{
 			del_cmd(tmp);
 			tmp = tmp->prev;
-			//continue ;
 		}
-		// if (!ft_strncmp(tmp->string, "rra\n", 4) && \
-		// !ft_strncmp(tmp->next->string, "ra\n", 3))
-		// {
-		// 	del_cmd(tmp);
-		// 	tmp = tmp->prev;
-		// 	//continue ;
-		// }
-		// if (!ft_strncmp(tmp->string, "rrb\n", 4) && \
-		// !ft_strncmp(tmp->next->string, "rb\n", 3))
-		// {
-		// 	del_cmd(tmp);
-		// 	tmp = tmp->prev;
-		// 	//continue ;
-		// }
 		if (!ft_strncmp(tmp->string, "rb\n", 3) && \
 		!ft_strncmp(tmp->next->string, "rrb\n", 4))
 		{
 			del_cmd(tmp);
 			tmp = tmp->prev;
-			//continue ;
 		}
 		while (!ft_strncmp(tmp->string, "rra\n", 4) && \
 		!ft_strncmp(tmp->next->string, "rrb\n", 4))
@@ -68,18 +52,41 @@ void	trim_cmd(t_ab *stacks)
 			cmd_push_at(stacks->commands, ft_lstnew_cmd("rrr\n"), tmp);
 			del_count--;
 		}
-		// while (!ft_strncmp(tmp->string, "ra\n", 3) && \
-		// !ft_strncmp(tmp->next->string, "rb\n", 3))
-		// {
-		// 	del_cmd(tmp);
-		// 	del_count++;
-		// 	tmp = tmp->prev;
-		// }
-		// while (del_count > 0)
-		// {
-		// 	cmd_push_at(stacks->commands, ft_lstnew_cmd("rr\n"), tmp);
-		// 	del_count--;
-		// }
+		if (!ft_strncmp(tmp->string, "ra\n", 3) && \
+		!ft_strncmp(tmp->next->string, "rrr\n", 4))
+		{
+			del_cmd(tmp);
+			tmp = tmp->prev;
+			cmd_push_at(stacks->commands, ft_lstnew_cmd("rrb\n"), tmp);
+		}
+		if (!ft_strncmp(tmp->string, "rb\n", 3) && \
+		!ft_strncmp(tmp->next->string, "rrr\n", 4))
+		{
+			del_cmd(tmp);
+			tmp = tmp->prev;
+			cmd_push_at(stacks->commands, ft_lstnew_cmd("rra\n"), tmp);
+		}
+		if (!ft_strncmp(tmp->string, "rrr\n", 4) && \
+		!ft_strncmp(tmp->next->string, "ra\n", 3))
+		{
+			del_cmd(tmp);
+			tmp = tmp->prev;
+			cmd_push_at(stacks->commands, ft_lstnew_cmd("rb\n"), tmp);
+		}
+		if (!ft_strncmp(tmp->string, "rrr\n", 4) && \
+		!ft_strncmp(tmp->next->string, "rb\n", 3))
+		{
+			del_cmd(tmp);
+			tmp = tmp->prev;
+			cmd_push_at(stacks->commands, ft_lstnew_cmd("ra\n"), tmp);
+		}
+		if (!ft_strncmp(tmp->string, "ra\n", 4) && \
+		!ft_strncmp(tmp->next->string, "rb\n", 3))
+		{
+			del_cmd(tmp);
+			tmp = tmp->prev;
+			cmd_push_at(stacks->commands, ft_lstnew_cmd("rr\n"), tmp);
+		}
 		tmp = tmp->next;
 	}
 }

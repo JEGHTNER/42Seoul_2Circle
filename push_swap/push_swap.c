@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:11:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/05 18:56:10 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/05 20:06:56 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,14 +128,6 @@ void	b_to_a(t_ab *stacks, int count)
 			{
 				rotate(stacks->b, stacks->commands);
 				rb_count++;
-				// push(stacks->a, stacks->b, stacks->commands);
-				// push_count++;
-				// if (stacks->a->top->content >= pivots[0])
-				// {
-				// 	ra_count++;
-				// 	rotate(stacks->a, stacks->commands);
-				// }
-				//continue ;?
 			}
 			else
 			{
@@ -150,14 +142,11 @@ void	b_to_a(t_ab *stacks, int count)
 		}
 		a_to_b(stacks, push_count - ra_count);
 		i = -1;
-		while(++i < ra_count)
+		while (++i < ra_count)
 			reverse_rotate(stacks->a, stacks->commands);
 		i = -1;
-		while(++i < rb_count)
+		while (++i < rb_count)
 			reverse_rotate(stacks->b, stacks->commands);
-		// while (++i < rb_count)
-		// 	reverse_rotate(stacks->b, stacks->commands);
-		//print_stack(stacks, count);
 		a_to_b(stacks, ra_count);
 		b_to_a(stacks, rb_count);
 	}
@@ -208,13 +197,6 @@ void	a_to_b(t_ab *stacks, int count)
 			{
 				rotate(stacks->a, stacks->commands);
 				ra_count++;
-				// push(stacks->b, stacks->a, stacks->commands);
-				// push_count++;
-				// if (stacks->b->top->content >= pivots[1])
-				// {
-				// 	rotate(stacks->b, stacks->commands);
-				// 	rb_count++;
-				// }
 			}
 			else
 			{
