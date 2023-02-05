@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/04 18:08:46 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/05 19:22:00 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,24 +22,64 @@ void	del_cmd(t_list *del)
 void	trim_cmd(t_ab *stacks)
 {
 	t_list	*tmp;
+	int		del_count;
 
+	del_count = 0;
 	tmp = stacks->commands->head;
 	while (tmp->next)
 	{
-		if (!ft_strncmp(tmp->string, "ra\n", 4) && \
+		if (!ft_strncmp(tmp->string, "ra\n", 3) && \
 		!ft_strncmp(tmp->next->string, "rra\n", 4))
 		{
 			del_cmd(tmp);
 			tmp = tmp->prev;
-			continue ;
+			//continue ;
 		}
-		if (!ft_strncmp(tmp->string, "rb\n", 4) && \
+		// if (!ft_strncmp(tmp->string, "rra\n", 4) && \
+		// !ft_strncmp(tmp->next->string, "ra\n", 3))
+		// {
+		// 	del_cmd(tmp);
+		// 	tmp = tmp->prev;
+		// 	//continue ;
+		// }
+		// if (!ft_strncmp(tmp->string, "rrb\n", 4) && \
+		// !ft_strncmp(tmp->next->string, "rb\n", 3))
+		// {
+		// 	del_cmd(tmp);
+		// 	tmp = tmp->prev;
+		// 	//continue ;
+		// }
+		if (!ft_strncmp(tmp->string, "rb\n", 3) && \
 		!ft_strncmp(tmp->next->string, "rrb\n", 4))
 		{
 			del_cmd(tmp);
 			tmp = tmp->prev;
-			continue ;
+			//continue ;
 		}
+		while (!ft_strncmp(tmp->string, "rra\n", 4) && \
+		!ft_strncmp(tmp->next->string, "rrb\n", 4))
+		{
+			del_cmd(tmp);
+			del_count++;
+			tmp = tmp->prev;
+		}
+		while (del_count > 0)
+		{
+			cmd_push_at(stacks->commands, ft_lstnew_cmd("rrr\n"), tmp);
+			del_count--;
+		}
+		// while (!ft_strncmp(tmp->string, "ra\n", 3) && \
+		// !ft_strncmp(tmp->next->string, "rb\n", 3))
+		// {
+		// 	del_cmd(tmp);
+		// 	del_count++;
+		// 	tmp = tmp->prev;
+		// }
+		// while (del_count > 0)
+		// {
+		// 	cmd_push_at(stacks->commands, ft_lstnew_cmd("rr\n"), tmp);
+		// 	del_count--;
+		// }
 		tmp = tmp->next;
 	}
 }

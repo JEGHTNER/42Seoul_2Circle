@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/04 19:14:02 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/05 16:19:02 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,13 @@ void	rev_sort_4_ba(t_ab *stacks);
 void	rev_sort_5_ba(t_ab *stacks);
 int		get_max(t_stack *stack, int count);
 int		get_min(t_stack *stack, int count);
-int		get_pivot(t_stack *stack, int size);
+void	get_pivot(t_stack *stack, int size, int *big_pivot, int *small_pivot);
 int		check_space_sign(char **argv, int *sign);
 void	check_recur(char **argv, t_stack *a);
 void	exit_with_error(char *str);
 void	make_index(t_stack *stack, int size);
-
+void	cmd_push_at(t_cmd_lst *commands, t_list *new, t_list *tmp);
+void	cmd_push(t_cmd_lst *commands, t_list *new);
+t_list	*ft_lstnew_cmd(char *string);
+void	print_cmd(t_ab *stacks);
 #endif

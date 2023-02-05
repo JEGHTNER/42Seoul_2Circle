@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:25:10 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/04 14:02:52 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/05 16:33:21 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ void	cmd_push(t_cmd_lst *commands, t_list *new)
 		commands->tail->next = new;
 	new->prev = commands->tail;
 	commands->tail = new;
+}
+
+void	cmd_push_at(t_cmd_lst *commands, t_list *new, t_list *tmp)
+{
+	if (!new || !commands)
+		return ;
+	if (!(commands->head))
+		commands->head = new;
+	new->next = tmp->next;
+	tmp->next = new;
+	new->prev = tmp;
 }
 
 void	swap(t_stack *stack, t_cmd_lst *commands)

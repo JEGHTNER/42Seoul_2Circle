@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:11:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/04 21:19:59 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/05 18:56:10 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,39 +65,34 @@ void	print_stack(t_ab *stacks, int size)
 }
 
 
-void	get_pivot(t_stack *stack, int size, int *big_pivot, int *samll_pivot)
+void	get_pivot(t_stack *stack, int size, int *big_pivot, int *small_pivot)
 {
 	t_list	*tmp;
-	int		sum;
 	int		find[2];
 	int		i;
 
-	//pivot 3등분????
-	sum = 0;
 	tmp = stack->top;
 	make_index(stack, size);
+	find[0] = size / 3 * 2;
+	find[1] = size / 3;
+	tmp = stack->top;
 	i = -1;
 	while (++i < size)
 	{
-		sum += tmp->index;
+		if (tmp->index == find[0])
+			*big_pivot = tmp->content;
+		else if (tmp->index == find[1])
+			*small_pivot = tmp->content;
 		tmp = tmp->next;
 	}
-	tmp = stack->top;
-	find[0] = sum / size;
-	while (--i >= 0)
-	{
-		if (tmp->index == find)
-			return (tmp->content);
-		tmp = tmp->next;
-	}
-	return (stack->top->content);
 }
 
 void	b_to_a(t_ab *stacks, int count)
 {
-	int	pivot;
+	int	pivots[2];
 	int	i;
 	int	push_count;
+	int	ra_count;
 	int	rb_count;
 
 	if (count <= 1)
@@ -121,31 +116,50 @@ void	b_to_a(t_ab *stacks, int count)
 		rev_sort_5_ba(stacks);
 	else
 	{
+		ra_count = 0;
 		rb_count = 0;
 		push_count = 0;
 		i = -1;
-		pivot = get_pivot(stacks->b, count);
-		//ft_printf("b_pivot = %d\n", pivot);
+		get_pivot(stacks->b, count, &pivots[0], &pivots[1]);
+		//ft_printf("a_pivot big = %d small = %d\n", pivots[0], pivots[1]);
 		while (++i < count)
 		{
-			if (stacks->b->top->content > pivot)
-			{
-				push(stacks->a, stacks->b, stacks->commands);
-				push_count++;
-				continue ;
-			}
-			else
+			if (stacks->b->top->content < pivots[1])
 			{
 				rotate(stacks->b, stacks->commands);
 				rb_count++;
+				// push(stacks->a, stacks->b, stacks->commands);
+				// push_count++;
+				// if (stacks->a->top->content >= pivots[0])
+				// {
+				// 	ra_count++;
+				// 	rotate(stacks->a, stacks->commands);
+				// }
+				//continue ;?
+			}
+			else
+			{
+				push(stacks->a, stacks->b, stacks->commands);
+				push_count++;
+				if (stacks->a->top->content < pivots[0])
+				{
+					ra_count++;
+					rotate(stacks->a, stacks->commands);
+				}
 			}
 		}
+		a_to_b(stacks, push_count - ra_count);
 		i = -1;
-		while (++i < rb_count)
+		while(++i < ra_count)
+			reverse_rotate(stacks->a, stacks->commands);
+		i = -1;
+		while(++i < rb_count)
 			reverse_rotate(stacks->b, stacks->commands);
+		// while (++i < rb_count)
+		// 	reverse_rotate(stacks->b, stacks->commands);
 		//print_stack(stacks, count);
-		a_to_b(stacks, push_count);
-		b_to_a(stacks, count - push_count);
+		a_to_b(stacks, ra_count);
+		b_to_a(stacks, rb_count);
 	}
 }
 
@@ -172,10 +186,10 @@ void	check_count(t_ab *stacks, int count)
 
 void	a_to_b(t_ab *stacks, int count)
 {
-	int	*big_pivot;
-	int	*small_pivot;
+	int	pivots[2];
 	int	i;
 	int	ra_count;
+	int	rb_count;
 	int	push_count;
 
 	if (count <= 5)
@@ -184,27 +198,44 @@ void	a_to_b(t_ab *stacks, int count)
 	{
 		push_count = 0;
 		ra_count = 0;
+		rb_count = 0;
 		i = -1;
-		get_pivot(stacks->a, count, big_pivot, small_pivot);
-		//ft_printf("a_pivot = %d\n", pivot);
+		get_pivot(stacks->a, count, &pivots[0], &pivots[1]);
+		//ft_printf("a_pivot big = %d small = %d\n", pivots[0], pivots[1]);
 		while (++i < count)
 		{
-			if (stacks->a->top->content < pivot)
-			{
-				push(stacks->b, stacks->a, stacks->commands);
-				push_count++;
-			}
-			else
+			if (stacks->a->top->content >= pivots[0])
 			{
 				rotate(stacks->a, stacks->commands);
 				ra_count++;
+				// push(stacks->b, stacks->a, stacks->commands);
+				// push_count++;
+				// if (stacks->b->top->content >= pivots[1])
+				// {
+				// 	rotate(stacks->b, stacks->commands);
+				// 	rb_count++;
+				// }
+			}
+			else
+			{
+				push(stacks->b, stacks->a, stacks->commands);
+				push_count++;
+				if (stacks->b->top->content >= pivots[1])
+				{
+					rotate(stacks->b, stacks->commands);
+					rb_count++;
+				}
 			}
 		}
 		i = -1;
-		while (++i < ra_count)
+		while(++i < ra_count)
 			reverse_rotate(stacks->a, stacks->commands);
+		i = -1;
+		while(++i < rb_count)
+			reverse_rotate(stacks->b, stacks->commands);
 		//print_stack(stacks, count);
-		a_to_b(stacks, count - push_count);
-		b_to_a(stacks, push_count);
+		a_to_b(stacks, ra_count);
+		b_to_a(stacks, rb_count);
+		b_to_a(stacks, push_count - rb_count);
 	}
 }
