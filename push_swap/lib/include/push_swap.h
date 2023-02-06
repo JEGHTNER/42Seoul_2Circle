@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/05 16:19:02 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/06 19:08:21 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ void	sort_4_ab(t_ab *stacks);
 void	sort_5_ab(t_ab *stacks);
 void	sort_5_ab_above(t_ab *stacks);
 void	sort_5_norm(t_ab *stacks, int ra_count);
+void	push_max(t_ab *stacks, t_stack *stack, int min);
+void	push_max_min(t_ab *stacks, t_stack *stack, int max);
+void	case_3_1(t_ab *stacks, t_stack *stack);
+void	case_3_2(t_ab *stacks, t_stack *stack);
+void	case_3_3(t_ab *stacks, t_stack *stack);
+void	case_3_4(t_ab *stacks, t_stack *stack);
 void	rev_sort_2(t_ab *stacks, t_stack *stack);
 void	rev_check_case_3(t_ab *stacks, t_stack *stack, int max, int min);
 void	rev_sort_3(t_ab *stacks, t_stack *stack);
