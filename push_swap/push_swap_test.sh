@@ -5,7 +5,7 @@
 
 
 push_swap=push_swap
-checker=checker_Mac
+checker=checker
 result_temp_file=.push_swap_result_temp
 
 
