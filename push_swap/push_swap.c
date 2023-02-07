@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:11:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/05 20:06:56 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/07 23:26:12 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int		is_sorted(t_stack *stack, int size)
 	return (1);
 }
 
+
+//delete it
 void	print_stack(t_ab *stacks, int size)
 {
 	t_list *tmp = stacks->a->top;

@@ -6,47 +6,22 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:25:10 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/05 16:33:21 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/07 23:37:16 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./lib/include/push_swap.h"
 
-t_list	*ft_lstnew_cmd(char *string)
+void	init_commands(t_ab *stacks)
 {
-	t_list	*new_node;
-
-	new_node = malloc(sizeof(t_list));
-	if (!new_node)
-		return (0);
-	new_node -> string = ft_strdup(string);
-	new_node -> next = NULL;
-	new_node -> prev = NULL;
-	return (new_node);
-}
-
-
-void	cmd_push(t_cmd_lst *commands, t_list *new)
-{
-	if (!new || !commands)
-		return ;
-	if (!(commands->head))
-		commands->head = new;
-	if (commands->tail)
-		commands->tail->next = new;
-	new->prev = commands->tail;
-	commands->tail = new;
-}
-
-void	cmd_push_at(t_cmd_lst *commands, t_list *new, t_list *tmp)
-{
-	if (!new || !commands)
-		return ;
-	if (!(commands->head))
-		commands->head = new;
-	new->next = tmp->next;
-	tmp->next = new;
-	new->prev = tmp;
+	stacks->commands = malloc(sizeof(t_cmd_lst));
+	if (!stacks->commands)
+		exit (0);
+	stacks->commands->head = NULL;
+	stacks->commands->tail = NULL;
+	stacks->a = malloc(sizeof(t_stack));
+	if (!stacks->a)
+		exit (0);
 }
 
 void	swap(t_stack *stack, t_cmd_lst *commands)

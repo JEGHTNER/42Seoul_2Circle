@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/06 19:08:21 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/07 23:43:18 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,22 @@ int		check_space_sign(char **argv, int *sign);
 void	check_recur(char **argv, t_stack *a);
 void	exit_with_error(char *str);
 void	make_index(t_stack *stack, int size);
+
+//command utils functions
+void	init_commands(t_ab *stacks);
 void	cmd_push_at(t_cmd_lst *commands, t_list *new, t_list *tmp);
 void	cmd_push(t_cmd_lst *commands, t_list *new);
 t_list	*ft_lstnew_cmd(char *string);
 void	print_cmd(t_ab *stacks);
+
+// command trim functions
+void	print_cmd(t_ab *stacks);
+void	trim_rbr(t_ab *stacks);
+void	trim_rrr(t_ab *stacks);
+void	trim_rr(t_ab *stacks);
+void	trim_rr_2(t_ab *stacks);
+void	trim_rbr(t_ab *stacks);
+void	trim_useless(t_ab *stacks);
+void	del_cmd(t_list *del);
+
 #endif
