@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:25:10 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/07 23:37:16 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:49:23 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ void	push(t_stack *stack_to, t_stack *stack_from, t_cmd_lst *commands)
 		cmd_push(commands, ft_lstnew_cmd("pa\n"));
 	else if (stack_to->name == 'b')
 		cmd_push(commands, ft_lstnew_cmd("pb\n"));
-
 }
 
 void	rotate(t_stack *stack, t_cmd_lst *commands)

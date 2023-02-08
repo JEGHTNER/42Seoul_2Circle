@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/08 16:10:06 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:52:50 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,9 @@ void	make_index(t_stack *stack, int size);
 
 //checks
 void	check_count_ab(t_ab *stacks, int count);
-
+void	check_count_ba(t_ab *stacks, int count);
+int		is_rev_sorted(t_stack *stack, int size);
+int		is_sorted(t_stack *stack, int size);
 
 //command utils functions
 void	init_commands(t_ab *stacks);

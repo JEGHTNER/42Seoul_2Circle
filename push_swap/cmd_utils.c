@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 23:25:24 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/07 23:29:56 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:49:34 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ t_list	*ft_lstnew_cmd(char *string)
 	new_node -> prev = NULL;
 	return (new_node);
 }
-
 
 void	cmd_push(t_cmd_lst *commands, t_list *new)
 {
