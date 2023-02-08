@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/07 23:43:18 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/08 16:10:06 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,10 @@ int		check_space_sign(char **argv, int *sign);
 void	check_recur(char **argv, t_stack *a);
 void	exit_with_error(char *str);
 void	make_index(t_stack *stack, int size);
+
+//checks
+void	check_count_ab(t_ab *stacks, int count);
+
 
 //command utils functions
 void	init_commands(t_ab *stacks);
