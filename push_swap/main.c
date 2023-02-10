@@ -6,14 +6,20 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/07 23:49:48 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:21:58 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./lib/include/push_swap.h"
 
+void	check_leaks(void)
+{
+	system("leaks push_swap");
+}
+
 int main(int argc, char *argv[])
 {
+	atexit(check_leaks);
 	t_ab		stacks;
 	int			i;
 
@@ -29,7 +35,7 @@ int main(int argc, char *argv[])
 			return (0);
 	}
 	if (!check_duplicate(stacks.a))
-		return (ft_printf("ERROR:sorted"));
+		exit(1);
 	make_index(stacks.a, stacks.a->size);
 	stacks.b = malloc(sizeof(t_stack));
 	if (!stacks.b)
@@ -37,7 +43,7 @@ int main(int argc, char *argv[])
 	init_stack(stacks.b, 'b');
 	a_to_b(&stacks, stacks.a->size);
 	b_to_a(&stacks, stacks.b->size);
-
+	ft_printf("\n");
 	for(int i = 0; i < 5; i++)
 	{
 		trim_useless(&stacks);
@@ -47,6 +53,7 @@ int main(int argc, char *argv[])
 		trim_rr(&stacks);
 	}
 	print_cmd(&stacks);
+	exit(0);
 	
 	// t_list *tmp = stacks.a->top;
 	// t_list *tmp2 = stacks.b->top;

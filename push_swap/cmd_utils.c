@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 23:25:24 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/08 16:49:34 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:21:49 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ void	del_cmd(t_list *del)
 	tmp2 = del->next;
 	del->prev->next = del->next->next;
 	del->next->next->prev = del->prev;
+	free(tmp1->string);
 	free(tmp1);
+	free(tmp2->string);
 	free(tmp2);
 }
 
@@ -69,6 +71,7 @@ void	cmd_push_at(t_cmd_lst *commands, t_list *new, t_list *tmp)
 	if (!(commands->head))
 		commands->head = new;
 	new->next = tmp->next;
+	new->next->prev = new;
 	tmp->next = new;
 	new->prev = tmp;
 }

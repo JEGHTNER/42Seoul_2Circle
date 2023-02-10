@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:25:10 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/08 16:49:23 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/10 17:18:00 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@ void	init_commands(t_ab *stacks)
 {
 	stacks->commands = malloc(sizeof(t_cmd_lst));
 	if (!stacks->commands)
-		exit (0);
+		exit_with_error("ERROR\nmalloc error\n");
 	stacks->commands->head = NULL;
 	stacks->commands->tail = NULL;
-	stacks->a = malloc(sizeof(t_stack));
-	if (!stacks->a)
-		exit (0);
 }
 
 void	swap(t_stack *stack, t_cmd_lst *commands)
