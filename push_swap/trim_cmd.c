@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 23:05:12 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/07 23:43:08 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:39:53 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	trim_rrr(t_ab *stacks)
 
 	del_count = 0;
 	tmp = stacks->commands->head;
+	if (!tmp)
+		return ;
 	while (tmp->next)
 	{
 		while (!ft_strncmp(tmp->string, "rra\n", 4) && \
@@ -47,6 +49,8 @@ void	trim_rr(t_ab *stacks)
 
 	del_count = 0;
 	tmp = stacks->commands->head;
+	if (!tmp)
+		return ;
 	while (tmp->next)
 	{
 		while (!ft_strncmp(tmp->string, "ra\n", 3) && \
@@ -74,6 +78,8 @@ void	trim_rr_2(t_ab *stacks)
 
 	del_count = 0;
 	tmp = stacks->commands->head;
+	if (!tmp)
+		return ;
 	while (tmp->next)
 	{
 		while (!ft_strncmp(tmp->string, "rb\n", 3) && \
@@ -99,6 +105,8 @@ void	trim_rbr(t_ab *stacks)
 	t_list	*del;
 
 	tmp = stacks->commands->head;
+	if (!tmp)
+		return ;
 	while (tmp->next)
 	{
 		while (!ft_strncmp(tmp->string, "ra\n", 3) && \
@@ -127,6 +135,8 @@ void	trim_useless(t_ab *stacks)
 	t_list	*del;
 
 	tmp = stacks->commands->head;
+	if (!tmp)
+		return ;
 	while (tmp->next)
 	{
 		while (!ft_strncmp(tmp->string, "ra\n", 3) && \
