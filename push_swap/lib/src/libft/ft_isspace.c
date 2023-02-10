@@ -6,13 +6,13 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:19:25 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/22 20:19:27 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/10 18:50:36 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int ft_isspace(int c)
+int	ft_isspace(int c)
 {
-    if ((c >= 9 && c <= 13) || c == 32)
-        return (1);
-    return (0);
+	if ((c >= 9 && c <= 13) || c == 32)
+		return (1);
+	return (0);
 }

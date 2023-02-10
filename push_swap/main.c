@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/10 18:38:50 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/10 19:30:18 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 void	check_leaks(void)
 {
 	system("leaks push_swap");
+}
+
+void	trim_cmd(t_ab *stacks)
+{
+	trim_useless(stacks);
+	trim_rrr(stacks);
+	trim_rbr(stacks);
+	trim_rr_2(stacks);
+	trim_rr(stacks);
 }
 
 int main(int argc, char *argv[])
@@ -42,15 +51,8 @@ int main(int argc, char *argv[])
 		return (0);
 	init_stack(stacks.b, 'b');
 	a_to_b(&stacks, stacks.a->size);
-	b_to_a(&stacks, stacks.b->size);
-	for(int i = 0; i < 5; i++)
-	{
-		trim_useless(&stacks);
-		trim_rrr(&stacks);
-		trim_rbr(&stacks);
-		trim_rr_2(&stacks);
-		trim_rr(&stacks);
-	}
+	//b_to_a(&stacks, stacks.b->size);
+	trim_cmd(&stacks);
 	print_cmd(&stacks);
 	exit(0);
 

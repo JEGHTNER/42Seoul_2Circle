@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:07:08 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/05 20:12:50 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/10 19:24:03 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,90 +18,6 @@ void	rev_sort_2(t_ab *stacks, t_stack *stack)
 		swap(stack, stacks->commands);
 	push(stacks->a, stacks->b, stacks->commands);
 	push(stacks->a, stacks->b, stacks->commands);
-}
-
-void	rev_check_case_3(t_ab *stacks, t_stack *stack, int max, int min)
-{
-	if (stack->top->content == max)
-	{
-		if (stack->top->next->content == min)
-		{
-			rotate(stack, stacks->commands);
-			swap(stack, stacks->commands);
-			reverse_rotate(stack, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-		}
-		else
-		{
-			push(stacks->a, stacks->b, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-		}
-	}
-	else if (stack->top->content != max && stack->top->content != min)
-	{
-		if (stack->top->next->content == max)
-		{
-			swap(stack, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-		}
-		else
-		{
-			push(stacks->a, stacks->b, stacks->commands);
-			swap(stack, stacks->commands);
-			push(stacks->b, stacks->a, stacks->commands);
-			swap(stack, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-		}
-	}
-	else if (stack->top->content == min)
-	{
-		if (stack->top->next->content == max)
-		{
-			push(stacks->a, stacks->b, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-			swap(stacks->a, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-			swap(stacks->a, stacks->commands);
-		}
-		else
-		{
-			swap(stack, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-			swap(stack, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-			swap(stacks->a, stacks->commands);
-			push(stacks->a, stacks->b, stacks->commands);
-		}
-	}
-}
-
-void	rev_sort_3(t_ab *stacks, t_stack *stack)
-{
-	int		max;
-	int		min;
-	int		i;
-	t_list	*tmp;
-
-	max = stack->top->content;
-	min = stack->top->content;
-	tmp = stack->top;
-	i = -1;
-	while (++i < 3)
-	{
-		if (max < tmp->content)
-			max = tmp->content;
-		else if (min > tmp->content)
-			min = tmp->content;
-		tmp = tmp->next;
-	}
-	rev_check_case_3(stacks, stack, max, min);
 }
 
 void	rev_sort_4_ba(t_ab *stacks)
@@ -138,8 +54,8 @@ void	rev_sort_5_ba(t_ab *stacks)
 	rb_count = 0;
 	max = get_max(stacks->b, 5);
 	min = get_min(stacks->b, 5);
-	i = 0;
-	while (i < 5)
+	i = -1;
+	while (++i < 5)
 	{
 		if (stacks->b->top->content == max || stacks->b->top->content == min)
 			push(stacks->a, stacks->b, stacks->commands);
@@ -148,7 +64,6 @@ void	rev_sort_5_ba(t_ab *stacks)
 			rotate(stacks->b, stacks->commands);
 			rb_count++;
 		}
-		i++;
 	}
 	while (--rb_count >= 0)
 		reverse_rotate(stacks->b, stacks->commands);
