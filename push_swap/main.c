@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/10 19:30:18 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/10 19:40:22 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	trim_cmd(t_ab *stacks)
 {
 	trim_useless(stacks);
 	trim_rrr(stacks);
+	trim_rrr_2(stacks);
 	trim_rbr(stacks);
 	trim_rr_2(stacks);
 	trim_rr(stacks);
@@ -28,7 +29,7 @@ void	trim_cmd(t_ab *stacks)
 
 int main(int argc, char *argv[])
 {
-	//atexit(check_leaks);
+	atexit(check_leaks);
 	t_ab		stacks;
 	int			i;
 
