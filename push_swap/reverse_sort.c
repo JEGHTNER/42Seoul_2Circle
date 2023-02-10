@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 17:07:08 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/10 19:24:03 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/10 19:46:22 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,17 +44,17 @@ void	rev_sort_4_ba(t_ab *stacks)
 	rev_sort_3(stacks, stacks->b);
 }
 
-void	rev_sort_5_ba(t_ab *stacks)
+void	rev_sort_5_ba(t_ab *stacks, int i)
 {
 	int	max;
 	int	min;
-	int	i;
+	//int	i;
 	int	rb_count;
 
 	rb_count = 0;
 	max = get_max(stacks->b, 5);
 	min = get_min(stacks->b, 5);
-	i = -1;
+	//i = -1;
 	while (++i < 5)
 	{
 		if (stacks->b->top->content == max || stacks->b->top->content == min)

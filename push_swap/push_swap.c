@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/28 20:11:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/10 18:46:09 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/10 19:45:52 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	check_count_ba(t_ab *stacks, int count)
 	else if (count == 4)
 		rev_sort_4_ba(stacks);
 	else if (count == 5)
-		rev_sort_5_ba(stacks);
+		rev_sort_5_ba(stacks, -1);
 }
 
 void	a_to_b(t_ab *stacks, int count)

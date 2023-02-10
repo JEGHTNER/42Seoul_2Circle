@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/10 19:35:06 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/10 19:45:29 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	rev_sort_3(t_ab *stacks, t_stack *stack);
 void	rev_sort_2(t_ab *stacks, t_stack *stack);
 void	rev_sort_3(t_ab *stacks, t_stack *stack);
 void	rev_sort_4_ba(t_ab *stacks);
-void	rev_sort_5_ba(t_ab *stacks);
+void	rev_sort_5_ba(t_ab *stacks, int i);
 
 //quick_sort functions
 void	move_rev(t_ab *stacks, int count_arr[3], int count, int *pivots);
