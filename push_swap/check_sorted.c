@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/08 16:08:13 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/08 16:49:41 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/11 18:41:59 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,25 +42,4 @@ int	is_sorted(t_stack *stack, int size)
 		tmp = tmp->next;
 	}
 	return (1);
-}
-
-void	check_count_ab(t_ab *stacks, int count)
-{
-	if (count <= 1)
-		return ;
-	if (is_sorted(stacks->a, count))
-		return ;
-	if (count == 2)
-		sort_2(stacks, stacks->a);
-	else if (count == 3)
-		sort_3(stacks, stacks->a);
-	else if (count == 4)
-		sort_4_ab(stacks);
-	else if (count == 5)
-	{
-		if (stacks->a->size == 5)
-			sort_5_ab(stacks);
-		else
-			sort_5_ab_above(stacks);
-	}
 }

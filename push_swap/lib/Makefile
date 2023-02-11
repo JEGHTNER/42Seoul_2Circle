@@ -6,7 +6,7 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 19:08:51 by jehelee           #+#    #+#              #
-#    Updated: 2023/02/10 13:59:57 by jehelee          ###   ########.fr        #
+#    Updated: 2023/02/11 19:41:58 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,8 +41,8 @@ all: $(NAME)
 $(NAME): libft ft_printf gnl
 
 %.o: %.c
-	$(CC) $(CFLAGS) -c -o $@ $^
-	$(AR) $(ARFLAGS) $(NAME) $@
+	@$(CC) $(CFLAGS) -c -o $@ $^
+	@$(AR) $(ARFLAGS) $(NAME) $@
 
 libft: $(addprefix $(LIBFT_DIR)/, $(LIBFT:.c=.o))
 ft_printf: $(addprefix $(FT_PRINTF_DIR)/, $(FT_PRINTF:.c=.o))

@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 23:05:12 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/10 19:34:56 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/11 13:58:08 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,34 +151,6 @@ void	trim_rbr(t_ab *stacks)
 			tmp = tmp->prev;
 			del_cmd(del);
 			cmd_push_at(stacks->commands, ft_lstnew_cmd("rra\n"), tmp);
-		}
-		tmp = tmp->next;
-	}
-}
-
-void	trim_useless(t_ab *stacks)
-{
-	t_list	*tmp;
-	t_list	*del;
-
-	tmp = stacks->commands->head;
-	if (!tmp)
-		return ;
-	while (tmp->next)
-	{
-		while (!ft_strncmp(tmp->string, "ra\n", 3) && \
-		!ft_strncmp(tmp->next->string, "rra\n", 4))
-		{
-			del = tmp;
-			tmp = tmp->prev;
-			del_cmd(del);
-		}
-		while (!ft_strncmp(tmp->string, "rb\n", 3) && \
-		!ft_strncmp(tmp->next->string, "rrb\n", 4))
-		{
-			del = tmp;
-			tmp = tmp->prev;
-			del_cmd(del);
 		}
 		tmp = tmp->next;
 	}

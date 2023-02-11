@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   push_swap_bonus.h                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/11 18:46:37 by jehelee          ###   ########.fr       */
+/*   Created: 2023/02/11 15:52:39 by jehelee           #+#    #+#             */
+/*   Updated: 2023/02/11 18:46:44 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#ifndef PUSH_SWAP_BONUS_H
+# define PUSH_SWAP_BONUS_H
 
 # include "libft.h"
 # include "ft_printf.h"
+# include "get_next_line.h"
 
 typedef struct s_cmd_lst
 {
@@ -38,6 +39,9 @@ typedef struct s_ab
 	t_cmd_lst	*commands;
 }				t_ab;
 
+//bonus functions
+void	do_cmd(char *line, t_ab *stacks);
+
 //recursive functions
 void	a_to_b(t_ab *stacks, int count);
 void	b_to_a(t_ab *stacks, int count);
@@ -54,12 +58,11 @@ void	ft_stack_push(t_stack *stack, t_list *n);
 void	ft_stack_pop(t_stack *stack);
 void	free_stacks(t_ab *stacks);
 
-
 //command functions
-void	swap(t_stack *stack, t_cmd_lst *commands);
-void	push(t_stack *stack_to, t_stack *stack_from, t_cmd_lst *commands);
-void	rotate(t_stack *stack, t_cmd_lst *commands);
-void	reverse_rotate(t_stack *stack, t_cmd_lst *commands);
+void	swap_bn(t_stack *stack);
+void	push_bn(t_stack *stack_to, t_stack *stack_from);
+void	rotate_bn(t_stack *stack);
+void	reverse_rotate_bn(t_stack *stack);
 
 //sort 5 under functions
 void	sort_2(t_ab *stacks, t_stack *stack);
@@ -110,8 +113,8 @@ int		check_argv(char *argv, t_stack *a);
 
 //command utils functions
 void	init_commands(t_ab *stacks);
-void	cmd_push_at(t_cmd_lst *commands, t_list *new, t_list *tmp);
-void	cmd_push(t_cmd_lst *commands, t_list *new);
+void	cmd_push_at(t_cmd_lst *commands, t_list *n, t_list *tmp);
+void	cmd_push(t_cmd_lst *commands, t_list *n);
 void	print_cmd(t_ab *stacks);
 void	free_commands(t_ab *stacks);
 t_list	*ft_lstnew_cmd(char *string);
