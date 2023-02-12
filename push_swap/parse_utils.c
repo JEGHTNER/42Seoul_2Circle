@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 15:53:11 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/11 14:18:06 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/12 17:26:08 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,6 @@ int	check_duplicate(t_stack *stack)
 		}
 		tmp = tmp->next;
 	}
-	if (sort_flag == stack->size)
-		return (0);
 	return (1);
 }
 
@@ -95,7 +93,7 @@ int	check_argv(char *argv, t_stack *a)
 	lnum = 0;
 	overflow = 0;
 	if (!check_space_sign(&argv, &sign))
-		return (0);
+		exit_with_error("Error\n");
 	while (ft_isdigit(argv[i]))
 	{
 		overflow = check_overflow(lnum);
