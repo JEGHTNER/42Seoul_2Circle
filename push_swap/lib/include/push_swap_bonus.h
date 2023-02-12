@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:52:39 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/11 18:46:44 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/12 13:33:47 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,8 @@ typedef struct s_ab
 
 //bonus functions
 void	do_cmd(char *line, t_ab *stacks);
+void	cmd_case_1(char *line, t_ab *stacks);
+void	cmd_case_2(char *line, t_ab *stacks);
 
 //recursive functions
 void	a_to_b(t_ab *stacks, int count);

@@ -6,12 +6,12 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/02/11 19:45:15 by jehelee          ###   ########.fr        #
+#    Updated: 2023/02/12 13:47:42 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
-NAME_BN = mychecker3
+NAME_BN = checker
 
 SRCS = main.c commands.c sort.c sort_util_find_max_min.c \
 	   push_swap.c parse_utils.c error_utils.c stack_utils.c \
@@ -41,7 +41,7 @@ libs:
 	make -C ./lib/
 
 ${NAME} : ${OBJS}
-	$(CC) -g -o $(NAME) ${OBJS} -I ${INC_DIR} -L ${LIB_DIR} -l_jehelee
+	$(CC) $(CFLAGS) -o $(NAME) ${OBJS} -I ${INC_DIR} -L ${LIB_DIR} -l_jehelee
 
 clean	:
 	make -C ./lib/ clean
@@ -50,15 +50,16 @@ clean	:
 
 fclean	: 
 	make -C ./lib/ fclean
-	make clean
+	rm -rf $(OBJS)
+	rm -rf $(OBJS_BN)
 	rm -rf	$(NAME)
 	rm -rf  $(NAME_BN)
 
 re		: fclean all
 
-bonus: ${NAME_BN}
+bonus: all ${NAME_BN}
 
 ${NAME_BN} : ${OBJS_BN}
-	$(CC) -g  -o $(NAME_BN) ${OBJS_BN} -L ${LIB_DIR} -l_jehelee
+	$(CC) $(CFLAGS) -o $(NAME_BN) ${OBJS_BN} -I ${INC_DIR} -L ${LIB_DIR} -l_jehelee
 
 .PHONY: all libs clean fclean re bonus

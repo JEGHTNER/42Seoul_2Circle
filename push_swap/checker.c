@@ -6,15 +6,49 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:20:52 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/11 19:35:44 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/12 13:33:07 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/include/push_swap_bonus.h"
 
-void	check_leaks(void)
+void	cmd_case_1(char *line, t_ab *stacks)
 {
-	system("leaks mychecker");
+	if (!(ft_strncmp(line, "sa\n", 3)))
+		swap_bn(stacks->a);
+	else if (!(ft_strncmp(line, "sb\n", 3)))
+		swap_bn(stacks->b);
+	else if (!(ft_strncmp(line, "ss\n", 3)))
+	{
+		swap_bn(stacks->a);
+		swap_bn(stacks->b);
+	}
+	else if (!(ft_strncmp(line, "ra\n", 3)))
+		rotate_bn(stacks->a);
+	else if (!(ft_strncmp(line, "rb\n", 3)))
+		rotate_bn(stacks->b);
+	else if (!(ft_strncmp(line, "rr\n", 3)))
+	{
+		rotate_bn(stacks->a);
+		rotate_bn(stacks->b);
+	}
+}
+
+void	cmd_case_2(char *line, t_ab *stacks)
+{
+	if (!(ft_strncmp(line, "rra\n", 4)))
+		reverse_rotate_bn(stacks->a);
+	else if (!(ft_strncmp(line, "rrb\n", 4)))
+		reverse_rotate_bn(stacks->b);
+	else if (!(ft_strncmp(line, "rrr\n", 4)))
+	{
+		reverse_rotate_bn(stacks->a);
+		reverse_rotate_bn(stacks->b);
+	}
+	else if (!(ft_strncmp(line, "pa\n", 3)))
+		push_bn(stacks->a, stacks->b);
+	else if (!(ft_strncmp(line, "pb\n", 3)))
+		push_bn(stacks->b, stacks->a);
 }
 
 int	main(int argc, char *argv[])
@@ -24,11 +58,11 @@ int	main(int argc, char *argv[])
 
 	stacks.a = malloc(sizeof(t_stack));
 	if (!stacks.a)
-		return (0);
+		exit_with_error ("Error\nmalloc error\n");
 	init_stack(stacks.a, 'a');
 	stacks.b = malloc(sizeof(t_stack));
 	if (!stacks.b)
-		return (0);
+		exit_with_error ("Error\nmalloc error\n");
 	init_stack(stacks.b, 'b');
 	parse_argv(argc, argv, &stacks);
 	while (1)
@@ -48,22 +82,6 @@ int	main(int argc, char *argv[])
 
 void	do_cmd(char *line, t_ab *stacks)
 {
-	if (!line)
-		return ;
-	if (!(ft_strncmp(line, "sa\n", 3)))
-		swap_bn(stacks->a);
-	else if (!(ft_strncmp(line, "sb\n", 3)))
-		swap_bn(stacks->b);
-	else if (!(ft_strncmp(line, "ra\n", 3)))
-		rotate_bn(stacks->a);
-	else if (!(ft_strncmp(line, "rb\n", 3)))
-		rotate_bn(stacks->b);
-	else if (!(ft_strncmp(line, "rra\n", 4)))
-		reverse_rotate_bn(stacks->a);
-	else if (!(ft_strncmp(line, "rrb\n", 4)))
-		reverse_rotate_bn(stacks->b);
-	else if (!(ft_strncmp(line, "pa\n", 3)))
-		push_bn(stacks->a, stacks->b);
-	else if (!(ft_strncmp(line, "pb\n", 3)))
-		push_bn(stacks->b, stacks->a);
+	cmd_case_1(line, stacks);
+	cmd_case_2(line, stacks);
 }

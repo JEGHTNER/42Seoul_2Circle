@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/07 23:25:24 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/10 18:21:49 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/12 13:37:27 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ t_list	*ft_lstnew_cmd(char *string)
 	if (!new_node)
 		return (0);
 	new_node -> string = ft_strdup(string);
+	if (!(new_node->string))
+		exit_with_error("Error\nmalloc error\n");
 	new_node -> next = NULL;
 	new_node -> prev = NULL;
 	return (new_node);

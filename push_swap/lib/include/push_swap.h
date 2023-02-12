@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/11 18:46:37 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/12 13:35:59 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	init_stack(t_stack *stack, char name);
 void	ft_stack_push(t_stack *stack, t_list *n);
 void	ft_stack_pop(t_stack *stack);
 void	free_stacks(t_ab *stacks);
-
 
 //command functions
 void	swap(t_stack *stack, t_cmd_lst *commands);
