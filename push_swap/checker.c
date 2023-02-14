@@ -6,25 +6,32 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/11 15:20:52 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/12 17:54:35 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/14 19:50:09 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lib/include/push_swap_bonus.h"
+
+void	start(t_ab *stacks)
+{
+	stacks->a = malloc(sizeof(t_stack));
+	if (!stacks->a)
+		exit_with_error ("Error\nmalloc error\n");
+	init_stack(stacks->a, 'a');
+	stacks->b = malloc(sizeof(t_stack));
+	if (!stacks->b)
+		exit_with_error ("Error\nmalloc error\n");
+	init_stack(stacks->b, 'b');
+}
 
 int	main(int argc, char *argv[])
 {
 	t_ab	stacks;
 	char	*line;
 
-	stacks.a = malloc(sizeof(t_stack));
-	if (!stacks.a)
-		exit_with_error ("Error\nmalloc error\n");
-	init_stack(stacks.a, 'a');
-	stacks.b = malloc(sizeof(t_stack));
-	if (!stacks.b)
-		exit_with_error ("Error\nmalloc error\n");
-	init_stack(stacks.b, 'b');
+	if (argc <= 1)
+		return (0);
+	start(&stacks);
 	parse_argv(argc, argv, &stacks);
 	while (1)
 	{
