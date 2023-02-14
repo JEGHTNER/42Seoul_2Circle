@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:12:09 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/11 18:47:34 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/14 12:17:06 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	exit_with_error(char *str)
 {
-	ft_printf("%s", str);
-	exit(0);
+	ft_putstr_fd(str, 2);
+	exit(EXIT_FAILURE);
 }
 
 void	parse_argv(int argc, char *argv[], t_ab *stacks)
@@ -26,10 +26,10 @@ void	parse_argv(int argc, char *argv[], t_ab *stacks)
 	while (--i >= 1)
 	{
 		if (!check_argv(argv[i], stacks->a))
-			exit(0);
+			exit(EXIT_FAILURE);
 	}
 	if (!check_duplicate(stacks->a))
-		exit(1);
+		exit(EXIT_FAILURE);
 }
 
 void	free_stacks(t_ab *stacks)
