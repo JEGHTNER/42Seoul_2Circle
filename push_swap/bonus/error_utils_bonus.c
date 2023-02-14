@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_utils.c                                      :+:      :+:    :+:   */
+/*   error_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 16:12:09 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/14 13:14:26 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/14 13:26:50 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lib/include/push_swap.h"
+#include "../lib/include/push_swap_bonus.h"
 
 void	exit_with_error(char *str)
 {

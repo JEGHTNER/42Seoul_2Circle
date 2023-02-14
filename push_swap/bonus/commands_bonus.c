@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   commands.c                                         :+:      :+:    :+:   */
+/*   commands_bonus.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/22 20:25:10 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/14 13:15:36 by jehelee          ###   ########.fr       */
+/*   Created: 2023/02/11 18:33:04 by jehelee           #+#    #+#             */
+/*   Updated: 2023/02/14 13:26:50 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./lib/include/push_swap.h"
+#include "../lib/include/push_swap_bonus.h"
 
-void	init_commands(t_ab *stacks)
-{
-	stacks->commands = malloc(sizeof(t_cmd_lst));
-	if (!stacks->commands)
-		exit_with_error("ERROR\nmalloc error\n");
-	stacks->commands->head = NULL;
-	stacks->commands->tail = NULL;
-}
-
-void	swap(t_stack *stack, t_cmd_lst *commands)
+void	swap_bn(t_stack *stack)
 {
 	t_list	*tmp;
 
@@ -37,13 +28,9 @@ void	swap(t_stack *stack, t_cmd_lst *commands)
 	stack->top = tmp;
 	if (stack->size == 2)
 		stack->bottom = stack->top->next;
-	if (stack->name == 'a')
-		cmd_push(commands, ft_lstnew_cmd("sa\n"));
-	else if (stack->name == 'b')
-		cmd_push(commands, ft_lstnew_cmd("sb\n"));
 }
 
-void	push(t_stack *stack_to, t_stack *stack_from, t_cmd_lst *commands)
+void	push_bn(t_stack *stack_to, t_stack *stack_from)
 {
 	int	push_num;
 
@@ -52,13 +39,9 @@ void	push(t_stack *stack_to, t_stack *stack_from, t_cmd_lst *commands)
 	push_num = stack_from->top->content;
 	ft_stack_pop(stack_from);
 	ft_stack_push(stack_to, ft_lstnew(push_num));
-	if (stack_to->name == 'a')
-		cmd_push(commands, ft_lstnew_cmd("pa\n"));
-	else if (stack_to->name == 'b')
-		cmd_push(commands, ft_lstnew_cmd("pb\n"));
 }
 
-void	rotate(t_stack *stack, t_cmd_lst *commands)
+void	rotate_bn(t_stack *stack)
 {
 	t_list	*tmp;
 
@@ -71,13 +54,9 @@ void	rotate(t_stack *stack, t_cmd_lst *commands)
 	tmp->next = NULL;
 	tmp->prev = stack->bottom;
 	stack->bottom = tmp;
-	if (stack->name == 'a')
-		cmd_push(commands, ft_lstnew_cmd("ra\n"));
-	else if (stack->name == 'b')
-		cmd_push(commands, ft_lstnew_cmd("rb\n"));
 }
 
-void	reverse_rotate(t_stack *stack, t_cmd_lst *commands)
+void	reverse_rotate_bn(t_stack *stack)
 {
 	t_list	*tmp;
 
@@ -91,8 +70,4 @@ void	reverse_rotate(t_stack *stack, t_cmd_lst *commands)
 	stack->top->prev = stack->bottom;
 	stack->top = stack->bottom;
 	stack->bottom = tmp;
-	if (stack->name == 'a')
-		cmd_push(commands, ft_lstnew_cmd("rra\n"));
-	else if (stack->name == 'b')
-		cmd_push(commands, ft_lstnew_cmd("rrb\n"));
 }

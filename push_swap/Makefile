@@ -6,12 +6,16 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/02/12 13:47:42 by jehelee          ###   ########.fr        #
+#    Updated: 2023/02/14 13:25:32 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 NAME_BN = checker
+
+INC_DIR		= ./lib/include/
+LIB_DIR		= ./lib/
+BN_DIR		= ./bonus/
 
 SRCS = main.c commands.c sort.c sort_util_find_max_min.c \
 	   push_swap.c parse_utils.c error_utils.c stack_utils.c \
@@ -20,12 +24,10 @@ SRCS = main.c commands.c sort.c sort_util_find_max_min.c \
 	   rev_sort_utils2.c trim_cmd_utils.c
 	   
 
-SRCS_BN = commands_bonus.c parse_utils.c error_utils.c stack_utils.c \
-	   check_sorted.c checker.c
+SRCS_BN = ${BN_DIR}commands_bonus.c ${BN_DIR}parse_utils_bonus.c ${BN_DIR}error_utils_bonus.c \
+		  ${BN_DIR}stack_utils_bonus.c ${BN_DIR}check_sorted_bonus.c ${BN_DIR}checker.c
 	   
-INC_DIR		= ./lib/include/
-LIB_DIR		= ./lib/
-BN_DIR		= ./bonus/
+
 
 OBJS = ${SRCS:%.c=%.o}
 OBJS_BN = ${SRCS_BN:%.c=%.o}

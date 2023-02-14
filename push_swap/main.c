@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/21 20:46:07 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/14 12:21:28 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/14 13:21:17 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[])
 	init_stack(stacks.b, 'b');
 	parse_argv(argc, argv, &stacks);
 	if (is_sorted(stacks.a, stacks.a->size))
-		exit(0);
+		exit(EXIT_SUCCESS);
 	make_index(stacks.a, stacks.a->size);
 	a_to_b(&stacks, stacks.a->size);
 	trim_cmd(&stacks);
