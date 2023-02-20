@@ -6,7 +6,7 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/02/18 20:56:43 by jehelee          ###   ########.fr        #
+#    Updated: 2023/02/20 23:29:56 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ INC_DIR		= ./lib/include/
 LIB_DIR		= ./lib/
 BN_DIR		= ./bonus/
 
-SRCS = main.c
+SRCS = main.c ft_split_pipex.c
 	   
 
 #SRCS_BN = ${BN_DIR}commands_bonus.c ${BN_DIR}parse_utils_bonus.c ${BN_DIR}error_utils_bonus.c \
