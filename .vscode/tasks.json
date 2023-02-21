@@ -7,7 +7,7 @@
             "args": [
                 "-C",
                 //"${workspaceFolder}/so_long/",
-                "${workspaceFolder}/push_swap/",
+                "${workspaceFolder}/pipex/",
                 "re"
             ],
             "options": {
