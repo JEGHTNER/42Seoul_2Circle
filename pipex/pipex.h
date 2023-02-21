@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/20 23:32:16 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/21 16:07:26 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,5 +49,6 @@ static int	check_sep(char c, char sep);
 static int	skip_quoted_string(char const *string, int i);
 static char	*make_string(char const *string, char seperator, int *i);
 char	**ft_split_pipex(char const *string, char seperator);
+
 
 #endif

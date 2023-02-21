@@ -6,7 +6,7 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/02/20 23:29:56 by jehelee          ###   ########.fr        #
+#    Updated: 2023/02/21 16:43:56 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,7 +43,7 @@ all : ${NAME}
 # 	make -C ./lib/
 
 ${NAME} : ${OBJS}
-	$(CC) -o $(NAME) ${OBJS} -L. -l_jehelee
+	$(CC) -o $(NAME) ${OBJS} -L. -l_jehelee -g
 
 
 clean	:
