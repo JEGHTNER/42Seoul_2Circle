@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 14:23:29 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/21 19:27:21 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/22 20:48:07 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,8 @@ char	*get_path(char *cmd, char **path_args)
 	return (NULL);
 }
 
-t_pipex	*init_pipex(char **argv, char **envp)
+void	*init_pipex(t_pipex *pipex, char **argv, char **envp)
 {
-	t_pipex	*pipex;
-
-	pipex = malloc(sizeof(t_pipex));
-	if (!pipex)
-		return (NULL);
 	pipex->fd_infile = open(argv[1], O_RDONLY);
 	pipex->fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	pipex->cmd1_args = ft_split_pipex(argv[2], ' ');
@@ -146,11 +141,12 @@ void	parent_process(t_pipex *pipex)
 	}
 	close(pipex->pipe[PIPE_READ]);
 	close(pipex->fd_outfile);
-	if (execve(pipex->cmd2_path, pipex->cmd2_args, pipex->envp_args) == -1)
-	{
-		//perror("command not found");
-		exit(127);
-	}
+	// if (execve(pipex->cmd2_path, pipex->cmd2_args, pipex->envp_args) == -1)
+	// {
+	// 	//perror("command not found");
+	// 	exit(127);
+	// }
+	execvp(pipex->cmd2_args[0], pipex->cmd2_args);
 }
 
 void	child_process(t_pipex *pipex)
@@ -176,11 +172,12 @@ void	child_process(t_pipex *pipex)
 	}
 	close(pipex->pipe[PIPE_WRITE]);
 	close(pipex->fd_infile);
-	if (execve(pipex->cmd1_path, pipex->cmd1_args, pipex->envp_args) == -1)
-	{
-		//perror("command not found");
-		exit(127);
-	}
+	// if (execve(pipex->cmd1_path, pipex->cmd1_args, pipex->envp_args) == -1)
+	// {
+	// 	//perror("command not found");
+	// 	exit(127);
+	// }
+	execvp(pipex->cmd1_args[0], pipex->cmd1_args);
 }
 
 void	free_cmd(char **cmd)
@@ -248,12 +245,15 @@ int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipex	*pipex;
 
+	pipex = malloc(sizeof(t_pipex));
+	if (!pipex)
+		exit (EXIT_FAILURE);
 	if (argc != 5)
 	{
 		perror("usage: ./pipex file1 cmd1 cmd2 file2\n");
 		exit (EXIT_FAILURE);
 	}
-	pipex = init_pipex(argv, envp);
+	init_pipex(pipex, argv, envp);
 	error_handle(pipex, argv);
 	pipex->pid = fork();
 	if (pipex->pid == -1)
