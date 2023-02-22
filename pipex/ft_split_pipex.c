@@ -6,12 +6,25 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:24:19 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/20 23:29:18 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/23 00:14:37 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 #include <stdio.h>
+
+typedef enum e_quote
+{
+	NO_QUOTE,
+	SINGLE_QUOTE,
+	DOUBLE_QUOTE,
+}	t_quote;
+
+typedef enum awk
+{
+	NO_AWK,
+	AWK,
+}	t_awk;
 
 size_t	ft_strlcpy_pipex_quote(char *dst, const char *src, size_t *i, size_t *j);
 static int	skip_quoted_string(char const *string, int i);
@@ -192,6 +205,124 @@ static char	*make_string(char const *string, char seperator, int *i)
 	}
 }
 
+int	check_awk(char const *string)
+{
+	int	i;
+	int	str_len;
+
+	if (!string)
+		return (0);
+	i = 0;
+	while (ft_isspace(string[i]))
+		i++;
+	while (string[i] && i < ft_strlen(string) - 3)
+	{
+		if (string[i] == 'a' && string[i + 1] == 'w' && string[i + 2] == 'k')
+			return (AWK);
+		i++;
+	}
+	return (NO_AWK);
+}
+
+int check_string(char const *string)
+{
+	int i;
+	int quote_flag;
+	char quote;
+
+	i = 0;
+	quote_flag = 0;
+	if (!check_awk(string))
+		return (NO_AWK);
+	else
+		return (AWK);
+	while (string[i])
+	{
+		if (string[i] == '\'' || string[i] == '\"')
+		{
+			quote = string[i];
+			quote_flag = 1;
+			i++;
+			while (string[i] && string[i] != quote)
+				i++;
+			if (string[i])
+				i++;
+		}
+		else
+			i++;
+	}
+	if (quote_flag)
+		return (0);
+	return (1);
+}
+
+char	*make_quote_line(char const *string)
+{
+	int		i;
+	int		str_len;
+	char	quote;
+	char	*line;
+
+	str_len = ft_strlen(string) - 1;
+	i = 0;
+	quote = 0;
+	while (string[i])
+	{
+		if (string[i] == '\'' || string[i] == '\"')
+		{
+			quote = string[i];
+			break ;
+		}
+		i++;
+	}
+	while (str_len > 0 && str_len > i)
+	{
+		if (string[str_len] == quote)
+			break ;
+		str_len--;
+	}
+	if (!quote)
+	{
+		i = 0;
+		str_len = ft_strlen(string);
+	}
+	line = ft_substr(string, i + 1, str_len - i - 1);
+	if (!line)
+		return (0);
+	return (line);
+}
+
+char	**case_awk(const char *string)
+{
+	char	**words;
+	int		i;
+
+	words = malloc(sizeof(char *) * 3);
+	if (!words)
+		return (0);
+	i = 0;
+	while (ft_isspace(string[i]))
+		i++;
+	while (string[i] && i < ft_strlen(string) - 3)
+	{
+		if (string[i] == 'a' && string[i + 1] == 'w' && string[i + 2] == 'k')
+		{
+			words[0] = ft_strdup("awk");
+			if (!words[0])
+				return (free_all(words));
+			// string[i] = '\0';
+			i += 3;
+			break ;
+		}
+		i++;
+	}
+	words[1] = make_quote_line(&string[i]);
+	if (!words[1])
+		return (free_all(words));
+	words[2] = 0;
+	return (words);
+}
+
 char	**ft_split_pipex(char const *string, char seperator)
 {
 	int		i;
@@ -200,6 +331,8 @@ char	**ft_split_pipex(char const *string, char seperator)
 
 	i = 0;
 	j = 0;
+	if (check_string(string))
+		return (case_awk(string));
 	words = malloc(sizeof(char *) * (count_words(string, seperator) + 1));
 	if (!words)
 		return (0);
@@ -230,6 +363,7 @@ char	**ft_split_pipex(char const *string, char seperator)
 // 	// char *str = "awk \"''{count++} END {print count}''\"";
 // 	// char *str = "awk \'\"{count++} END {print count}\"\'";
 // 	// char *str = "awk \"\'{count++} END {print count}\'\"";
+// 	char *str = "awk \'\"\'\"\'{count++} END {printf \"count: %i\", count}\'\"\'\"\'";
 
 
 // 	// char *str = "wc -l  a b c def g ";
