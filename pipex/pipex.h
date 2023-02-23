@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/21 16:07:26 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/23 22:04:50 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,16 @@
 # include "get_next_line.h"
 
 //ft_split_pipex function
-size_t	ft_strlcpy_pipex(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlcpy_pipex_quote(char *dst, const char *src, size_t *i, size_t *j);
-static int	skip_quoted_string(char const *string, int i);
-static char	**free_all(char **words);
-static int	count_words(char const *string, char c);
-static int	check_sep(char c, char sep);
-static int	skip_quoted_string(char const *string, int i);
-static char	*make_string(char const *string, char seperator, int *i);
-char	**ft_split_pipex(char const *string, char seperator);
+size_t      ft_strlcpy_pipex(char *dst, const char *src, size_t dstsize);
+size_t      ft_strlcpy_pipex_quote(char *dst, const char *src, size_t *i, size_t *j);
+int         skip_quoted_string(char const *string, int i);
+char	    **free_all(char **words);
+int	        count_words(char const *string, char c);
+int	        check_sep(char c, char sep);
+int         skip_quoted_string(char const *string, int i);
+char	    *make_string(char const *string, char seperator, int *i);
+char	    **ft_split_pipex(char const *string, char seperator);
+int         check_sh(char *cmd);
 
 
 #endif

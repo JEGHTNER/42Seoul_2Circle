@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 14:23:29 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/22 20:48:07 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/23 22:32:12 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ typedef struct s_pipex
 	pid_t	pid;
 }			t_pipex;
 
-char	**get_path_args(char **envp)
+char	**get_path_args(char *envp[])
 {
 	int		i;
 	char	*path;
@@ -78,6 +78,22 @@ char	**get_path_args(char **envp)
 	return (NULL);
 }
 
+int	check_sh(char *cmd)
+{
+	int		cmd_len;
+	int		i;
+	char	*tmp;
+
+	cmd_len = ft_strlen(cmd);
+	i = -1;
+	while (++i < 3)
+		cmd_len--;
+	cmd = cmd + cmd_len;
+	if (ft_strncmp(cmd, ".sh", 3) == 0)
+		return (1);
+	return (0);
+}
+
 char	*get_path(char *cmd, char **path_args)
 {
 	int		i;
@@ -91,6 +107,8 @@ char	*get_path(char *cmd, char **path_args)
 	i = 0;
 	while (path_args[i])
 	{
+		if (check_sh(cmd))
+			return (ft_strdup("/bin/sh"));
 		tmp = ft_strjoin(path_args[i], "/");
 		if (!tmp)
 			return (NULL);
@@ -104,7 +122,7 @@ char	*get_path(char *cmd, char **path_args)
 	return (NULL);
 }
 
-void	*init_pipex(t_pipex *pipex, char **argv, char **envp)
+void	*init_pipex(t_pipex *pipex, char **argv, char *envp[])
 {
 	pipex->fd_infile = open(argv[1], O_RDONLY);
 	pipex->fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -141,12 +159,12 @@ void	parent_process(t_pipex *pipex)
 	}
 	close(pipex->pipe[PIPE_READ]);
 	close(pipex->fd_outfile);
-	// if (execve(pipex->cmd2_path, pipex->cmd2_args, pipex->envp_args) == -1)
-	// {
-	// 	//perror("command not found");
-	// 	exit(127);
-	// }
-	execvp(pipex->cmd2_args[0], pipex->cmd2_args);
+	if (execve(pipex->cmd2_path, pipex->cmd2_args, pipex->envp_args) == -1)
+	{
+		//perror("command not found");
+		exit(127);
+	}
+	// execvp(pipex->cmd2_args[0], pipex->cmd2_args);
 }
 
 void	child_process(t_pipex *pipex)
@@ -172,12 +190,12 @@ void	child_process(t_pipex *pipex)
 	}
 	close(pipex->pipe[PIPE_WRITE]);
 	close(pipex->fd_infile);
-	// if (execve(pipex->cmd1_path, pipex->cmd1_args, pipex->envp_args) == -1)
-	// {
-	// 	//perror("command not found");
-	// 	exit(127);
-	// }
-	execvp(pipex->cmd1_args[0], pipex->cmd1_args);
+	if (execve(pipex->cmd1_path, pipex->cmd1_args, pipex->envp_args) == -1)
+	{
+		//perror("command not found");
+		exit(127);
+	}
+	// execvp(pipex->cmd1_args[0], pipex->cmd1_args);
 }
 
 void	free_cmd(char **cmd)
