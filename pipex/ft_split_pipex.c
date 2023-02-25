@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:24:19 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/24 23:52:35 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/26 00:23:43 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef enum awk
 	AWK,
 }	t_awk;
 
-size_t	ft_strlcpy_pipex_quote(char *dst, const char *src, size_t *i, size_t *j);
+size_t	ft_strlcpy_quote(char *dst, const char *src, size_t *i, size_t *j);
 int	skip_quoted_string(char const *string, int i);
 
 // size_t ft_strlen(const char *s)
@@ -68,7 +68,7 @@ size_t	ft_strlcpy_pipex(char *dst, const char *src, size_t dstsize)
 	while (src[i] && i < dstsize - 1)
 	{
 		if (src[i] == '\'' || src[i] == '\"')
-			ft_strlcpy_pipex_quote(dst, src, &i, &j);
+			ft_strlcpy_quote(dst, src, &i, &j);
 		else
 		{
 			dst[j] = src[i];
@@ -95,7 +95,7 @@ void	ft_strlcpy_quote_check(const char *src, size_t *i, char q, int *q_flag)
 	}
 }
 
-size_t	ft_strlcpy_pipex_quote(char *dst, const char *src, size_t *i, size_t *j)
+size_t	ft_strlcpy_quote(char *dst, const char *src, size_t *i, size_t *j)
 {
 	char	quote;
 	int		quote_flag;
@@ -118,7 +118,7 @@ size_t	ft_strlcpy_pipex_quote(char *dst, const char *src, size_t *i, size_t *j)
 }
 
 
-char	**free_all(char **words)
+char	**free_2d_arr(char **words)
 {
 	int	i;
 
@@ -129,7 +129,7 @@ char	**free_all(char **words)
 		i++;
 	}
 	free(words);
-	return (0);
+	return (NULL);
 }
 
 int	check_sep(char c, char sep)
@@ -323,10 +323,10 @@ char	**case_awk(const char *string)
 		i++;
 	words[0] = make_awk(string, &i);
 	if (!words[0])
-		return (free_all(words));
+		return (free_2d_arr(words));
 	words[1] = make_quote_line(&string[i]);
 	if (!words[1])
-		return (free_all(words));
+		return (free_2d_arr(words));
 	words[2] = 0;
 	return (words);
 }
@@ -348,14 +348,14 @@ char	**case_sh(const char *string)
 		{
 			words[0] = ft_strdup("sh");
 			if (!words[0])
-				return (free_all(words));
+				return (free_2d_arr(words));
 			break ;
 		}
 		i++;
 	}
 	words[1] = ft_strdup(string);
 	if (!words[1])
-		return (free_all(words));
+		return (free_2d_arr(words));
 	words[2] = 0;
 	return (words);
 }
@@ -379,7 +379,7 @@ char **ft_split_norm(char const *string, char seperator)
 		{
 			words[j] = make_string(&string[i], seperator, &i);
 			if (!words[j])
-				return (free_all(words));
+				return (free_2d_arr(words));
 			j++;
 		}
 		while (string[i] && check_sep(string[i], seperator) == 0)
@@ -419,7 +419,7 @@ char	**ft_split_pipex(char const *string, char seperator)
 // 		printf("%s\n", result[i]);
 // 		i++;
 // 	}
-// 	free_all(result);
+// 	free_2d_arr(result);
 // }
 
 // int main(int argc, char *argv[], char *envp[])

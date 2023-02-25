@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 14:23:29 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/25 22:42:20 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/26 01:24:39 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,36 +19,6 @@
 #include <errno.h>
 #include <sys/wait.h>
 #include <sys/types.h>
-
-typedef enum pipex_error
-{
-	NO_ERROR,
-	ARGUMENT_ERROR,
-	OPEN_ERROR,
-	FORK_ERROR,
-	DUP2_ERROR,
-	EXECVE_ERROR,
-}	t_pipex_error;
-
-typedef enum pipex_status
-{
-	PIPE_READ,
-	PIPE_WRITE,
-}	t_pipex_status;
-
-typedef struct s_pipex
-{
-	int		fd_infile;
-	int		fd_outfile;
-	int		pipe[2];
-	char	**cmd1_args;
-	char	**cmd2_args;
-	char	**envp_args;
-	char	**path_args;
-	char	*cmd1_path;
-	char	*cmd2_path;
-	pid_t	pid;
-}			t_pipex;
 
 char	**get_path_args(char *envp[])
 {
@@ -146,19 +116,19 @@ void	parent_process(t_pipex *pipex)
 	close(pipex->pipe[PIPE_WRITE]);
 	if (dup2(pipex->pipe[PIPE_READ], STDIN_FILENO) == -1)
 	{
-		ft_putstr_fd(strerror(errno), 2);
+		perror("dup2");
 		exit(1);
 	}
 	if (dup2(pipex->fd_outfile, STDOUT_FILENO) == -1)
 	{
-		perror("dup2 fail");
+		perror("dup2");
 		exit(1);
 	}
 	close(pipex->pipe[PIPE_READ]);
 	close(pipex->fd_outfile);
 	if (execve(pipex->cmd2_path, pipex->cmd2_args, pipex->envp_args) == -1)
 	{
-		perror("command not found");
+		perror("execve: ");
 		exit(127);
 	}
 }
@@ -172,22 +142,21 @@ void	child_process(t_pipex *pipex)
 		exit(1);
 	if (pipex->cmd1_path == NULL)
 		exit(127);
-
 	if (dup2(pipex->fd_infile, STDIN_FILENO) == -1)
 	{
-		perror("dup2 fail");
+		perror("dup2");
 		exit(1);
 	}
 	if (dup2(pipex->pipe[PIPE_WRITE], STDOUT_FILENO) == -1)
 	{
-		perror("dup2 fail");
+		perror("dup2");
 		exit(1);
 	}
 	close(pipex->pipe[PIPE_WRITE]);
 	close(pipex->fd_infile);
 	if (execve(pipex->cmd1_path, pipex->cmd1_args, pipex->envp_args) == -1)
 	{
-		perror("command not found");
+		perror("execve: ");
 		exit(127);
 	}
 }
@@ -207,8 +176,11 @@ void	free_cmd(char **cmd)
 
 void	free_pipex(t_pipex *pipex)
 {
-	free_cmd(pipex->cmd1_args);
-	free_cmd(pipex->cmd2_args);
+	free_2d_arr(pipex->cmd1_args);
+	free_2d_arr(pipex->cmd2_args);
+	free_2d_arr(pipex->path_args);
+	free(pipex->cmd1_path);
+	free(pipex->cmd2_path);
 	free(pipex);
 }
 
@@ -216,7 +188,7 @@ void	error_no_cmd(t_pipex *pipex)
 {
 	if (pipex->cmd1_args == NULL || pipex->cmd2_args == NULL)
 	{
-		perror("command not found");
+		perror("pipex: ");
 		exit(127);
 	}
 }
@@ -248,17 +220,21 @@ void	error_no_infile(t_pipex *pipex, char *argv[])
 		ft_putstr_fd("pipex: ", 2);
 		ft_putstr_fd(argv[1], 2);
 		ft_putstr_fd(": ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n", 2);
+		perror(NULL);
 	}
 }
 
 void	error_no_outfile(t_pipex *pipex, char *argv[])
 {
+	// if (pipex->fd_outfile == -1)
+	// 	perror("pipex: ");
+	
 	if (pipex->fd_outfile == -1)
 	{
-		ft_putstr_fd(strerror(errno), 2);
-		perror("pipex:");
+		ft_putstr_fd("pipex: ", 2);
+		ft_putstr_fd(argv[4], 2);
+		ft_putstr_fd(": ", 2);
+		perror(NULL);
 	}
 }
 
@@ -266,19 +242,18 @@ void	error_no_pipe(t_pipex *pipex)
 {
 	if (pipe(pipex->pipe) == -1)
 	{
-		ft_putstr_fd(strerror(errno), 2);
-		perror("pipex:");
+		perror("pipex: ");
 		exit (1);
 	}
 }
 
 void	error_handle(t_pipex *pipex, char *argv[])
 {
+	error_no_infile(pipex, argv);
+	error_no_outfile(pipex, argv);
 	error_no_cmd(pipex);
 	error_no_cmd1_path(pipex, argv);
 	error_no_cmd2_path(pipex, argv);
-	error_no_infile(pipex, argv);
-	error_no_outfile(pipex, argv);
 	error_no_pipe(pipex);
 }
 

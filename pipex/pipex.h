@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/23 22:04:50 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/26 00:23:56 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,35 +15,45 @@
 
 /* to write, read, close, access, pipe, dup, dup2, execve, fork */
 # include <unistd.h>
-# include <sys/types.h>
-# include <sys/uio.h>
-
 /* malloc, free, exit */
 # include <stdlib.h>
-
 /* open, unlink */
 # include <fcntl.h>
-
 /* waitpid, wait */
 # include <sys/wait.h>
-
-/* strerror */
-# include <string.h>
-
-/*to perror*/
+/*for perror*/
 # include <stdio.h>
-
-/* to get_next_line */
-
+//libft, ft_printf, get_next_line
 # include "libft.h"
 # include "ft_printf.h"
 # include "get_next_line.h"
 
+//typedefs
+typedef enum pipex_status
+{
+	PIPE_READ,
+	PIPE_WRITE,
+}	t_pipex_status;
+
+typedef struct s_pipex
+{
+	int		fd_infile;
+	int		fd_outfile;
+	int		pipe[2];
+	char	**cmd1_args;
+	char	**cmd2_args;
+	char	**envp_args;
+	char	**path_args;
+	char	*cmd1_path;
+	char	*cmd2_path;
+	pid_t	pid;
+}			t_pipex;
+
 //ft_split_pipex function
 size_t      ft_strlcpy_pipex(char *dst, const char *src, size_t dstsize);
-size_t      ft_strlcpy_pipex_quote(char *dst, const char *src, size_t *i, size_t *j);
+size_t      ft_strlcpy_quote(char *dst, const char *src, size_t *i, size_t *j);
 int         skip_quoted_string(char const *string, int i);
-char	    **free_all(char **words);
+char	    **free_2d_arr(char **words);
 int	        count_words(char const *string, char c);
 int	        check_sep(char c, char sep);
 int         skip_quoted_string(char const *string, int i);
