@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 14:23:29 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/23 22:32:12 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/25 22:38:35 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,7 +161,7 @@ void	parent_process(t_pipex *pipex)
 	close(pipex->fd_outfile);
 	if (execve(pipex->cmd2_path, pipex->cmd2_args, pipex->envp_args) == -1)
 	{
-		//perror("command not found");
+		perror("command not found");
 		exit(127);
 	}
 	// execvp(pipex->cmd2_args[0], pipex->cmd2_args);
@@ -192,7 +192,7 @@ void	child_process(t_pipex *pipex)
 	close(pipex->fd_infile);
 	if (execve(pipex->cmd1_path, pipex->cmd1_args, pipex->envp_args) == -1)
 	{
-		//perror("command not found");
+		perror("command not found");
 		exit(127);
 	}
 	// execvp(pipex->cmd1_args[0], pipex->cmd1_args);
@@ -218,25 +218,37 @@ void	free_pipex(t_pipex *pipex)
 	free(pipex);
 }
 
-void	error_handle(t_pipex *pipex, char *argv[])
+void	error_no_cmd(t_pipex *pipex)
 {
 	if (pipex->cmd1_args == NULL || pipex->cmd2_args == NULL)
 	{
 		perror("command not found");
 		exit(127);
 	}
+}
+
+void	error_no_cmd1_path(t_pipex *pipex, char *argv[])
+{
 	if (pipex->cmd1_path == NULL)
 	{
 		ft_putstr_fd("pipex: ", 2);
 		ft_putstr_fd(argv[2], 2);
 		ft_putstr_fd(": command not found\n", 2);
 	}
+}
+
+void	error_no_cmd2_path(t_pipex *pipex, char *argv[])
+{
 	if (pipex->cmd2_path == NULL)
 	{
 		ft_putstr_fd("pipex: ", 2);
 		ft_putstr_fd(argv[3], 2);
 		ft_putstr_fd(": command not found\n", 2);
 	}
+}
+
+void	error_no_infile(t_pipex *pipex, char *argv[])
+{
 	if (pipex->fd_infile == -1)
 	{
 		ft_putstr_fd("pipex: ", 2);
@@ -245,18 +257,35 @@ void	error_handle(t_pipex *pipex, char *argv[])
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
 	}
+}
+
+void	error_no_outfile(t_pipex *pipex, char *argv[])
+{
 	if (pipex->fd_outfile == -1)
 	{
 		ft_putstr_fd(strerror(errno), 2);
 		perror("pipex:");
-		// exit (1);
 	}
+}
+
+void	error_no_pipe(t_pipex *pipex)
+{
 	if (pipe(pipex->pipe) == -1)
 	{
 		ft_putstr_fd(strerror(errno), 2);
 		perror("pipex:");
 		exit (1);
 	}
+}
+
+void	error_handle(t_pipex *pipex, char *argv[])
+{
+	error_no_cmd(pipex);
+	error_no_cmd1_path(pipex, argv);
+	error_no_cmd2_path(pipex, argv);
+	error_no_infile(pipex, argv);
+	error_no_outfile(pipex, argv);
+	error_no_pipe(pipex);
 }
 
 int	main(int argc, char *argv[], char *envp[])
