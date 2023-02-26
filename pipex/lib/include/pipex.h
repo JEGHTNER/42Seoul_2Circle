@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/26 22:18:56 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/26 23:03:56 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ typedef struct s_pipex
 char		**get_path_args(char *envp[]);
 int			check_sh(char *cmd);
 char		*get_path(char *cmd, char **path_args);
-void		*init_pipex(t_pipex *pipex, char **argv, char *envp[]);
+void		init_pipex(t_pipex *pipex, char **argv, char *envp[]);
 
 //ft_split_pipex function
 size_t		ft_strlcpy_pipex(char *dst, const char *src, size_t dstsize);

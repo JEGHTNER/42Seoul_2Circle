@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:04:31 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/26 22:22:08 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/02/26 23:04:09 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*get_path(char *cmd, char **path_args)
 	return (NULL);
 }
 
-void	*init_pipex(t_pipex *pipex, char **argv, char *envp[])
+void	init_pipex(t_pipex *pipex, char **argv, char *envp[])
 {
 	pipex->fd_infile = open(argv[1], O_RDONLY);
 	pipex->fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
@@ -94,6 +94,5 @@ void	*init_pipex(t_pipex *pipex, char **argv, char *envp[])
 	pipex->path_args = get_path_args(envp);
 	pipex->cmd1_path = get_path(pipex->cmd1_args[0], pipex->path_args);
 	pipex->cmd2_path = get_path(pipex->cmd2_args[0], pipex->path_args);
-	return (pipex);
 }
 
