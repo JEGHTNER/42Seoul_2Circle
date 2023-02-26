@@ -6,53 +6,55 @@
 #    By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/01/07 16:31:23 by jehelee           #+#    #+#              #
-#    Updated: 2023/02/21 16:43:56 by jehelee          ###   ########.fr        #
+#    Updated: 2023/02/26 22:35:53 by jehelee          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
-
+NAME_BN = pipex_bonus
 
 INC_DIR		= ./lib/include/
 LIB_DIR		= ./lib/
 BN_DIR		= ./bonus/
+SRCS_DIR	= ./src/
 
-SRCS = main.c ft_split_pipex.c
+SRCS = error_utils.c error_utils2.c fork_utils.c free_utils.c init_pipex.c \
+		main.c ft_split_pipex_utils.c ft_split_pipex_utils2.c ft_split_pipex_utils_awk.c  \
+		ft_split_pipex.c 
+
 	   
 
-#SRCS_BN = ${BN_DIR}commands_bonus.c ${BN_DIR}parse_utils_bonus.c ${BN_DIR}error_utils_bonus.c \
-		  ${BN_DIR}stack_utils_bonus.c ${BN_DIR}check_sorted_bonus.c ${BN_DIR}checker.c
-	   
+#SRCS_BN = error_utils.c error_utils2.c fork_utils.c free_utils.c init_pipex.c \
+		main.c ft_split_pipex_utils.c ft_split_pipex_utils2.c ft_split_pipex_utils_awk.c  \
+		ft_split_pipex.c 
 
-
-OBJS = ${SRCS:%.c=%.o}
-#OBJS_BN = ${SRCS_BN:%.c=%.o}
-
+OBJS = $(addprefix $(SRCS_DIR)/, $(SRCS:.c=.o))
+OBJS_BN = $(addprefix $(BN_DIR)/, $(SRCS_BN:.c=.o))
 CC = cc
 CFLAGS = -Wextra -Werror -Wall
 
 #rules
 
 	
-all : ${NAME}
+all : libs ${NAME}
 
 %.o : %.c
 	$(CC) -c -o $@ $^ -g
 
-# libs:
-# 	make -C ./lib/
+libs:
+	make -C ./lib/
 
 ${NAME} : ${OBJS}
 	$(CC) -o $(NAME) ${OBJS} -L. -l_jehelee -g
 
 
 clean	:
-	# make -C ./lib/ clean
+	make -C ./lib/ clean
 	rm -rf $(OBJS)
 #	rm -rf $(OBJS_BN)
 
 fclean	: 
-	# make -C ./lib/ fclean
+	make -C ./lib/ fclean
 	rm -rf $(OBJS)
 #	rm -rf $(OBJS_BN)
 	rm -rf	$(NAME)

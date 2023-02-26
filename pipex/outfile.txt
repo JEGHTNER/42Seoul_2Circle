@@ -1,1 +1,5 @@
-count: 1
+Teste file with stuff inside
+That does nothing
+And also have some lines
+Some more text
+Some more text
