@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_split_pipex_utils_awk.c                         :+:      :+:    :+:   */
+/*   ft_split_pipex_utils_awk_bonus.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:26:45 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/26 22:22:08 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/01 14:06:44 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/include/pipex.h"
+#include "../lib/include/pipex_bonus.h"
 
 int	check_awk(char const *string)
 {

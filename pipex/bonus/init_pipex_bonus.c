@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_pipex.c                                       :+:      :+:    :+:   */
+/*   init_pipex_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:04:31 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/26 22:22:08 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/01 15:57:09 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/include/pipex.h"
+#include "../lib/include/pipex_bonus.h"
 
 char	**get_path_args(char *envp[])
 {
@@ -84,16 +84,16 @@ char	*get_path(char *cmd, char **path_args)
 	return (NULL);
 }
 
-void	*init_pipex(t_pipex *pipex, char **argv, char *envp[])
+void	init_pipex(t_pipex *pipex, int argc, char **argv, char *envp[])
 {
 	pipex->fd_infile = open(argv[1], O_RDONLY);
-	pipex->fd_outfile = open(argv[4], O_WRONLY | O_CREAT | O_TRUNC, 0644);
+	pipex->fd_outfile = open(argv[argc - 1], \
+	O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	pipex->cmd1_args = ft_split_pipex(argv[2], ' ');
 	pipex->cmd2_args = ft_split_pipex(argv[3], ' ');
 	pipex->envp_args = envp;
 	pipex->path_args = get_path_args(envp);
 	pipex->cmd1_path = get_path(pipex->cmd1_args[0], pipex->path_args);
 	pipex->cmd2_path = get_path(pipex->cmd2_args[0], pipex->path_args);
-	return (pipex);
 }
 

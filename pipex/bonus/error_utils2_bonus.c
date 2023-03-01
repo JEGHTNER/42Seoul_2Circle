@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_utils2.c                                     :+:      :+:    :+:   */
+/*   error_utils2_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:09:33 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/26 22:22:08 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/01 14:06:34 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/include/pipex.h"
+#include "../lib/include/pipex_bonus.h"
 
 void	error_no_outfile(t_pipex *pipex, char *argv[])
 {

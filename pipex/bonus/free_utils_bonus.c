@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_utils.c                                       :+:      :+:    :+:   */
+/*   free_utils_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:10:36 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/26 22:22:08 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/01 14:06:39 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../lib/include/pipex.h"
+#include "../lib/include/pipex_bonus.h"
 
 void	free_pipex(t_pipex *pipex)
 {
