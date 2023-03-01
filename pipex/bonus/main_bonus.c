@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 14:23:29 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/01 15:55:17 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/02 01:13:12 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,20 @@
 int	main(int argc, char *argv[], char *envp[])
 {
 	t_pipex	*pipex;
-	pid_t	pid;
-	int		pipe_fd[2];
+	// pid_t	pid;
+	// int		pipe_fd[2];
 	int		i;
 
+	if (argc < 5)
+	{
+		ft_putstr_fd("usage: ./pipex infile cmd1 cmd2 ... outfile\n", 2);
+		exit (EXIT_FAILURE);
+	}
 	pipex = malloc(sizeof(t_pipex));
 	if (!pipex)
 		exit (EXIT_FAILURE);
+	i = is_here_doc(pipex, argv[1]);
 	init_pipex(pipex, argc, argv, envp);
-	i = 1;
 	while (++i < argc - 1)
 	{
 		if (pipe(pipex->pipe) == -1)
@@ -33,16 +38,17 @@ int	main(int argc, char *argv[], char *envp[])
 			perror(NULL);
 		else if (pipex->pid == 0)
 		{
-			if (i == 2)
-				first_child_process(pipex, argc, argv[i]);
-			else if (i == argc - 2)
-				last_child_process(pipex, argc, argv[i]);
-			else
-				child_process(pipex, argc, argv[i]);
+			if (i == 2 || (pipex->here_doc_flag && i == 3))
+				first_child_process(pipex, argv);
+			if (i == argc - 2)
+				last_child_process(pipex, argv[i]);
+			child_process(pipex, argv[i]);
 		}
 		else
-			parent_process(pipex, argc, argv[i]);
+			parent_process(pipex);
 	}
+	while (wait(NULL) > 0)
+		;
 	free_pipex(pipex);
 	return (0);
 }

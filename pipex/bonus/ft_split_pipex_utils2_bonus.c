@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:19:24 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/01 14:06:49 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/01 20:03:16 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ char	**case_sh(const char *string)
 	i = 0;
 	while (ft_isspace(string[i]))
 		i++;
-	while (string[i] && i < ft_strlen(string) - 2)
+	while (string[i] && i < (int)ft_strlen(string) - 2)
 	{
 		if (string[i] == '.' && string[i + 1] == 's' && string[i + 2] == 'h')
 		{

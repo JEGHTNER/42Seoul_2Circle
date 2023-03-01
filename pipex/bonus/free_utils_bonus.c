@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:10:36 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/01 14:06:39 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/02 00:38:27 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,7 @@
 
 void	free_pipex(t_pipex *pipex)
 {
-	free_2d_arr(pipex->cmd1_args);
-	free_2d_arr(pipex->cmd2_args);
 	free_2d_arr(pipex->path_args);
-	free(pipex->cmd1_path);
-	free(pipex->cmd2_path);
 	free(pipex);
 }
 
@@ -26,6 +22,8 @@ char	**free_2d_arr(char **words)
 {
 	int	i;
 
+	if (!words)
+		return (NULL);
 	i = 0;
 	while (words[i])
 	{

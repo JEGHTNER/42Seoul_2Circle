@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:04:31 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/01 15:57:09 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/02 00:55:03 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	check_sh(char *cmd)
 {
 	int		cmd_len;
 	int		i;
-	char	*tmp;
 
 	cmd_len = ft_strlen(cmd);
 	i = -1;
@@ -87,13 +86,20 @@ char	*get_path(char *cmd, char **path_args)
 void	init_pipex(t_pipex *pipex, int argc, char **argv, char *envp[])
 {
 	pipex->fd_infile = open(argv[1], O_RDONLY);
-	pipex->fd_outfile = open(argv[argc - 1], \
-	O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	pipex->cmd1_args = ft_split_pipex(argv[2], ' ');
-	pipex->cmd2_args = ft_split_pipex(argv[3], ' ');
+	if (pipex->here_doc_flag)
+		pipex->fd_outfile = open(argv[argc - 1], \
+		O_WRONLY | O_CREAT | O_APPEND, 0644);
+	else
+		pipex->fd_outfile = open(argv[argc - 1], \
+		O_WRONLY | O_CREAT | O_TRUNC, 0644);
 	pipex->envp_args = envp;
 	pipex->path_args = get_path_args(envp);
-	pipex->cmd1_path = get_path(pipex->cmd1_args[0], pipex->path_args);
-	pipex->cmd2_path = get_path(pipex->cmd2_args[0], pipex->path_args);
+	if (pipex->here_doc_flag)
+	{
+		pipex->limiter = ft_strjoin(argv[2], "\n");
+		if (!pipex->limiter)
+			exit(1);
+	}
+	else
+		pipex->limiter = NULL;
 }
-
