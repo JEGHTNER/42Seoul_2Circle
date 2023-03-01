@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 14:23:29 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/26 22:59:15 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/01 21:35:15 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	main(int argc, char *argv[], char *envp[])
 		child_process(pipex);
 	else
 		parent_process(pipex);
+	// waitpid(pipex->pid, NULL, WNOHANG);
 	free_pipex(pipex);
 	return (0);
 }

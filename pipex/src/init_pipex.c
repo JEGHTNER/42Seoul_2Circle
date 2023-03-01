@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:04:31 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/26 23:04:09 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/01 16:40:22 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	check_sh(char *cmd)
 {
 	int		cmd_len;
 	int		i;
-	char	*tmp;
 
 	cmd_len = ft_strlen(cmd);
 	i = -1;
@@ -69,8 +68,6 @@ char	*get_path(char *cmd, char **path_args)
 	i = 0;
 	while (path_args[i])
 	{
-		if (check_sh(cmd))
-			return (ft_strdup("/bin/sh"));
 		tmp = ft_strjoin(path_args[i], "/");
 		if (!tmp)
 			return (NULL);

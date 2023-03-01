@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:26:45 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/26 22:22:08 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/01 16:42:12 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 int	check_awk(char const *string)
 {
 	int	i;
-	int	str_len;
 
 	if (!string)
 		return (0);
 	i = 0;
 	while (ft_isspace(string[i]))
 		i++;
-	while (string[i] && i < ft_strlen(string) - 3)
+	while (string[i] && i < (int)ft_strlen(string) - 3)
 	{
 		if (string[i] == 'a' && string[i + 1] == 'w' && string[i + 2] == 'k')
 			return (AWK);
@@ -42,7 +41,8 @@ char	*make_awk(const char *string, int *i)
 {
 	char	*line;
 
-	while (string[(*i)] && (*i) < ft_strlen(string) - 3)
+	line = NULL;
+	while (string[(*i)] && (*i) < (int)ft_strlen(string) - 3)
 	{
 		if (string[(*i)] == 'a' && string[(*i) + 1] == 'w' \
 		&& string[(*i) + 2] == 'k')
@@ -61,7 +61,6 @@ char	*make_awk(const char *string, int *i)
 char	*quote_line(char const *string, int i, int str_len, char quote)
 {
 	char	*line;
-	int		j;
 
 	while (str_len > 0 && str_len > i)
 	{
@@ -85,7 +84,6 @@ char	*make_quote_line(char const *string)
 	int		i;
 	int		str_len;
 	char	quote;
-	char	*line;
 
 	str_len = ft_strlen(string) - 1;
 	i = 0;
