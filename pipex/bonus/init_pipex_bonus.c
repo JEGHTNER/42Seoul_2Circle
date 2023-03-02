@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:04:31 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/02 20:19:45 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/02 20:31:53 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,4 @@ void	init_pipex(t_pipex *pipex, int argc, char **argv, char *envp[])
 	}
 	else
 		pipex->limiter = NULL;
-	if (!pipex->pid_list)
-		exit(1);
 }
