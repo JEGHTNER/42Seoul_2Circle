@@ -6,15 +6,30 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:10:36 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/02 00:38:27 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/02 20:19:00 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/include/pipex_bonus.h"
 
+void	ft_lstfree(t_list *lst)
+{
+	t_list	*tmp;
+
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		tmp = lst->next;
+		free(lst);
+		lst = tmp;
+	}
+}
+
 void	free_pipex(t_pipex *pipex)
 {
 	free_2d_arr(pipex->path_args);
+	free(pipex->limiter);
 	free(pipex);
 }
 

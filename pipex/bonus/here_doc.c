@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 22:10:22 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/02 01:28:30 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/02 16:35:39 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	here_doc(char *limiter)
 	{
 		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
 		line = get_next_line(STDIN_FILENO);
-		if (!line || ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
+		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 		{
 			free(line);
 			break ;
@@ -45,7 +45,7 @@ void	here_doc(char *limiter)
 
 int	is_here_doc(t_pipex *pipex, char *argv_i)
 {
-	if (ft_strncmp(argv_i, "here_doc", 8) == 0)
+	if (ft_strncmp(argv_i, "here_doc", 8) == 0 && ft_strlen(argv_i) == 8)
 	{
 		pipex->here_doc_flag = 1;
 		return (2);

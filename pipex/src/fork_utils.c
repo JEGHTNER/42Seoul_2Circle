@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:07:24 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/01 16:40:15 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/02 17:36:46 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	parent_process(t_pipex *pipex)
 {
-	waitpid(pipex->pid, NULL, WNOHANG);
 	if (pipex->cmd2_path == NULL)
 		exit(127);
 	close(pipex->pipe[PIPE_WRITE]);
