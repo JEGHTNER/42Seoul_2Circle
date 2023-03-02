@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 14:23:29 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/02 20:47:29 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/02 21:04:21 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,7 @@ void	check_leaks(void)
 
 int	main(int argc, char *argv[], char *envp[])
 {
-	// atexit(check_leaks);
 	t_pipex	*pipex;
-	int		i;
 	int		status;
 	t_list	*pid_list;
 
@@ -34,13 +32,28 @@ int	main(int argc, char *argv[], char *envp[])
 	pipex = malloc(sizeof(t_pipex));
 	if (!pipex)
 		exit (EXIT_FAILURE);
-	i = is_here_doc(pipex, argv[1]);
+	is_here_doc(pipex, argv[1]);
 	init_pipex(pipex, argc, argv, envp);
 	error_handle(pipex, argv, argc);
+	multi_pipe(pipex, argc, argv, pid_list);
+	status = wait_func(pid_list);
+	free_pipex(pipex);
+	return (status);
+}
+
+void	multi_pipe(t_pipex *pipex, int argc, char *argv[], t_list *pid_list)
+{
+	int		pipe_fd[2];
+	int		i;
+
+	if (pipex->here_doc_flag)
+		i = 2;
+	else
+		i = 1;
 	while (++i < argc - 1)
 	{
 		error_no_pipe(pipex);
-		if (pipe(pipex->pipe) == -1)
+		if (pipe(pipe_fd) == -1)
 			perror(NULL);
 		pipex->pid = fork();
 		if (pipex->pid == -1)
@@ -59,7 +72,4 @@ int	main(int argc, char *argv[], char *envp[])
 			parent_process(pipex);
 		}
 	}
-	status = wait_func(pid_list);
-	free_pipex(pipex);
-	return (status);
 }
