@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/26 22:33:49 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/02 19:48:33 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,20 +46,23 @@ typedef struct s_pipex
 	int		fd_infile;
 	int		fd_outfile;
 	int		pipe[2];
-	char	**cmd1_args;
-	char	**cmd2_args;
+	int		here_doc_flag;
+	char	*limiter;
 	char	**envp_args;
 	char	**path_args;
-	char	*cmd1_path;
-	char	*cmd2_path;
+	t_list	*pid_list;
 	pid_t	pid;
 }			t_pipex;
+
+//here_doc functions
+void		here_doc(char *limiter);
+int			is_here_doc(t_pipex *pipex, char *argv_i);
 
 //init_pipex functions
 char		**get_path_args(char *envp[]);
 int			check_sh(char *cmd);
 char		*get_path(char *cmd, char **path_args);
-void		*init_pipex(t_pipex *pipex, char **argv, char *envp[]);
+void		init_pipex(t_pipex *pipex, int argc, char **argv, char *envp[]);
 
 //ft_split_pipex function
 size_t		ft_strlcpy_pipex(char *dst, const char *src, size_t dstsize);
@@ -82,20 +85,23 @@ char		*make_string(char const *string, char seperator, int *i);
 
 //fork function
 void		parent_process(t_pipex *pipex);
-void		child_process(t_pipex *pipex);
+void		child_process(t_pipex *pipex, char *argv_i);
+void		first_child_process(t_pipex *pipex, char **argv);
+void		last_child_process(t_pipex *pipex, char *argv_i);
 
 //error_utils
-void		error_handle(t_pipex *pipex, char *argv[]);
-void		error_no_cmd(t_pipex *pipex);
-void		error_no_cmd1_path(t_pipex *pipex, char *argv[]);
-void		error_no_cmd2_path(t_pipex *pipex, char *argv[]);
+void		error_handle(t_pipex *pipex, char *argv[], int argc);
+void		error_no_cmd(char **cmd_args, char *argv_i);
+void		error_no_cmd_path(char *c_path, char *av[], int i);
 void		error_no_infile(t_pipex *pipex, char *argv[]);
 void		error_no_pipe(t_pipex *pipex);
-void		error_no_outfile(t_pipex *pipex, char *argv[]);
+void		error_no_outfile(t_pipex *pipex, char *argv[], int argc);
 
 //free functions
 void		free_pipex(t_pipex *pipex);
 char		**free_2d_arr(char **words);
+void		ft_lstfree(t_list *lst);
+int			wait_func(t_list *pid_list);
 
 
 
