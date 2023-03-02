@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 14:23:29 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/02 20:31:03 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/02 20:47:29 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,19 +62,4 @@ int	main(int argc, char *argv[], char *envp[])
 	status = wait_func(pid_list);
 	free_pipex(pipex);
 	return (status);
-}
-
-int	wait_func(t_list *pid_list)
-{
-	int		status;
-	t_list	*tmp;
-
-	tmp = pid_list->next;
-	while (tmp)
-	{
-		waitpid(tmp->content, &status, 0);
-		tmp = tmp->next;
-	}
-	ft_lstfree(pid_list);
-	return ((((*(int *)&(status)) >> 8) & 0x000000ff));
 }

@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/02 19:48:33 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/02 20:48:38 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void		parent_process(t_pipex *pipex);
 void		child_process(t_pipex *pipex, char *argv_i);
 void		first_child_process(t_pipex *pipex, char **argv);
 void		last_child_process(t_pipex *pipex, char *argv_i);
+int			wait_func(t_list *pid_list);
 
 //error_utils
 void		error_handle(t_pipex *pipex, char *argv[], int argc);
@@ -101,7 +102,7 @@ void		error_no_outfile(t_pipex *pipex, char *argv[], int argc);
 void		free_pipex(t_pipex *pipex);
 char		**free_2d_arr(char **words);
 void		ft_lstfree(t_list *lst);
-int			wait_func(t_list *pid_list);
+
 
 
 
