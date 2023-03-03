@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/02 20:48:38 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/03 18:09:41 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,10 @@ char		*make_string(char const *string, char seperator, int *i);
 void		parent_process(t_pipex *pipex);
 void		child_process(t_pipex *pipex, char *argv_i);
 void		first_child_process(t_pipex *pipex, char **argv);
-void		last_child_process(t_pipex *pipex, char *argv_i);
+void		last_child_process(t_pipex *pipex, char **argv, int i);
 int			wait_func(t_list *pid_list);
+void		multi_pipe(t_pipex *pipex, int argc, char *argv[], t_list *pid_list);
+
 
 //error_utils
 void		error_handle(t_pipex *pipex, char *argv[], int argc);
