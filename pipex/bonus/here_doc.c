@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 22:10:22 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/02 16:35:39 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/04 01:27:32 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	here_doc(char *limiter)
 		perror("here_doc");
 	while (1)
 	{
-		ft_putstr_fd("heredoc> ", STDOUT_FILENO);
+		ft_putstr_fd("here_doc> ", STDOUT_FILENO);
 		line = get_next_line(STDIN_FILENO);
 		if (ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 		{

@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:47:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/02 20:48:04 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/03 23:55:46 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,14 @@ int	wait_func(t_list *pid_list)
 	}
 	ft_lstfree(pid_list);
 	return ((((*(int *)&(status)) >> 8) & 0x000000ff));
+}
+
+int	check_heredoc(t_pipex *pipex)
+{
+	int	i;
+
+	i = 1;
+	if (pipex->here_doc_flag)
+		i = 2;
+	return (i);
 }
