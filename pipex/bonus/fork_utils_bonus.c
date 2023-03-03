@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:07:24 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/02 17:17:58 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/03 18:17:00 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,15 +71,14 @@ void	first_child_process(t_pipex *pipex, char **argv)
 		}
 		close(pipex->fd_infile);
 	}
-	cmd_args = ft_split_pipex(argv[i], ' ');
-	cmd_path = get_path(cmd_args[0], pipex->path_args);
-	if (cmd_path == NULL)
-		exit(127);
 	if (dup2(pipex->pipe[PIPE_WRITE], STDOUT_FILENO) == -1)
 	{
 		perror("dup2");
 		exit(1);
 	}
+	cmd_args = ft_split_pipex(argv[i], ' ');
+	cmd_path = get_path(cmd_args[0], pipex->path_args);
+	error_no_cmd_path(cmd_path, argv, i);
 	close(pipex->pipe[PIPE_WRITE]);
 	if (execve(cmd_path, cmd_args, pipex->envp_args) == -1)
 	{
@@ -88,15 +87,14 @@ void	first_child_process(t_pipex *pipex, char **argv)
 	}
 }
 
-void	last_child_process(t_pipex *pipex, char *argv_i)
+void	last_child_process(t_pipex *pipex, char **argv, int i)
 {
 	char	**cmd_args;
 	char	*cmd_path;
 
-	cmd_args = ft_split_pipex(argv_i, ' ');
+	cmd_args = ft_split_pipex(argv[i], ' ');
 	cmd_path = get_path(cmd_args[0], pipex->path_args);
-	if (cmd_path == NULL)
-		exit(127);
+	error_no_cmd_path(cmd_path, argv, i);
 	close(pipex->pipe[PIPE_WRITE]);
 	if (dup2(pipex->fd_outfile, STDOUT_FILENO) == -1)
 	{
