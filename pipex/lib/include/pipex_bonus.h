@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/03 18:09:41 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/04 13:44:15 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,7 @@ typedef struct s_pipex
 
 //here_doc functions
 void		here_doc(char *limiter);
+void		here_doc_tmp(char *limiter);
 int			is_here_doc(t_pipex *pipex, char *argv_i);
 
 //init_pipex functions
@@ -84,13 +85,16 @@ int			find_len(char const *string, int len, char seperator);
 char		*make_string(char const *string, char seperator, int *i);
 
 //fork function
-void		parent_process(t_pipex *pipex);
-void		child_process(t_pipex *pipex, char *argv_i);
-void		first_child_process(t_pipex *pipex, char **argv);
-void		last_child_process(t_pipex *pipex, char **argv, int i);
+void		parent_process(int pipe_fd[2], t_list *pid_list, t_pipex *pipex);
+void		child_process(t_pipex *pipex, char *argv_i, int pipe_fd[2]);
+void		first_child_process(t_pipex *pipex, int ac, char **av, int pipe[2]);
+void		first_child_heredoc(t_pipex *pipex, int ac, char **av);
+void		first_child_infile(t_pipex *pipex, int *i);
+void		last_child_process(t_pipex *pipex, char **av, int i, int pipe[2]);
 int			wait_func(t_list *pid_list);
-void		multi_pipe(t_pipex *pipex, int argc, char *argv[], t_list *pid_list);
-
+void		multi_pipe(t_pipex *pipex, int argc, char *argv[], t_list *p_list);
+int			check_heredoc(t_pipex *pipex);
+int			ft_w_exit_status(int status);
 
 //error_utils
 void		error_handle(t_pipex *pipex, char *argv[], int argc);
@@ -104,8 +108,6 @@ void		error_no_outfile(t_pipex *pipex, char *argv[], int argc);
 void		free_pipex(t_pipex *pipex);
 char		**free_2d_arr(char **words);
 void		ft_lstfree(t_list *lst);
-
-
-
+int			ft_w_exit_status(int status);
 
 #endif
