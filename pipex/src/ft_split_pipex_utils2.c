@@ -6,11 +6,11 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 18:19:24 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/01 16:41:10 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/04 14:00:09 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include"../lib/include/pipex.h"
+#include "../lib/include/pipex.h"
 
 char	**case_awk(const char *string)
 {

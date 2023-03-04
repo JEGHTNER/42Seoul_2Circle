@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:24:19 by jehelee           #+#    #+#             */
-/*   Updated: 2023/02/28 22:16:48 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/04 14:00:11 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ size_t	ft_strlcpy_quote(char *dst, const char *src, size_t *i, size_t *j)
 	return (*i);
 }
 
-char **ft_split_norm(char const *string, char seperator)
+char	**ft_split_norm(char const *string, char seperator)
 {
 	int		i;
 	int		j;
