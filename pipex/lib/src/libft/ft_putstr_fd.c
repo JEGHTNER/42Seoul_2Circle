@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/23 18:06:49 by jehelee           #+#    #+#             */
-/*   Updated: 2023/01/07 19:17:11 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/04 19:24:57 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_putstr_fd(char *string, int file_descriptor)
 	int	i;
 
 	i = 0;
+	if (!string)
+		return ;
 	if (file_descriptor < 0)
 		return ;
 	while (string[i])
