@@ -6,13 +6,13 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 22:10:22 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/04 01:27:32 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/04 12:55:34 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/include/pipex_bonus.h"
 
-void	here_doc(char *limiter)
+void	here_doc_tmp(char *limiter)
 {
 	int		fd;
 	char	*line;
@@ -33,6 +33,13 @@ void	here_doc(char *limiter)
 		free(line);
 	}
 	close(fd);
+}
+
+void	here_doc(char *limiter)
+{
+	int		fd;
+
+	here_doc_tmp(limiter);
 	fd = open("tmp_here_doc.txt", O_RDONLY);
 	if (fd == -1)
 	{
