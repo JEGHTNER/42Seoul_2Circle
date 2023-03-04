@@ -6,16 +6,11 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 14:23:29 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/04 01:26:29 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/05 01:33:38 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../lib/include/pipex_bonus.h"
-
-void	check_leaks(void)
-{
-	system("leaks pipex");
-}
 
 int	main(int argc, char *argv[], char *envp[])
 {

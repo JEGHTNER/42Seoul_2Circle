@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/02 20:47:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/04 13:38:55 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/05 00:47:45 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,37 +45,35 @@ int	check_heredoc(t_pipex *pipex)
 	return (i);
 }
 
-void	first_child_heredoc(t_pipex *pipex, int ac, char **av)
+void	run_single_cmd(t_pipex *pipex, char **av, int i)
 {
 	char	**cmd_args;
 	char	*cmd_path;
-	int		i;
 
-	i = 3;
-	here_doc(pipex->limiter);
-	free(pipex->limiter);
-	if (ac == 5)
+	cmd_args = ft_split_pipex(av[i], ' ');
+	cmd_path = get_path(cmd_args[0], pipex->path_args);
+	error_no_cmd_path(cmd_path, av, i);
+	if (dup2(pipex->fd_outfile, STDOUT_FILENO) == -1)
 	{
-		cmd_args = ft_split_pipex(av[i], ' ');
-		cmd_path = get_path(cmd_args[0], pipex->path_args);
-		error_no_cmd_path(cmd_path, av, i);
-		if (dup2(pipex->fd_outfile, STDOUT_FILENO) == -1)
-		{
-			perror("dup2");
-			exit(1);
-		}
-		close(pipex->fd_outfile);
-		if (execve(cmd_path, cmd_args, pipex->envp_args) == -1)
-		{
-			perror("execve_1cmd");
-			exit(127);
-		}
+		perror("dup2");
+		exit(1);
+	}
+	close(pipex->fd_outfile);
+	if (execve(cmd_path, cmd_args, pipex->envp_args) == -1)
+	{
+		perror("execve_single_cmd");
+		exit(127);
 	}
 }
 
-void	first_child_infile(t_pipex *pipex, int *i)
+void	run_child_with_input(t_pipex *pipex, int i, int pipe_fd[2], char **av)
 {
-	*i = 2;
+	char	**cmd_args;
+	char	*cmd_path;
+
+	cmd_args = ft_split_pipex(av[i], ' ');
+	cmd_path = get_path(cmd_args[0], pipex->path_args);
+	error_no_cmd_path(cmd_path, av, i);
 	if (pipex->fd_infile == -1)
 		exit(1);
 	if (dup2(pipex->fd_infile, STDIN_FILENO) == -1)
@@ -84,4 +82,15 @@ void	first_child_infile(t_pipex *pipex, int *i)
 		exit(1);
 	}
 	close(pipex->fd_infile);
+	if (dup2(pipe_fd[PIPE_WRITE], STDOUT_FILENO) == -1)
+	{
+		perror("dup2");
+		exit(1);
+	}
+	close(pipe_fd[PIPE_WRITE]);
+	if (execve(cmd_path, cmd_args, pipex->envp_args) == -1)
+	{
+		perror("execve_child_with_input");
+		exit(127);
+	}
 }

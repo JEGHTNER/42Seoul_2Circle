@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/01 22:10:22 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/04 12:55:34 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/05 00:25:53 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	here_doc(char *limiter)
 
 int	is_here_doc(t_pipex *pipex, char *argv_i)
 {
+	pipex->here_doc_flag = 0;
 	if (ft_strncmp(argv_i, "here_doc", 8) == 0 && ft_strlen(argv_i) == 8)
 	{
 		pipex->here_doc_flag = 1;

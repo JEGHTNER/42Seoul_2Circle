@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/22 20:16:51 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/04 13:44:15 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/05 00:43:22 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,10 +86,10 @@ char		*make_string(char const *string, char seperator, int *i);
 
 //fork function
 void		parent_process(int pipe_fd[2], t_list *pid_list, t_pipex *pipex);
-void		child_process(t_pipex *pipex, char *argv_i, int pipe_fd[2]);
+void		child_process(t_pipex *pipex, char **argv, int i, int pipe_fd[2]);
 void		first_child_process(t_pipex *pipex, int ac, char **av, int pipe[2]);
-void		first_child_heredoc(t_pipex *pipex, int ac, char **av);
-void		first_child_infile(t_pipex *pipex, int *i);
+void		run_single_cmd(t_pipex *pipex, char **av, int i);
+void		run_child_with_input(t_pipex *pipex, int i, int pipe[2], char **av);
 void		last_child_process(t_pipex *pipex, char **av, int i, int pipe[2]);
 int			wait_func(t_list *pid_list);
 void		multi_pipe(t_pipex *pipex, int argc, char *argv[], t_list *p_list);

@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/18 14:24:19 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/04 14:00:11 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/05 01:16:59 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,12 @@ char	**ft_split_pipex(char const *string, char seperator)
 		return (case_awk(string));
 	if (check_sh((char *)string))
 	{
-		if (access(string, X_OK == 0))
-			return (case_sh(string));
+		if (access(string, X_OK != 0))
+		{
+			perror(string);
+			exit(126);
+		}
+		return (case_sh(string));
 	}
 	return (ft_split_norm(string, seperator));
 }
