@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_pipex_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jehelee <jehelee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:04:31 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/02 20:31:53 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/05 13:12:54 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ char	*get_path(char *cmd, char **path_args)
 	i = 0;
 	while (path_args[i])
 	{
-		if (check_sh(cmd))
-			return (ft_strdup("/bin/sh"));
 		tmp = ft_strjoin(path_args[i], "/");
 		if (!tmp)
 			return (NULL);
