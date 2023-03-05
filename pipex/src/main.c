@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
+/*   By: jehelee <jehelee@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/17 14:23:29 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/05 01:33:49 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/05 13:18:01 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int argc, char *argv[], char *envp[])
 	t_list	*pid_list;
 
 	pid_list = malloc(sizeof(t_list));
+	pid_list->next = NULL;
 	if (argc != 5)
 	{
 		ft_putstr_fd("usage: ./pipex infile cmd1 cmd2 outfile\n", 2);
