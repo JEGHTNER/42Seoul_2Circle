@@ -6,7 +6,7 @@
 /*   By: jehelee <jehelee@student.42.kr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/26 17:07:24 by jehelee           #+#    #+#             */
-/*   Updated: 2023/03/05 00:38:08 by jehelee          ###   ########.fr       */
+/*   Updated: 2023/03/26 16:53:30 by jehelee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	child_process(t_pipex *pipex, char **argv, int i, int pipe_fd[2])
 		exit(1);
 	}
 	close(pipe_fd[PIPE_WRITE]);
-	if (execve(cmd_path, cmd_args, pipex->path_args) == -1)
+	if (execve(cmd_path, cmd_args, pipex->envp_args) == -1)
 		exit(127);
 }
 
@@ -95,7 +95,6 @@ void	multi_pipe(t_pipex *pipex, int argc, char *argv[], t_list *pid_list)
 	i = check_heredoc(pipex);
 	while (++i < argc - 1)
 	{
-		error_no_pipe(pipex);
 		if (pipe(pipe_fd) == -1)
 			perror("pipe");
 		pipex->pid = fork();
